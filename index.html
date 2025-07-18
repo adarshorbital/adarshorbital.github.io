@@ -1,39 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title>Portfolio: Agrawal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adarsh Agrawal – Aerospace Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #1a237e;
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      color: #1a237e;
+    }
+    .item {
+      margin-bottom: 1.5rem;
+    }
+    .meta {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .skills span {
+      background: #c5cae9;
+      padding: 0.3rem 0.6rem;
+      margin: 0.2rem;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      background: #e8eaf6;
+    }
+  </style>
 </head>
 <body>
-    <div class="grid-2">
-        <div class="section-1">
-            <i class="fas fa-code fa-5x white"></i>
-            <h2>Adarsh Agrawal</h2>
-            <p>West Lafayette, IN United States.</p>
-            <a href="https://golghar.org"><i class="fab fa-globe"></i></a>
-            <a href="https://linkedin.com/in/adarshagrl?utm_medium=Website"><i class="fab fa-linkedin"></i></a>
-            <a href="https://github.com/tireckoner"><i class="fab fa-github"></i></a>
-        </div>
-        <div class="section-2">
-            <h2>About</h2>
-            <p>I am an astrodynamics Engineer looking for opportunities. Please feel free to contact me. My email ID is as below</h2>
-            <p>Lorectetur adipisicing elit. Reiciendis in maiores autem quidem.</p>
+  <header>
+    <h1>Adarsh Agrawal</h1>
+    <p>Aerospace Engineer | Educator | System Designer</p>
+    <nav>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-            <h2>Skills</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in maiores autem quidem obcaecati excepturi! Cupiditate eaque itaque magni voluptatibus neque nobis est dolor? Atque sunt minus ipsa asperiores. At.</p>
-            <h2>Projects</h2>
-            <a href="#">Project 0</a>
-            <a href="#">Project 2</a>
-            <a href="#">Project 3</a>
-            <a href="#">Project 4</a>
-            <a href="#">Project 5</a>
-            <h2>Let's get in touchContact</h2>
-            <p>aadarshagrawal01@gmail.com</p>
-        </div>
+  <section id="experience">
+    <h2>Professional Experience</h2>
+
+    <div class="item">
+      <h3>Instruction Specialist, Purdue University</h3>
+      <div class="meta">Aug 2023 – Present | West Lafayette, IN</div>
+      <p>Designed new aerospace lab experiments, supported curriculum redesign, and trained teaching assistants in lab safety and usage.</p>
     </div>
+
+    <div class="item">
+      <h3>Associate Engineer – Simulation and Physical Systems, Airbus Group</h3>
+      <div class="meta">Jan 2020 – May 2020 | Bangalore, India</div>
+      <p>Led design optimization for A350-1000 ULR, conducted tradeoff analysis, and defined technical system solutions for safety and integration.</p>
+    </div>
+
+    <div class="item">
+      <h3>Graduate Course Coordinator – Aerospace Design, Purdue University</h3>
+      <div class="meta">Aug 2022 – May 2023 | West Lafayette, IN</div>
+      <p>Supported sophomores in aerospace design using MATLAB, developed code for team projects, and coordinated with course instructors and TAs.</p>
+    </div>
+
+    <div class="item">
+      <h3>CTO / System Engineer, Team Antariksh</h3>
+      <div class="meta">July 2018 – Sep 2019 | Bangalore, India</div>
+      <p>Oversaw satellite system design, collaborated with subsystem leads, and led mission planning and spacecraft analysis.</p>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+
+    <div class="item">
+      <h3>Master of Science in Aeronautics and Astronautics</h3>
+      <div class="meta">Purdue University, May 2023 | GPA: 3.7/4.0</div>
+    </div>
+
+    <div class="item">
+      <h3>Bachelor of Science in Aerospace Engineering</h3>
+      <div class="meta">RV College of Engineering, May 2020 | GPA: 8.51/10</div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills & Tools</h2>
+    <div class="skills">
+      <span>Python</span><span>MATLAB</span><span>Jupyter</span><span>VS Code</span>
+      <span>LaTeX</span><span>GitHub</span><span>LabVIEW</span><span>Simulink</span>
+      <span>GMAT</span><span>SolidWorks</span><span>System Design Thinking</span>
+      <span>Orbital Mechanics</span><span>Multidisciplinary Design</span><span>Applied Control</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:aadarshagrawal01@gmail.com">aadarshagrawal01@gmail.com</a></p>
+    <p>Phone: <a href="tel:+17089043819">(708) 904-3819</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/adarshagrl" target="_blank">linkedin.com/in/adarshagrl</a></p>
+    <p>GitHub: <a href="https://github.com/adarshagrl" target="_blank">github.com/adarshagrl</a></p>
+  </section>
+
+  <footer>
+    &copy; 2025 Adarsh Agrawal. Built with HTML & CSS.
+  </footer>
 </body>
 </html>
