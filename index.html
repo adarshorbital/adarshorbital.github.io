@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adarsh Agrawal - Aerospace Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,169 +14,22 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            color: #ffffff;
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-        }
-
-        /* Animated aerospace background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
-
-        .star {
-            position: absolute;
-            background: #ffffff;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
-
-        .satellite-orbit {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border: 1px solid rgba(100, 181, 246, 0.2);
-            border-radius: 50%;
-            top: 20%;
-            right: 10%;
-            animation: rotate 30s linear infinite;
-        }
-
-        .satellite {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            top: -10px;
-            left: 50%;
-            margin-left: -10px;
-        }
-
-        .satellite::before {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #64b5f6;
-            border-radius: 2px;
-            top: 6px;
-            left: 6px;
-        }
-
-        .satellite::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            height: 16px;
-            background: #42a5f5;
-            top: 2px;
-            left: 9px;
-        }
-
-        .rocket-trail {
-            position: absolute;
-            bottom: 10%;
-            left: 15%;
-            width: 4px;
-            height: 100px;
-            background: linear-gradient(to top, transparent, #ff6b35, #f7931e);
-            border-radius: 2px;
-            animation: rocketLaunch 8s ease-in-out infinite;
-        }
-
-        .rocket {
-            position: absolute;
-            bottom: -20px;
-            left: -6px;
-            width: 16px;
-            height: 40px;
-            animation: rocketMove 8s ease-in-out infinite;
-        }
-
-        .rocket::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 20px solid #e0e0e0;
-            top: 0;
-            left: 0;
-        }
-
-        .rocket::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 20px;
-            background: #424242;
-            bottom: 0;
-            left: 0;
-            border-radius: 0 0 8px 8px;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes rocketLaunch {
-            0% { height: 0; opacity: 0; }
-            20% { height: 100px; opacity: 1; }
-            80% { height: 100px; opacity: 1; }
-            100% { height: 0; opacity: 0; }
-        }
-
-        @keyframes rocketMove {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-200px) rotate(5deg); }
-            100% { transform: translateY(0) rotate(0deg); }
+            color: #333;
+            background: #0a0a0a;
         }
 
         /* Navigation */
-        nav {
+        .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
+            padding: 1rem 0;
             transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(15, 15, 35, 0.95);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
@@ -184,15 +38,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 2rem;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, #64b5f6, #42a5f5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #00d4ff;
         }
 
         .nav-links {
@@ -202,430 +54,557 @@
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: #fff;
             text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #64b5f6;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #64b5f6;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+            color: #00d4ff;
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
             display: flex;
             align-items: center;
-            justify-content: center;
-            text-align: center;
             position: relative;
-            padding: 0 2rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%2300d4ff" stop-opacity="0.1"/><stop offset="100%" stop-color="%2300d4ff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
         }
 
         .hero-content {
-            max-width: 800px;
-            animation: fadeInUp 1s ease-out;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            z-index: 2;
+            position: relative;
         }
 
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+        .hero-text h1 {
+            font-size: 4rem;
             font-weight: 700;
+            color: #fff;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, #ffffff, #64b5f6, #42a5f5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 3s ease-in-out infinite alternate;
+            line-height: 1.1;
         }
 
-        @keyframes glow {
-            from { filter: drop-shadow(0 0 20px rgba(100, 181, 246, 0.3)); }
-            to { filter: drop-shadow(0 0 30px rgba(100, 181, 246, 0.6)); }
+        .hero-text .highlight {
+            color: #00d4ff;
         }
 
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #b0bec5;
+        .hero-text .subtitle {
+            font-size: 1.5rem;
+            color: #b0b0b0;
             margin-bottom: 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.3s forwards;
+            font-weight: 400;
         }
 
-        .hero-description {
+        .hero-text .description {
             font-size: 1.1rem;
-            color: #90a4ae;
-            margin-bottom: 3rem;
+            color: #888;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
+            margin-bottom: 3rem;
+            line-height: 1.8;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1.5rem;
-            justify-content: center;
+            gap: 1rem;
             flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeInUp 1s ease-out 0.9s forwards;
         }
 
         .btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            cursor: pointer;
         }
 
         .btn-primary {
-            background: linear-gradient(45deg, #64b5f6, #42a5f5);
-            color: white;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
         }
 
         .btn-secondary {
             background: transparent;
-            color: #64b5f6;
-            border: 2px solid #64b5f6;
+            color: #00d4ff;
+            border: 2px solid #00d4ff;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(100, 181, 246, 0.4);
+        .btn-secondary:hover {
+            background: #00d4ff;
+            color: #0a0a0a;
         }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s;
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: #111;
         }
 
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        /* Sections */
-        .section {
-            padding: 5rem 2rem;
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 700;
             text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(45deg, #ffffff, #64b5f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            margin-bottom: 4rem;
         }
 
-        /* Experience Cards */
-        .experience-grid {
+        .section-title h2 {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-content {
             display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-text h3 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
-            margin-top: 3rem;
         }
 
-        .experience-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
+        .stat-item {
+            text-align: center;
             padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
 
-        .experience-card::before {
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+            display: block;
+        }
+
+        .stat-label {
+            color: #ccc;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 6rem 0;
+            background: #0a0a0a;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
             content: '';
             position: absolute;
+            left: 50%;
             top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00d4ff, #0099cc);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
             left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, #64b5f6, #42a5f5);
-        }
-
-        .experience-card .card-icon {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            color: rgba(100, 181, 246, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .experience-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(100, 181, 246, 0.2);
-            border-color: rgba(100, 181, 246, 0.3);
-        }
-
-        .experience-card:hover .card-icon {
-            color: rgba(100, 181, 246, 0.8);
-            transform: scale(1.1);
-        }
-
-        .experience-card h3 {
-            font-size: 1.4rem;
-            color: #64b5f6;
-            margin-bottom: 0.5rem;
             padding-right: 3rem;
         }
 
-        .experience-card .company {
-            font-size: 1.1rem;
-            color: #90a4ae;
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-content {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+            border-left-color: #1a1a1a;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+            border-right-color: #1a1a1a;
+        }
+
+        .timeline-date {
+            color: #00d4ff;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: #888;
+            font-size: 1rem;
             margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .timeline-description ul {
+            margin-left: 1rem;
+            margin-top: 1rem;
+        }
+
+        .timeline-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 6rem 0;
+            background: #111;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+
+        .skill-category h3 {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .experience-card .company::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #64b5f6;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .experience-card p {
-            color: #b0bec5;
-            line-height: 1.6;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .skill-item {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(100, 181, 246, 0.1), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.6s;
-        }
-
-        .skill-item:hover::before {
-            transform: translateX(100%);
-        }
-
-        .skill-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(100, 181, 246, 0.2);
-            border-color: rgba(100, 181, 246, 0.3);
-        }
-
-        .skill-item .skill-icon {
-            font-size: 2.5rem;
-            color: #64b5f6;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover .skill-icon {
-            transform: scale(1.1);
-            color: #42a5f5;
-            text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
-        }
-
-        .skill-item h4 {
-            color: #ffffff;
+        .skill-tag {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
             font-size: 0.9rem;
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
 
-        .skill-item.featured {
-            background: linear-gradient(45deg, rgba(100, 181, 246, 0.1), rgba(66, 165, 245, 0.1));
-            border-color: rgba(100, 181, 246, 0.3);
+        /* Awards Section */
+        .awards {
+            padding: 6rem 0;
+            background: #0a0a0a;
         }
 
-        .skill-item.featured .skill-icon {
-            color: #ffd700;
-        }
-
-        /* Contact Section */
-        .contact-grid {
+        .awards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .contact-item {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 15px;
+        .award-card {
+            background: #1a1a1a;
             padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #333;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
-        .contact-item:hover {
+        .award-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(100, 181, 246, 0.2);
-            border-color: rgba(100, 181, 246, 0.3);
+        }
+
+        .award-icon {
+            font-size: 3rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+
+        .award-title {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .award-org {
+            color: #888;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .award-date {
+            color: #00d4ff;
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: #111;
+        }
+
+        .contact-content {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            color: #ccc;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .contact-info h3 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .contact-item i {
-            font-size: 2.5rem;
-            color: #64b5f6;
-            margin-bottom: 1rem;
-        }
-
-        .contact-item h4 {
-            color: #ffffff;
-            margin-bottom: 1rem;
+            color: #00d4ff;
             font-size: 1.2rem;
+            width: 20px;
         }
 
-        .contact-item a {
-            color: #90a4ae;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .contact-form {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #333;
         }
 
-        .contact-item a:hover {
-            color: #64b5f6;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .form-group label {
+            color: #ccc;
+            display: block;
+            margin-bottom: 0.5rem;
         }
 
-        .fade-in {
-            opacity: 0;
-            animation: fadeInUp 1s ease-out forwards;
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-family: inherit;
         }
 
-        /* Mobile Responsiveness */
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0a0a0a;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        .footer p {
+            color: #888;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
-            
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                padding-left: 3rem !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-content::before {
+                left: -20px !important;
+                border-right-color: #1a1a1a !important;
+                border-left-color: transparent !important;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
             .cta-buttons {
                 flex-direction: column;
-                align-items: center;
-            }
-            
-            .section {
-                padding: 3rem 1rem;
-            }
-            
-            .skills-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                align-items: flex-start;
             }
         }
 
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #64b5f6;
-            animation: bounce 2s infinite;
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .scroll-indicator i {
-            font-size: 2rem;
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #00d4ff;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0099cc;
         }
     </style>
 </head>
 <body>
-    <!-- Animated Aerospace Background -->
-    <div class="particles" id="particles">
-        <div class="satellite-orbit">
-            <div class="satellite"></div>
-        </div>
-        <div class="rocket-trail">
-            <div class="rocket"></div>
-        </div>
-    </div>
-
     <!-- Navigation -->
-    <nav id="navbar">
+    <nav class="navbar">
         <div class="nav-container">
             <div class="logo">Adarsh Agrawal</div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
+                <li><a href="#awards">Awards</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -634,255 +613,355 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Adarsh Agrawal</h1>
-            <p class="hero-subtitle">Aerospace Engineer | Educator | System Engineer</p>
-            <p class="hero-description">
-                Passionate about pushing the boundaries of aerospace technology through innovative design, 
-                educational excellence, and systematic problem-solving. From optimizing aircraft systems 
-                to designing satellite missions, I bring technical expertise and creative solutions to 
-                complex aerospace challenges.
-            </p>
-            <div class="cta-buttons">
-                <a href="#experience" class="btn btn-primary">
-                    <i class="fas fa-rocket"></i>
-                    Explore My Work
-                </a>
-                <a href="#contact" class="btn btn-secondary">
-                    <i class="fas fa-envelope"></i>
-                    Get In Touch
-                </a>
+            <div class="hero-text">
+                <h1>Adarsh <span class="highlight">Agrawal</span></h1>
+                <p class="subtitle">Aerospace Engineer | Educator | Systems Specialist</p>
+                <p class="description">
+                    Passionate aerospace engineer with expertise in lab instruction, aircraft systems design, and satellite engineering. 
+                    Currently advancing aerospace education at Purdue University while developing innovative solutions for complex engineering challenges.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#experience" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Explore My Work
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i>
+                        Get In Touch
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+                <p>Dedicated to advancing aerospace technology through education, innovation, and systematic engineering excellence</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Engineering Excellence</h3>
+                    <p>
+                        With a Master's degree in Aeronautics and Astronautics from Purdue University (GPA: 3.7/4.0) and a Bachelor's in Aerospace Engineering from RV College of Engineering (GPA: 8.51/10), I bring both theoretical knowledge and practical experience to complex aerospace challenges.
+                    </p>
+                    <p>
+                        My journey spans from optimizing fuel systems for the Airbus A350-1000 ULR to designing cutting-edge laboratory experiments that enhance student learning outcomes. I'm passionate about bridging the gap between advanced aerospace concepts and practical implementation.
+                    </p>
+                    <p>
+                        Currently serving as an Instruction Specialist at Purdue's School of Aeronautics & Astronautics, I'm committed to shaping the next generation of aerospace engineers while continuing to push the boundaries of what's possible in aerospace technology.
+                    </p>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Major Awards</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">1</span>
+                        <span class="stat-label">Publication</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Students Mentored</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="section">
-        <h2 class="section-title">Professional Experience</h2>
-        <div class="experience-grid">
-            <div class="experience-card fade-in">
-                <div class="card-icon">🧪</div>
-                <h3>Aerospace Instruction Specialist</h3>
-                <p class="company">Purdue University, School of Aeronautics and Astronautics</p>
-                <p>Designed innovative aerospace lab experiments that enhanced student learning outcomes. 
-                Supported comprehensive curriculum redesign initiatives and provided specialized training 
-                to teaching assistants in laboratory safety protocols and equipment usage.</p>
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-title">
+                <h2>Professional Experience</h2>
+                <p>A journey through aerospace innovation, education, and technical excellence</p>
             </div>
-            <div class="experience-card fade-in">
-                <div class="card-icon">✈️</div>
-                <h3>Aircraft Systems Engineer, A350-1000 ULR Project</h3>
-                <p class="company">Airbus</p>
-                <p>Led critical design optimization efforts for the A350-1000 Ultra Long Range aircraft. 
-                Conducted comprehensive tradeoff analyses and developed technical system solutions focused 
-                on safety enhancement and system integration efficiency.</p>
-            </div>
-            <div class="experience-card fade-in">
-                <div class="card-icon">📐</div>
-                <h3>Academic Support Specialist</h3>
-                <p class="company">Aerospace Design Program</p>
-                <p>Provided mentorship and technical support to sophomore students in aerospace design 
-                courses. Developed custom MATLAB code solutions for team projects and maintained close 
-                coordination with course instructors and teaching assistants.</p>
-            </div>
-            <div class="experience-card fade-in">
-                <div class="card-icon">🛰️</div>
-                <h3>Satellite Systems Engineer</h3>
-                <p class="company">Team Antariksh</p>
-                <p>Oversaw comprehensive satellite system design from concept to implementation. 
-                Collaborated effectively with subsystem leads and spearheaded mission planning 
-                and spacecraft analysis initiatives.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Aug 2023 - Present</div>
+                        <h3 class="timeline-title">Instruction Specialist/Lab Coordinator</h3>
+                        <p class="timeline-company">School of Aeronautics & Astronautics, Purdue University</p>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Design and develop innovative aerospace laboratory experiments for undergraduate students</li>
+                                <li>Create and 3D print physical models using state-of-the-art 3D printers for lab experimentation</li>
+                                <li>Train teaching assistants on lab equipment and safety procedures for optimal student learning</li>
+                                <li>Implement comprehensive curriculum improvements that enhance educational outcomes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Aug 2022 - May 2023</div>
+                        <h3 class="timeline-title">Graduate Course Coordinator</h3>
+                        <p class="timeline-company">Aerospace Design, School of Aeronautics and Astronautics</p>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Designed systems and methodologies for teaching Aerospace Engineering fundamentals to sophomores</li>
+                                <li>Provided instructional support on MATLAB for assignment problems and team project development</li>
+                                <li>Helped students debug code issues and optimize functionality</li>
+                                <li>Coordinated with instructors, teaching assistants, and graders for comprehensive course management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">Jan 2020 - May 2020</div>
+                        <h3 class="timeline-title">Associate Engineer, Simulation and Physical Systems</h3>
+                        <p class="timeline-company">Airbus Group, Bangalore, India</p>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Executed design optimization for additional fuel tank integration in A350-1000 ULR aircraft</li>
+                                <li>Conducted data-driven tradeoff analysis using ATA 100 referencing system for commercial aircraft</li>
+                                <li>Led technical meetings to ensure comprehensive tradeoff analyses across multiple teams</li>
+                                <li>Demonstrated expertise in technical development of system and safety solutions with associated requirements</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">July 2018 - Sep 2019</div>
+                        <h3 class="timeline-title">Chief Technical Officer/System Engineer</h3>
+                        <p class="timeline-company">Team Antariksh, Space Technology Team</p>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Monitored overall progress of satellite system design and provided technical expertise</li>
+                                <li>Collaborated cross-functionally with subsystem leads to address and resolve challenges</li>
+                                <li>Developed satellite command and control procedures and performed mission planning</li>
+                                <li>Conducted comprehensive spacecraft system design analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-item fade-in">
-                <div class="skill-icon">✈️</div>
-                <h4>Aircraft Design</h4>
+    <section id="skills" class="skills">
+        <div class="container">
+            <div class="section-title">
+                <h2>Technical Expertise</h2>
+                <p>Comprehensive skill set spanning aerospace systems, software development, and advanced engineering tools</p>
             </div>
-            <div class="skill-item featured fade-in">
-                <div class="skill-icon">🛰️</div>
-                <h4>Satellite Systems</h4>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-code"></i> Programming & Software</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">MATLAB</span>
+                        <span class="skill-tag">Jupyter</span>
+                        <span class="skill-tag">LabVIEW</span>
+                        <span class="skill-tag">Simulink</span>
+                        <span class="skill-tag">LaTeX</span>
+                        <span class="skill-tag">GitHub</span>
+                        <span class="skill-tag">VS Code</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-drafting-compass"></i> Design & CAD</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SolidWorks</span>
+                        <span class="skill-tag">CAD Design</span>
+                        <span class="skill-tag">3D Printing</span>
+                        <span class="skill-tag">Bambu Studio</span>
+                        <span class="skill-tag">Technical Drawing</span>
+                        <span class="skill-tag">Prototyping</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-satellite"></i> Aerospace Systems</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Aircraft Design</span>
+                        <span class="skill-tag">Satellite Systems</span>
+                        <span class="skill-tag">Orbital Mechanics</span>
+                        <span class="skill-tag">GMAT</span>
+                        <span class="skill-tag">Mission Planning</span>
+                        <span class="skill-tag">System Integration</span>
+                        <span class="skill-tag">Safety Analysis</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3><i class="fas fa-cogs"></i> Engineering Specializations</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Systems Engineering</span>
+                        <span class="skill-tag">Multidisciplinary Design Optimization</span>
+                        <span class="skill-tag">Applied Control</span>
+                        <span class="skill-tag">Spaceflight Operations</span>
+                        <span class="skill-tag">Space Traffic Management</span>
+                        <span class="skill-tag">System Design Thinking</span>
+                    </div>
+                </div>
             </div>
-            <div class="skill-item fade-in">
-                <div class="skill-icon">🔬</div>
-                <h4>MATLAB</h4>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="awards">
+        <div class="container">
+            <div class="section-title">
+                <h2>Awards & Recognition</h2>
+                <p>Recognized for excellence in teaching, service, and technical contributions</p>
             </div>
-            <div class="skill-item fade-in">
-                <div class="skill-icon">⚙️</div>
-                <h4>System Integration</h4>
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="award-title">The Bravo Award for Excellent Service</h3>
+                    <p class="award-org">Purdue University</p>
+                    <p class="award-date">April 2025</p>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="award-title">Estus H. and Vashti L. Magoon Award</h3>
+                    <p class="award-org">Excellence in Teaching - Purdue University</p>
+                    <p class="award-date">Spring 2023</p>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="award-title">Project Management Certification</h3>
+                    <p class="award-org">Purdue Global</p>
+                    <p class="award-date">Spring 2025</p>
+                </div>
+
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3 class="award-title">Published Research</h3>
+                    <p class="award-org">SETI@home: A Detailed Analysis and Study</p>
+                    <p class="award-date">IAC 2019, Washington, DC</p>
+                </div>
             </div>
-            <div class="skill-item fade-in">
-                <div class="skill-icon">🛡️</div>
-                <h4>Safety Analysis</h4>
-            </div>
-            <div class="skill-item fade-in">
-                <div class="skill-icon">📊</div>
-                <h4>Optimization</h4>
-            </div>
-            <div class="skill-item fade-in">
-                <div class="skill-icon">🌌</div>
-                <h4>Mission Planning</h4>
-            </div>
-            <div class="skill-item fade-in">
-                <div class="skill-icon">🔧</div>
-                <h4>CAD Design</h4>
-            </div>
-            <div class="skill-item featured fade-in">
-                <div class="skill-icon">🌍</div>
-                <h4>Orbital Mechanics</h4>
-            </div>
-            <div class="skill-item fade-in">
-                <div class="skill-icon">📡</div>
-                <h4>Communications</h4>
-            </div>
-    
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="contact-grid">
-            <div class="contact-item fade-in">
-                <i class="fas fa-envelope"></i>
-                <h4>Email</h4>
-                <a href="mailto:aadarshagrawal01@gmail.com">aadarshagrawal01@gmail.com</a>
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Let's Connect</h2>
+                <p>Ready to collaborate on aerospace innovations or discuss opportunities</p>
             </div>
-            <div class="contact-item fade-in">
-                <i class="fas fa-phone"></i>
-                <h4>Phone</h4>
-                <a href="tel:+17089043819">(708) 904-3819</a>
-            </div>
-            <div class="contact-item fade-in">
-                <i class="fab fa-linkedin"></i>
-                <h4>LinkedIn</h4>
-                <a href="https://linkedin.com/in/adarshagrl" target="_blank">linkedin.com/in/adarshagrl</a>
-            </div>
-            <div class="contact-item fade-in">
-                <i class="fab fa-github"></i>
-                <h4>GitHub</h4>
-                <a href="https://github.com/adarshagrl" target="_blank">github.com/adarshagrl</a>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <p>I'm always interested in discussing aerospace engineering opportunities, research collaborations, or innovative projects. Whether you're looking for technical expertise or educational insights, let's connect!</p>
+                    
+                    <div class="contact-item">
+                        <span style="font-size: 1.2rem; margin-right: 0.5rem;">✉️</span>
+                        <span style="color: #ccc; margin-right: 0.5rem;">Email:</span>
+                        <a href="mailto:aadarshagrawal01@gmail.com" style="color: #00d4ff; text-decoration: none;">aadarshagrawal01@gmail.com</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span style="font-size: 1.2rem; margin-right: 0.5rem;">📞</span>
+                        <span style="color: #ccc; margin-right: 0.5rem;">Phone:</span>
+                        <a href="tel:+17089043819" style="color: #00d4ff; text-decoration: none;">(708) 904-3819</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span style="font-size: 1.2rem; margin-right: 0.5rem;">💼</span>
+                        <span style="color: #ccc; margin-right: 0.5rem;">LinkedIn:</span>
+                        <a href="https://linkedin.com/in/adarshagrl" style="color: #00d4ff; text-decoration: none;">linkedin.com/in/adarshagrl</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span style="font-size: 1.2rem; margin-right: 0.5rem;">🐙</span>
+                        <span style="color: #ccc; margin-right: 0.5rem;">GitHub:</span>
+                        <a href="https://github.com/adarshorbital" style="color: #00d4ff; text-decoration: none;">github.com/adarshorbital</a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <span style="font-size: 1.2rem; margin-right: 0.5rem;">🆔</span>
+                        <span style="color: #ccc; margin-right: 0.5rem;">ORCID:</span>
+                        <a href="https://orcid.org/0000-0001-9288-5421" style="color: #00d4ff; text-decoration: none;">0000-0001-9288-5421</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Adarsh Agrawal. All rights reserved. | Aerospace Engineer | Educator | Innovator</p>
+        </div>
+    </footer>
 
     <script>
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
 
-        // Navbar scroll effect
+        // Navbar background on scroll
         window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
+            const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
             } else {
-                navbar.classList.remove('scrolled');
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
             }
         });
 
-        // Create animated particles and stars
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            const starCount = 30;
+        // Form submission (you can integrate with your preferred form service)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            this.reset();
+        });
 
-            // Create floating particles
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-
-            // Create twinkling stars
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                particlesContainer.appendChild(star);
-            }
-        }
-
-        // Intersection Observer for animations
+        // Add animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(function(entries) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = '0s';
-                    entry.target.classList.add('fade-in');
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
-            
-            // Observe all fade-in elements
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
-
-            // Add typing effect to hero title
-            const heroTitle = document.querySelector('.hero h1');
-            const text = heroTitle.textContent;
-            heroTitle.textContent = '';
-            
-            let i = 0;
-            const typeWriter = () => {
-                if (i < text.length) {
-                    heroTitle.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            };
-            
-            setTimeout(typeWriter, 1000);
-        });
-
-        // Add parallax effect to hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            const rate = scrolled * -0.5;
-            hero.style.transform = `translateY(${rate}px)`;
-        });
-
-        // Add hover effects to cards
-        document.querySelectorAll('.experience-card, .skill-item, .contact-item').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
+        // Observe elements for animation
+        document.querySelectorAll('.timeline-item, .skill-category, .award-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
