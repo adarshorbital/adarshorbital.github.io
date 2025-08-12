@@ -20,7 +20,7 @@
             line-height: 1.6;
         }
 
-        /* Animated background particles */
+        /* Animated aerospace background */
         .particles {
             position: fixed;
             top: 0;
@@ -40,11 +40,125 @@
             animation: float 20s infinite linear;
         }
 
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        .satellite-orbit {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            border-radius: 50%;
+            top: 20%;
+            right: 10%;
+            animation: rotate 30s linear infinite;
+        }
+
+        .satellite {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: -10px;
+            left: 50%;
+            margin-left: -10px;
+        }
+
+        .satellite::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #64b5f6;
+            border-radius: 2px;
+            top: 6px;
+            left: 6px;
+        }
+
+        .satellite::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 16px;
+            background: #42a5f5;
+            top: 2px;
+            left: 9px;
+        }
+
+        .rocket-trail {
+            position: absolute;
+            bottom: 10%;
+            left: 15%;
+            width: 4px;
+            height: 100px;
+            background: linear-gradient(to top, transparent, #ff6b35, #f7931e);
+            border-radius: 2px;
+            animation: rocketLaunch 8s ease-in-out infinite;
+        }
+
+        .rocket {
+            position: absolute;
+            bottom: -20px;
+            left: -6px;
+            width: 16px;
+            height: 40px;
+            animation: rocketMove 8s ease-in-out infinite;
+        }
+
+        .rocket::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 20px solid #e0e0e0;
+            top: 0;
+            left: 0;
+        }
+
+        .rocket::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 20px;
+            background: #424242;
+            bottom: 0;
+            left: 0;
+            border-radius: 0 0 8px 8px;
+        }
+
         @keyframes float {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
             100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rocketLaunch {
+            0% { height: 0; opacity: 0; }
+            20% { height: 100px; opacity: 1; }
+            80% { height: 100px; opacity: 1; }
+            100% { height: 0; opacity: 0; }
+        }
+
+        @keyframes rocketMove {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-200px) rotate(5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
         }
 
         /* Navigation */
@@ -265,22 +379,49 @@
             background: linear-gradient(90deg, #64b5f6, #42a5f5);
         }
 
+        .experience-card .card-icon {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: rgba(100, 181, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
         .experience-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(100, 181, 246, 0.2);
             border-color: rgba(100, 181, 246, 0.3);
         }
 
+        .experience-card:hover .card-icon {
+            color: rgba(100, 181, 246, 0.8);
+            transform: scale(1.1);
+        }
+
         .experience-card h3 {
             font-size: 1.4rem;
             color: #64b5f6;
             margin-bottom: 0.5rem;
+            padding-right: 3rem;
         }
 
         .experience-card .company {
             font-size: 1.1rem;
             color: #90a4ae;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .experience-card .company::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #64b5f6;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(100, 181, 246, 0.5);
         }
 
         .experience-card p {
@@ -291,7 +432,7 @@
         /* Skills Section */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 1.5rem;
             margin-top: 3rem;
         }
@@ -308,22 +449,58 @@
             overflow: hidden;
         }
 
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(100, 181, 246, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .skill-item:hover::before {
+            transform: translateX(100%);
+        }
+
         .skill-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(100, 181, 246, 0.2);
             border-color: rgba(100, 181, 246, 0.3);
         }
 
-        .skill-item i {
-            font-size: 2rem;
+        .skill-item .skill-icon {
+            font-size: 2.5rem;
             color: #64b5f6;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover .skill-icon {
+            transform: scale(1.1);
+            color: #42a5f5;
+            text-shadow: 0 0 20px rgba(100, 181, 246, 0.5);
         }
 
         .skill-item h4 {
             color: #ffffff;
             font-size: 0.9rem;
             font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .skill-item.featured {
+            background: linear-gradient(45deg, rgba(100, 181, 246, 0.1), rgba(66, 165, 245, 0.1));
+            border-color: rgba(100, 181, 246, 0.3);
+        }
+
+        .skill-item.featured .skill-icon {
+            color: #ffd700;
         }
 
         /* Contact Section */
@@ -431,8 +608,15 @@
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="particles" id="particles"></div>
+    <!-- Animated Aerospace Background -->
+    <div class="particles" id="particles">
+        <div class="satellite-orbit">
+            <div class="satellite"></div>
+        </div>
+        <div class="rocket-trail">
+            <div class="rocket"></div>
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav id="navbar">
@@ -479,6 +663,7 @@
         <h2 class="section-title">Professional Experience</h2>
         <div class="experience-grid">
             <div class="experience-card fade-in">
+                <div class="card-icon">🧪</div>
                 <h3>Aerospace Lab Assistant</h3>
                 <p class="company">Educational Institution</p>
                 <p>Designed innovative aerospace lab experiments that enhanced student learning outcomes. 
@@ -486,6 +671,7 @@
                 to teaching assistants in laboratory safety protocols and equipment usage.</p>
             </div>
             <div class="experience-card fade-in">
+                <div class="card-icon">✈️</div>
                 <h3>Aircraft Systems Engineer</h3>
                 <p class="company">A350-1000 ULR Project</p>
                 <p>Led critical design optimization efforts for the A350-1000 Ultra Long Range aircraft. 
@@ -493,6 +679,7 @@
                 on safety enhancement and system integration efficiency.</p>
             </div>
             <div class="experience-card fade-in">
+                <div class="card-icon">📐</div>
                 <h3>Academic Support Specialist</h3>
                 <p class="company">Aerospace Design Program</p>
                 <p>Provided mentorship and technical support to sophomore students in aerospace design 
@@ -500,6 +687,7 @@
                 coordination with course instructors and teaching assistants.</p>
             </div>
             <div class="experience-card fade-in">
+                <div class="card-icon">🛰️</div>
                 <h3>Satellite Systems Engineer</h3>
                 <p class="company">Space Mission Project</p>
                 <p>Oversaw comprehensive satellite system design from concept to implementation. 
@@ -513,37 +701,53 @@
     <section id="skills" class="section">
         <h2 class="section-title">Technical Skills</h2>
         <div class="skills-grid">
-            <div class="skill-item fade-in">
-                <i class="fas fa-plane"></i>
-                <h4>Aircraft Design</h4>
+            <div class="skill-item featured fade-in">
+                <div class="skill-icon">🚀</div>
+                <h4>Rocket Propulsion</h4>
             </div>
             <div class="skill-item fade-in">
-                <i class="fas fa-satellite"></i>
+                <div class="skill-icon">✈️</div>
+                <h4>Aircraft Design</h4>
+            </div>
+            <div class="skill-item featured fade-in">
+                <div class="skill-icon">🛰️</div>
                 <h4>Satellite Systems</h4>
             </div>
             <div class="skill-item fade-in">
-                <i class="fas fa-calculator"></i>
+                <div class="skill-icon">🔬</div>
                 <h4>MATLAB</h4>
             </div>
             <div class="skill-item fade-in">
-                <i class="fas fa-cogs"></i>
+                <div class="skill-icon">⚙️</div>
                 <h4>System Integration</h4>
             </div>
             <div class="skill-item fade-in">
-                <i class="fas fa-shield-alt"></i>
+                <div class="skill-icon">🛡️</div>
                 <h4>Safety Analysis</h4>
             </div>
             <div class="skill-item fade-in">
-                <i class="fas fa-chart-line"></i>
+                <div class="skill-icon">📊</div>
                 <h4>Optimization</h4>
             </div>
             <div class="skill-item fade-in">
-                <i class="fas fa-graduation-cap"></i>
-                <h4>Education</h4>
+                <div class="skill-icon">🌌</div>
+                <h4>Mission Planning</h4>
             </div>
             <div class="skill-item fade-in">
-                <i class="fas fa-project-diagram"></i>
-                <h4>Mission Planning</h4>
+                <div class="skill-icon">🔧</div>
+                <h4>CAD Design</h4>
+            </div>
+            <div class="skill-item featured fade-in">
+                <div class="skill-icon">🌍</div>
+                <h4>Orbital Mechanics</h4>
+            </div>
+            <div class="skill-item fade-in">
+                <div class="skill-icon">📡</div>
+                <h4>Communications</h4>
+            </div>
+            <div class="skill-item fade-in">
+                <div class="skill-icon">🎓</div>
+                <h4>Education</h4>
             </div>
         </div>
     </section>
@@ -600,11 +804,13 @@
             }
         });
 
-        // Create animated particles
+        // Create animated particles and stars
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 50;
+            const starCount = 30;
 
+            // Create floating particles
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -612,6 +818,17 @@
                 particle.style.animationDelay = Math.random() * 20 + 's';
                 particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
                 particlesContainer.appendChild(particle);
+            }
+
+            // Create twinkling stars
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                particlesContainer.appendChild(star);
             }
         }
 
