@@ -1,3 +1,3 @@
 # adarshorbital.github.io
 
-This is a basic portfolio website derived from someone else. I am still learning how to work it out. 
+This is a basic portfolio website, which shows my work. 
