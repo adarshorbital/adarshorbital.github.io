@@ -1,3 +1,3 @@
 # adarshorbital.github.io
 
-This is a basic portfolio website, which shows my work. 
+This is a portfolio website for Adarsh Agrawal, showing his latest qualifications on the website adarshverse.com
