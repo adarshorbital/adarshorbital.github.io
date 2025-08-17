@@ -1,15 +1,13 @@
-# gustyai_backend.py - Backend proxy for GustyAI with RAG knowledge base
+# gustyai_backend_simple.py - Simple backend proxy for GustyAI
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
-import os
-from knowledge_base import initialize_knowledge_base, search_pdfs
 
 app = Flask(__name__)
 CORS(app)  # Allow your website to call this backend
 
 # Your Purdue GenAI API configuration
-API_KEY = "sk-18b41012931c4e96a6e0b3754a567c54"  # Replace with your real API key
+API_KEY = "sk-18b41012931c4e96a6e0b3754a567c54"
 API_URL = "https://genai.rcac.purdue.edu/api/chat/completions"
 
 @app.route('/api/chat', methods=['POST'])
@@ -18,10 +16,6 @@ def chat():
     GustyAI chat endpoint - safely calls Purdue GenAI API
     """
     try:
-        # Check if API key is configured
-        if API_KEY == "YOUR_ACTUAL_API_KEY_HERE":
-            return jsonify({'error': 'Please set your API key in gustyai_backend.py'}), 500
-            
         # Get the message data from your website
         user_data = request.json
         
@@ -29,36 +23,16 @@ def chat():
         if not user_data or 'messages' not in user_data:
             return jsonify({'error': 'Invalid request format'}), 400
 
-        # Get the latest user message for knowledge base search
-        messages = user_data.get('messages', [])
-        latest_user_message = ""
-        for msg in reversed(messages):
-            if msg.get('role') == 'user':
-                latest_user_message = msg.get('content', '')
-                break
+        # Ensure we have the model specified
+        user_data['model'] = 'gustyai'
         
-        # Search knowledge base for relevant context
-        context = ""
-        if latest_user_message:
-            context = search_pdfs(latest_user_message)
-        
-        # Add GustyAI personality and knowledge base context to the conversation
-        if not any(msg.get('role') == 'system' for msg in messages):
-            system_content = """You are GustyAI, an expert AI assistant specializing in aerospace engineering, fluid mechanics, and aerodynamics. You help students and engineers with technical questions. Be helpful, accurate, and educational.
+        # Add default parameters if not provided
+        if 'max_tokens' not in user_data:
+            user_data['max_tokens'] = 1000
+        if 'temperature' not in user_data:
+            user_data['temperature'] = 0.7
 
-When answering questions, prioritize information from the knowledge base if it's relevant. Always cite your sources when using information from the knowledge base."""
-            
-            if context:
-                system_content += f"\n\n{context}"
-            
-            system_message = {
-                "role": "system",
-                "content": system_content
-            }
-            messages.insert(0, system_message)
-            user_data['messages'] = messages
-
-        # Call Purdue GenAI API
+        # Call Purdue GenAI API directly
         response = requests.post(
             API_URL,
             headers={
@@ -73,7 +47,10 @@ When answering questions, prioritize information from the knowledge base if it's
         if response.status_code == 200:
             return jsonify(response.json())
         else:
-            return jsonify({'error': f'API request failed: {response.status_code}'}), response.status_code
+            error_msg = f'API request failed: {response.status_code}'
+            if response.text:
+                error_msg += f' - {response.text}'
+            return jsonify({'error': error_msg}), response.status_code
             
     except requests.exceptions.Timeout:
         return jsonify({'error': 'Request timeout - try again'}), 504
@@ -83,15 +60,18 @@ When answering questions, prioritize information from the knowledge base if it's
 @app.route('/health', methods=['GET'])
 def health_check():
     """Check if the backend is running"""
-    return jsonify({'status': 'GustyAI Backend is running!'}), 200
+    return jsonify({
+        'status': 'GustyAI Backend is running!',
+        'model': 'gustyai',
+        'api_configured': True
+    }), 200
 
 if __name__ == '__main__':
     print("🚀 Starting GustyAI Backend Server...")
     print("📡 Chat API: http://localhost:5000/api/chat")
     print("🏥 Health Check: http://localhost:5000/health")
-    print("⚠️  Make sure to set your API key in the code!")
-    
-    # Initialize knowledge base on startup
-    initialize_knowledge_base()
+    print("🔑 API Key configured for gustyai model")
+    print("🤖 Using GenAI system's built-in knowledge base")
+    print("✨ Ready to chat!")
     
     app.run(debug=True, port=5000, host='localhost')

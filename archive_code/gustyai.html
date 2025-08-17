@@ -3,124 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GustyAI - Aerospace Assistant</title>
+    <title>GustyAI - Aerospace Engineering Assistant</title>
     <style>
-        body { margin:0; font-family: system-ui, sans-serif; background:#f6f7f9; }
-        .container { max-width: 900px; margin: 0 auto; height: 100vh; display:flex; flex-direction:column; }
-        .header { background:#000; color:#CFB991; padding:16px; font-weight:700; text-align:center; }
-        .messages { flex:1; overflow:auto; padding:16px; }
-        .message { margin:12px 0; display:flex; }
-        .message.user { justify-content:flex-end; }
-        .bubble { max-width:70%; padding:12px 16px; border-radius:16px; white-space:pre-wrap; }
-        .user .bubble { background:#000; color:#fff; border-bottom-right-radius:4px; }
-        .assistant .bubble { background:#CFB991; color:#000; border-bottom-left-radius:4px; }
-        .input-area { display:flex; gap:8px; padding:16px; background:#fff; border-top:1px solid #ddd; }
-        .input-area input { flex:1; padding:12px; border:1px solid #ddd; border-radius:20px; font-size:16px; outline:none; }
-        .input-area button { background:#000; color:#CFB991; border:none; border-radius:20px; padding:12px 20px; font-weight:600; cursor:pointer; }
-        .input-area button:disabled { opacity:.6; cursor:not-allowed; }
-        .error { background:#ff6b6b !important; color:#fff !important; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+            color: #CFB991;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(207, 185, 145, 0.1);
+            padding: 1rem 2rem;
+            border-bottom: 2px solid #CFB991;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            color: #CFB991;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo .subtitle {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff4444;
+            animation: pulse 2s infinite;
+        }
+
+        .status-dot.connected {
+            background: #00ff44;
+        }
+
+        .status-text {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            background: rgba(207, 185, 145, 0.05);
+            border: 1px solid rgba(207, 185, 145, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            overflow-y: auto;
+            min-height: 400px;
+            max-height: 600px;
+            backdrop-filter: blur(5px);
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .message.user {
+            background: linear-gradient(135deg, #CFB991 0%, #B8A082 100%);
+            color: #000;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .message.assistant {
+            background: rgba(207, 185, 145, 0.1);
+            border: 1px solid rgba(207, 185, 145, 0.3);
+            color: #CFB991;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.system {
+            background: rgba(0, 255, 68, 0.1);
+            border: 1px solid rgba(0, 255, 68, 0.3);
+            color: #00ff44;
+            text-align: center;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        #messageInput {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(207, 185, 145, 0.3);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #CFB991;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 50px;
+            max-height: 150px;
+            backdrop-filter: blur(5px);
+        }
+
+        #messageInput:focus {
+            outline: none;
+            border-color: #CFB991;
+            box-shadow: 0 0 10px rgba(207, 185, 145, 0.3);
+        }
+
+        #messageInput::placeholder {
+            color: rgba(207, 185, 145, 0.5);
+        }
+
+        .send-button {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #CFB991 0%, #B8A082 100%);
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(207, 185, 145, 0.4);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 1rem;
+            color: #999;
+            font-style: italic;
+        }
+
+        .typing-dots {
+            display: inline-block;
+        }
+
+        .typing-dots::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        .welcome-message {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            margin: 2rem 0;
+        }
+
+        .error-message {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            color: #ff4444;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+
+            .chat-container {
+                padding: 1rem;
+            }
+
+            .message {
+                max-width: 95%;
+            }
+
+            .input-container {
+                flex-direction: column;
+            }
+
+            .send-button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            ✈️ GustyAI - Aerospace Engineering Assistant
-        </div>
-
-        <div id="messages" class="messages">
-            <div class="message assistant">
-                <div class="bubble">
-                    Hi! I'm GustyAI, your AAE33301 and AAE33401 lab course virtual assistant. Ask me about questions fluid mechanics and aerodynamics. Note that I am a bot in beta testing mode. My answers may not be accurate.
-                </div>
+    <div class="header">
+        <div class="logo">
+            <div>
+                <h1>🌪️ GustyAI</h1>
+                <div class="subtitle">Aerospace Engineering Assistant</div>
             </div>
         </div>
+        <div class="connection-status" id="connectionStatus">
+            <div class="status-dot" id="statusDot"></div>
+            <span class="status-text" id="statusText">Connecting...</span>
+        </div>
+    </div>
 
-        <div class="input-area">
-            <input id="userInput" type="text" placeholder="Ask GustyAI a question..." maxlength="1000" />
-            <button id="sendButton">Send</button>
+    <div class="chat-container">
+        <div class="chat-messages" id="chatMessages">
+            <div class="welcome-message">
+                Welcome to GustyAI! I'm your aerospace engineering assistant specializing in fluid mechanics and aerodynamics. 
+                Ask me anything about your coursework, research, or engineering problems!
+            </div>
+        </div>
+        
+        <div class="typing-indicator" id="typingIndicator">
+            GustyAI is thinking<span class="typing-dots"></span>
+        </div>
+
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea 
+                    id="messageInput" 
+                    placeholder="Ask me about aerospace engineering, fluid mechanics, aerodynamics..."
+                    rows="2"
+                ></textarea>
+            </div>
+            <button class="send-button" id="sendButton" onclick="sendMessage()">
+                Send
+            </button>
         </div>
     </div>
 
     <script>
-        // This points to your backend (running on your computer)
-        const API_URL = 'http://localhost:5000/api/chat';
+        let messages = [];
+        let isConnected = false;
 
-        const messagesDiv = document.getElementById('messages');
-        const userInput = document.getElementById('userInput');
-        const sendButton = document.getElementById('sendButton');
+        // Check backend connection on page load
+        async function checkConnection() {
+            try {
+                const response = await fetch('http://localhost:5000/health');
+                if (response.ok) {
+                    setConnectionStatus(true);
+                } else {
+                    setConnectionStatus(false);
+                }
+            } catch (error) {
+                setConnectionStatus(false);
+            }
+        }
 
-        // Keep track of conversation
-        let conversation = [];
+        function setConnectionStatus(connected) {
+            isConnected = connected;
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            
+            if (connected) {
+                statusDot.classList.add('connected');
+                statusText.textContent = 'Connected';
+                statusText.style.color = '#00ff44';
+            } else {
+                statusDot.classList.remove('connected');
+                statusText.textContent = 'Disconnected';
+                statusText.style.color = '#ff4444';
+            }
+        }
 
-        function addMessage(content, isUser = false, isError = false) {
+        // Check connection every 10 seconds
+        setInterval(checkConnection, 10000);
+        checkConnection(); // Initial check
+
+        function addMessage(role, content, isError = false) {
+            const messagesContainer = document.getElementById('chatMessages');
             const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
+            messageDiv.className = `message ${role}`;
             
-            const bubble = document.createElement('div');
-            bubble.className = `bubble ${isError ? 'error' : ''}`;
-            bubble.textContent = content;
+            if (isError) {
+                messageDiv.className += ' error-message';
+            }
             
-            messageDiv.appendChild(bubble);
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            messageDiv.textContent = content;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTyping(show) {
+            const typingIndicator = document.getElementById('typingIndicator');
+            typingIndicator.style.display = show ? 'block' : 'none';
+        }
+
+        function toggleSendButton(enabled) {
+            const sendButton = document.getElementById('sendButton');
+            sendButton.disabled = !enabled;
+            sendButton.textContent = enabled ? 'Send' : 'Sending...';
         }
 
         async function sendMessage() {
-            const message = userInput.value.trim();
+            if (!isConnected) {
+                addMessage('system', 'Backend is not connected. Please make sure the server is running.', true);
+                return;
+            }
+
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
             if (!message) return;
 
             // Add user message to chat
-            addMessage(message, true);
-            conversation.push({ role: 'user', content: message });
-
-            // Clear input and disable button
-            userInput.value = '';
-            sendButton.disabled = true;
-            sendButton.textContent = 'Thinking...';
+            addMessage('user', message);
+            messages.push({ role: 'user', content: message });
+            
+            // Clear input and disable send button
+            messageInput.value = '';
+            toggleSendButton(false);
+            showTyping(true);
 
             try {
-                // Call your backend
-                const response = await fetch(API_URL, {
+                const response = await fetch('http://localhost:5000/api/chat', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                     body: JSON.stringify({
-                        model: 'gpt-oss:120b',
-                        messages: conversation,
-                        stream: false,
+                        messages: messages,
+                        model: 'gustyai',
                         max_tokens: 1000,
                         temperature: 0.7
                     })
                 });
 
                 if (!response.ok) {
-                    const error = await response.json();
-                    throw new Error(error.error || `HTTP ${response.status}`);
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
                 const data = await response.json();
-                const reply = data?.choices?.[0]?.message?.content || 'No response received';
                 
-                // Add AI response to chat
-                addMessage(reply, false);
-                conversation.push({ role: 'assistant', content: reply });
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+
+                const assistantMessage = data.choices[0].message.content;
+                addMessage('assistant', assistantMessage);
+                messages.push({ role: 'assistant', content: assistantMessage });
 
             } catch (error) {
-                addMessage(`Error: ${error.message}. Make sure the backend is running!`, false, true);
+                console.error('Error:', error);
+                addMessage('system', `Error: ${error.message}`, true);
             } finally {
-                sendButton.disabled = false;
-                sendButton.textContent = 'Send';
-                userInput.focus();
+                showTyping(false);
+                toggleSendButton(true);
+                messageInput.focus();
             }
         }
 
-        // Event listeners
-        sendButton.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
+        // Handle Enter key in textarea
+        document.getElementById('messageInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
         });
 
-        // Focus input when page loads
-        userInput.focus();
+        // Focus on input when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('messageInput').focus();
+        });
     </script>
 </body>
 </html>
