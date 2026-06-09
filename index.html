@@ -1381,11 +1381,14 @@ z13BhLuAAg==
                         </div>
 
                         <div class="encrypt-step">
-                            <label class="encrypt-form-label" for="encryptedMsg">Encrypted output — copy and send via <a href="https://linkedin.com/in/adarshagrl" target="_blank">LinkedIn DM</a>:</label>
+                            <label class="encrypt-form-label" for="encryptedMsg">Encrypted output — copy and send via the Contact Form or click the button "Send via Contact Form"</label>
                             <textarea class="encrypt-textarea output" id="encryptedMsg" readonly placeholder="Encrypted PGP block will appear here…"></textarea>
                             <div class="encrypt-row">
                                 <button class="btn btn-secondary" id="copyEncBtn" onclick="copyEncrypted(this)" disabled>
                                     <i class="fas fa-copy"></i> Copy Encrypted Message
+                                </button>
+                                <button class="btn btn-primary" id="sendEncBtn" onclick="sendEncrypted()" disabled>
+                                    <i class="fas fa-paper-plane"></i> Send via Contact Form
                                 </button>
                                 <span class="encrypt-hint">No plaintext leaves your browser.</span>
                             </div>
@@ -1564,10 +1567,19 @@ z13BhLuAAg==
                 });
                 outputEl.value = encrypted;
                 copyBtn.disabled = false;
+                document.getElementById('sendEncBtn').disabled = false;
             } catch (err) {
                 outputEl.value = 'Encryption failed: ' + err.message;
                 copyBtn.disabled = true;
             }
+        }
+
+        function sendEncrypted() {
+            const ciphertext = document.getElementById('encryptedMsg').value;
+            if (!ciphertext) return;
+            document.getElementById('cf-message').value = ciphertext;
+            document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.getElementById('cf-name').focus();
         }
 
         async function copyEncrypted(btn) {
