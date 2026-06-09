@@ -15,6 +15,7 @@
     <title>Adarsh Agrawal - Aerospace Engineer</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/openpgp@5/dist/openpgp.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -626,6 +627,259 @@
             color: #fff;
         }
 
+        /* Contact Form */
+        .contact-form-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.15);
+        }
+
+        .contact-form-section > h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .contact-form-section > p {
+            color: #888;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-field label {
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            background: #0d0d0d;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            color: #ccc;
+            padding: 0.75rem 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .form-field input:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-status {
+            font-size: 0.9rem;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            background: rgba(0, 212, 100, 0.1);
+            border: 1px solid rgba(0, 212, 100, 0.3);
+            color: #00d464;
+        }
+
+        .form-status.error {
+            display: block;
+            background: rgba(255, 80, 80, 0.1);
+            border: 1px solid rgba(255, 80, 80, 0.3);
+            color: #ff6060;
+        }
+
+        /* GPG / Encrypted Contact */
+        .gpg-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.15);
+        }
+
+        .gpg-section > h3 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .gpg-section > p {
+            color: #888;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .gpg-key-card {
+            background: #0d0d0d;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .gpg-key-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.25rem;
+            background: rgba(0, 212, 255, 0.08);
+            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .gpg-key-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+
+        .gpg-key-id {
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .gpg-key-expiry {
+            color: #666;
+            font-size: 0.75rem;
+        }
+
+        .gpg-download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: transparent;
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            color: #00d4ff;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .gpg-download-btn:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+            color: #fff;
+        }
+
+        .gpg-key-body {
+            padding: 1rem 1.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+            color: #555;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.5;
+            max-height: 110px;
+            overflow-y: auto;
+            user-select: all;
+        }
+
+        .encrypt-step {
+            margin-bottom: 1.25rem;
+        }
+
+        .encrypt-form-label {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .encrypt-textarea {
+            width: 100%;
+            background: #0d0d0d;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 10px;
+            color: #ccc;
+            padding: 1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            min-height: 110px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .encrypt-textarea:focus {
+            outline: none;
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .encrypt-textarea.output {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            color: #777;
+            min-height: 140px;
+        }
+
+        .encrypt-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 0.75rem;
+        }
+
+        .encrypt-hint {
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        .encrypt-hint a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        .encrypt-hint a:hover {
+            color: #fff;
+        }
+
         /* Footer */
         .footer {
             background: #0a0a0a;
@@ -1055,6 +1309,88 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-section">
+                        <h3><i class="fas fa-paper-plane"></i> Send a Message</h3>
+                        <p>No account needed — just fill in the form and hit send.</p>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label for="cf-name">Name</label>
+                                    <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+                                </div>
+                                <div class="form-field">
+                                    <label for="cf-email">Email (for reply)</label>
+                                    <input type="email" id="cf-email" name="email" placeholder="you@example.com" required>
+                                </div>
+                            </div>
+                            <div class="form-field">
+                                <label for="cf-message">Message</label>
+                                <textarea id="cf-message" name="message" placeholder="What's on your mind?" required></textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary" id="cfSubmitBtn">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+                            </div>
+                            <div class="form-status" id="formStatus"></div>
+                        </form>
+                    </div>
+
+                    <!-- GPG Encrypted Contact -->
+                    <div class="gpg-section">
+                        <h3><i class="fas fa-lock"></i> Send an Encrypted Message</h3>
+                        <p>Prefer privacy? Encrypt your message with my GPG public key — only I can read it. Send the ciphertext via LinkedIn DM.</p>
+
+                        <div class="gpg-key-card">
+                            <div class="gpg-key-card-header">
+                                <div class="gpg-key-meta">
+                                    <span class="gpg-key-id">Key ID: 0x36A89F7869565013</span>
+                                    <span class="gpg-key-expiry">Expires: June 8, 2028 &nbsp;·&nbsp; Ed25519</span>
+                                </div>
+                                <a class="gpg-download-btn" href="guyfawkes_0x36A89F7869565013_public.asc" download>
+                                    <i class="fas fa-download"></i> Download Public Key (.asc)
+                                </a>
+                            </div>
+                            <div class="gpg-key-body" id="gpgKeyBlock">-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mDMEaicuYxYJKwYBBAHaRw8BAQdANpFf3o4nHaEE6x6jP50yFG0oRIWMwvVzDvY/
+JyXIETa0I2d1eWZhd2tlcyA8Z3V5LmZhd2tlczBAb3V0bG9vay5jb20+iLUEExYK
+AF0WIQTQk7HD27lQxvoTGvw2qJ94aVZQEwUCaicuYxsUgAAAAAAEAA5tYW51Miwy
+LjUrMS4xMiwyLDECGwMFCQWkpJ0FCwkIBwICIgIGFQoJCAsCBBYCAwECHgcCF4AA
+CgkQNqifeGlWUBMWAgD8DuT0/9WjV3jgxLrsMPL1YWbeTr77HsHqSunZA9gfHL0B
+APpT3oFVOQuV23mo4i/DG/CoDwMQSvm+6J70wayzifcMuDgEaicuYxIKKwYBBAGX
+VQEFAQEHQJ584FaZn+34z/HSEXlGfNP4qhzoK3CRm48adUpZgr5cAwEIB4iaBBgW
+CgBCFiEE0JOxw9u5UMb6Exr8NqifeGlWUBMFAmonLmMbFIAAAAAABAAObWFudTIs
+Mi41KzEuMTIsMiwxAhsMBQkFpKSdAAoJEDaon3hpVlATxZkA+wZa5qyKamwWC08r
+ZkJNv8o3BLOiRdMjT8q9B94wgdf5AQCaZsMRlioD7i72ehyUgTFqX/h2my9kSQPR
+z13BhLuAAg==
+=TIbF
+-----END PGP PUBLIC KEY BLOCK-----</div>
+                        </div>
+
+                        <div class="encrypt-step">
+                            <label class="encrypt-form-label" for="plaintextMsg">Your message:</label>
+                            <textarea class="encrypt-textarea" id="plaintextMsg" placeholder="Write your confidential message here…"></textarea>
+                            <div class="encrypt-row">
+                                <button class="btn btn-primary" onclick="encryptMessage()">
+                                    <i class="fas fa-lock"></i> Encrypt
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="encrypt-step">
+                            <label class="encrypt-form-label" for="encryptedMsg">Encrypted output — copy and send via <a href="https://linkedin.com/in/adarshagrl" target="_blank">LinkedIn DM</a>:</label>
+                            <textarea class="encrypt-textarea output" id="encryptedMsg" readonly placeholder="Encrypted PGP block will appear here…"></textarea>
+                            <div class="encrypt-row">
+                                <button class="btn btn-secondary" id="copyEncBtn" onclick="copyEncrypted(this)" disabled>
+                                    <i class="fas fa-copy"></i> Copy Encrypted Message
+                                </button>
+                                <span class="encrypt-hint">No plaintext leaves your browser.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1166,14 +1502,82 @@
                 shootingStar.style.top = e.clientY + 'px';
                 shootingStar.style.position = 'fixed';
                 shootingStar.style.zIndex = '10';
-                
+
                 document.body.appendChild(shootingStar);
-                
+
                 setTimeout(() => {
                     shootingStar.remove();
                 }, 3000);
             }
         });
+
+        // Contact form — replace YOUR_FORM_ID with your Formspree form ID
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('cfSubmitBtn');
+            const status = document.getElementById('formStatus');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+            status.className = 'form-status';
+            status.style.display = 'none';
+
+            try {
+                const res = await fetch('https://formspree.io/f/xlgknvnl', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: new FormData(this),
+                });
+                if (res.ok) {
+                    status.textContent = 'Message sent! I\'ll get back to you soon.';
+                    status.className = 'form-status success';
+                    this.reset();
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch {
+                status.textContent = 'Something went wrong. Please try LinkedIn instead.';
+                status.className = 'form-status error';
+            }
+
+            status.style.display = 'block';
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        });
+
+        // GPG encryption
+        async function encryptMessage() {
+            const plaintext = document.getElementById('plaintextMsg').value.trim();
+            const outputEl = document.getElementById('encryptedMsg');
+            const copyBtn = document.getElementById('copyEncBtn');
+
+            if (!plaintext) {
+                outputEl.value = 'Please enter a message first.';
+                return;
+            }
+
+            try {
+                const armoredKey = document.getElementById('gpgKeyBlock').textContent.trim();
+                const publicKey = await openpgp.readKey({ armoredKey });
+                const encrypted = await openpgp.encrypt({
+                    message: await openpgp.createMessage({ text: plaintext }),
+                    encryptionKeys: publicKey,
+                });
+                outputEl.value = encrypted;
+                copyBtn.disabled = false;
+            } catch (err) {
+                outputEl.value = 'Encryption failed: ' + err.message;
+                copyBtn.disabled = true;
+            }
+        }
+
+        async function copyEncrypted(btn) {
+            const text = document.getElementById('encryptedMsg').value;
+            if (!text) return;
+            await navigator.clipboard.writeText(text);
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => { btn.innerHTML = orig; }, 2000);
+        }
     </script>
 </body>
 </html>
