@@ -2,1358 +2,1184 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTL8JBBLX4"></script>
-            <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-QTL8JBBLX4');
-            </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTL8JBBLX4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QTL8JBBLX4');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adarsh Agrawal - Aerospace Engineer</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Adarsh Agrawal — Aerospace Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/openpgp@5/dist/openpgp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/satellite.js@4.1.3/dist/satellite.min.js"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ── Design Tokens ── */
+        :root {
+            --bg:           #020817;
+            --bg-surface:   #060f20;
+            --bg-card:      #0a1628;
+            --bg-card-h:    #0d1f3c;
+            --border:       rgba(0,212,255,0.10);
+            --border-h:     rgba(0,212,255,0.35);
+            --cyan:         #00d4ff;
+            --purple:       #818cf8;
+            --gold:         #f59e0b;
+            --green:        #10b981;
+            --text:         #e2e8f0;
+            --text-m:       #94a3b8;
+            --text-d:       #475569;
+            --glow:         0 0 24px rgba(0,212,255,0.25);
+            --glow-sm:      0 0 10px rgba(0,212,255,0.2);
+            --r:            12px;
+            --ease:         0.25s cubic-bezier(0.4,0,0.2,1);
         }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #0a0a0a;
+            font-family:'Inter',sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            line-height:1.6;
+            overflow-x:hidden;
         }
 
-        /* Navigation */
+        @media (prefers-reduced-motion:reduce) {
+            *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+        }
+
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--cyan); border-radius:3px; }
+
+        /* ── NAVBAR ── */
         .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
+            position:fixed; top:0; left:0; right:0; z-index:1000;
+            padding:1rem 2rem;
+            transition:background var(--ease), border-color var(--ease);
         }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
+        .navbar.scrolled {
+            background:rgba(2,8,23,0.92);
+            backdrop-filter:blur(18px);
+            -webkit-backdrop-filter:blur(18px);
+            border-bottom:1px solid var(--border);
         }
-
+        .nav-inner {
+            max-width:1200px; margin:0 auto;
+            display:flex; justify-content:space-between; align-items:center;
+        }
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #00d4ff;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:1.2rem; font-weight:700;
+            color:var(--cyan); text-decoration:none;
         }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
+        .logo em { color:var(--text); font-style:normal; }
+        .nav-links { display:flex; list-style:none; gap:.2rem; }
         .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            color:var(--text-m); text-decoration:none;
+            font-size:.85rem; font-weight:500;
+            padding:.4rem .85rem; border-radius:6px;
+            transition:color var(--ease), background var(--ease);
+            cursor:pointer;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color:var(--cyan);
+            background:rgba(0,212,255,.08);
+        }
+        .nav-hamburger {
+            display:none; background:none;
+            border:1px solid var(--border); color:var(--text);
+            padding:.45rem .6rem; border-radius:8px; cursor:pointer;
+            font-size:.9rem; line-height:1;
         }
 
-        .nav-links a:hover {
-            color: #00d4ff;
+        /* Mobile drawer */
+        .mobile-drawer {
+            display:none; position:fixed; inset:0; z-index:999;
+            background:rgba(2,8,23,.97);
+            flex-direction:column; align-items:center; justify-content:center;
+            gap:1.5rem;
+        }
+        .mobile-drawer.open { display:flex; }
+        .mobile-drawer a {
+            color:var(--text); text-decoration:none;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:1.5rem; font-weight:600;
+            transition:color var(--ease);
+        }
+        .mobile-drawer a:hover { color:var(--cyan); }
+        .mobile-drawer-close {
+            position:absolute; top:1.5rem; right:1.5rem;
+            background:none; border:none; color:var(--text-m);
+            font-size:1.25rem; cursor:pointer;
         }
 
-        /* Hero Section */
+        /* ── HERO ── */
         .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
+            position:relative; height:100vh; min-height:700px;
+            display:flex; align-items:center; overflow:hidden;
+            background:radial-gradient(ellipse 100% 80% at 65% 50%, rgba(0,50,90,.28) 0%, transparent 70%),
+                        radial-gradient(ellipse 50% 60% at 15% 85%, rgba(124,58,237,.07) 0%, transparent 60%),
+                        var(--bg);
         }
-
-        /* Animated Background */
-        .stars-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
+        #orbital-canvas {
+            position:absolute; top:0; right:0;
+            width:58%; height:100%; opacity:.9;
         }
-
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
+        .hud-frame {
+            position:absolute; top:0; right:0;
+            width:58%; height:100%; pointer-events:none;
         }
-
-        .star.small {
-            width: 1px;
-            height: 1px;
+        .hud-corner {
+            position:absolute; width:50px; height:50px;
+            border-color:rgba(0,212,255,.35); border-style:solid;
         }
-
-        .star.medium {
-            width: 2px;
-            height: 2px;
+        .hud-corner.tl { top:24px; left:24px; border-width:1px 0 0 1px; }
+        .hud-corner.tr { top:24px; right:24px; border-width:1px 1px 0 0; }
+        .hud-corner.bl { bottom:24px; left:24px; border-width:0 0 1px 1px; }
+        .hud-corner.br { bottom:24px; right:24px; border-width:0 1px 1px 0; }
+        .hud-data {
+            position:absolute; bottom:12%; right:6%;
+            font-family:'JetBrains Mono',monospace;
+            font-size:.68rem; color:rgba(0,212,255,.45);
+            line-height:2; text-align:right;
         }
-
-        .star.large {
-            width: 3px;
-            height: 3px;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        .rocket {
-            position: absolute;
-            font-size: 2rem;
-            color: #00d4ff;
-            animation: flyRocket 15s linear infinite;
-            z-index: 1;
-        }
-
-        .satellite {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #ffd700;
-            animation: orbit 20s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes flyRocket {
-            0% {
-                transform: translateX(-100px) translateY(50px) rotate(-45deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(calc(100vw + 100px)) translateY(-50px) rotate(-45deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes orbit {
-            0% {
-                transform: rotate(0deg) translateX(200px) rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg) translateX(200px) rotate(-360deg);
-            }
-        }
-
-        .shooting-star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: linear-gradisent(45deg, #fff, transparent);
-            border-radius: 50%;
-            animation: shootingStar 3s linear infinite;
-        }
-
-        @keyframes shootingStar {
-            0% {
-                transform: translateX(-100px) translateY(-100px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(300px) translateY(300px);
-                opacity: 0;
-            }
-        }
+        .hud-data .lbl { color:rgba(0,212,255,.25); }
 
         .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            z-index: 2;
-            position: relative;
+            position:relative; z-index:2;
+            max-width:1200px; width:100%;
+            margin:0 auto; padding:0 2rem;
         }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 1rem;
-            line-height: 1.1;
+        .hero-badge {
+            display:inline-flex; align-items:center; gap:.5rem;
+            background:rgba(0,212,255,.05);
+            border:1px solid rgba(0,212,255,.18);
+            padding:.3rem .85rem; border-radius:50px;
+            font-family:'JetBrains Mono',monospace;
+            font-size:.7rem; color:var(--cyan);
+            letter-spacing:.06em; margin-bottom:1.5rem;
         }
-
-        .hero-text .highlight {
-            color: #00d4ff;
+        .hero-badge::before {
+            content:''; width:6px; height:6px;
+            background:var(--cyan); border-radius:50%;
+            animation:pulse-dot 2s ease-in-out infinite;
         }
-
-        .hero-text .subtitle {
-            font-size: 1.5rem;
-            color: #b0b0b0;
-            margin-bottom: 2rem;
-            font-weight: 400;
+        @keyframes pulse-dot {
+            0%,100% { opacity:1; transform:scale(1); }
+            50%      { opacity:.35; transform:scale(.65); }
         }
-
-        .hero-text .description {
-            font-size: 1.1rem;
-            color: #888;
-            max-width: 600px;
-            margin-bottom: 3rem;
-            line-height: 1.8;
+        .hero-name {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(2.8rem,6.5vw,5.2rem);
+            font-weight:700; line-height:1.02;
+            letter-spacing:-.03em; color:var(--text);
+            margin-bottom:.6rem;
         }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+        .hero-name .acc { color:var(--cyan); }
+        .hero-role {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(1rem,2.2vw,1.35rem);
+            color:var(--text-m); font-weight:400;
+            margin-bottom:1.5rem; min-height:2rem;
         }
+        .typed-cursor {
+            color:var(--cyan);
+            animation:blink 1s step-end infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
+        .hero-desc {
+            font-size:1rem; color:var(--text-m);
+            max-width:520px; line-height:1.8;
+            margin-bottom:2.5rem;
+        }
+        .hero-actions { display:flex; gap:.7rem; flex-wrap:wrap; }
 
+        /* ── BUTTONS ── */
         .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            display:inline-flex; align-items:center; gap:.45rem;
+            padding:.7rem 1.4rem; border-radius:8px;
+            font-weight:600; font-size:.875rem;
+            text-decoration:none; cursor:pointer;
+            border:none; transition:all var(--ease);
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #00d4ff, #0099cc);
-            color: #fff;
-        }
-
+        .btn-primary { background:var(--cyan); color:#000; }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            background:#00b8d9; transform:translateY(-2px);
+            box-shadow:0 8px 24px rgba(0,212,255,.3);
+        }
+        .btn-ghost {
+            background:transparent; color:var(--text);
+            border:1px solid var(--border-h);
+        }
+        .btn-ghost:hover {
+            border-color:var(--cyan); color:var(--cyan);
+            background:rgba(0,212,255,.05);
+        }
+        .btn-danger {
+            background:rgba(239,68,68,.12); color:#f87171;
+            border:1px solid rgba(239,68,68,.25);
+        }
+        .btn-danger:hover {
+            background:rgba(239,68,68,.22);
+            border-color:#f87171; transform:translateY(-2px);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: #00d4ff;
-            border: 2px solid #00d4ff;
-        }
+        /* ── SHARED ── */
+        section { padding:6rem 0; }
+        .container { max-width:1200px; margin:0 auto; padding:0 2rem; }
 
-        .btn-secondary:hover {
-            background: #00d4ff;
-            color: #0a0a0a;
+        .section-label {
+            display:inline-flex; align-items:center; gap:.5rem;
+            font-family:'JetBrains Mono',monospace;
+            font-size:.68rem; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--cyan);
+            margin-bottom:.65rem;
         }
-
-        /* About Section */
-        .about {
-            padding: 6rem 0;
-            background: #111;
+        .section-label::before {
+            content:''; display:inline-block;
+            width:18px; height:1px; background:var(--cyan);
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
         .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(1.75rem,4vw,2.6rem);
+            font-weight:700; letter-spacing:-.025em;
+            color:var(--text); margin-bottom:.7rem;
         }
-
-        .section-title h2 {
-            font-size: 3rem;
-            color: #fff;
-            margin-bottom: 1rem;
+        .section-sub {
+            font-size:.95rem; color:var(--text-m);
+            max-width:540px; line-height:1.75;
         }
+        .section-head { margin-bottom:3.5rem; }
 
-        .section-title p {
-            font-size: 1.2rem;
-            color: #888;
-            max-width: 600px;
-            margin: 0 auto;
+        .card {
+            background:var(--bg-card);
+            border:1px solid var(--border); border-radius:var(--r);
+            transition:border-color var(--ease), box-shadow var(--ease), background var(--ease);
         }
+        .card:hover { border-color:var(--border-h); box-shadow:var(--glow); }
 
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        /* Reveal */
+        .reveal {
+            opacity:0; transform:translateY(22px);
+            transition:opacity .6s ease, transform .6s ease;
         }
+        .reveal.visible { opacity:1; transform:translateY(0); }
 
-        .about-text {
-            color: #ccc;
-            font-size: 1.1rem;
-            line-height: 1.8;
+        /* ── ABOUT ── */
+        .about { background:var(--bg-surface); }
+        .about-grid {
+            display:grid; grid-template-columns:1fr 1fr;
+            gap:4rem; align-items:start;
         }
-
-        .about-text h3 {
-            color: #00d4ff;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
         .about-text p {
-            margin-bottom: 1.5rem;
+            color:var(--text-m); font-size:.97rem;
+            line-height:1.82; margin-bottom:1.2rem;
         }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+        .about-text p:last-child { margin-bottom:0; }
+        .about-hl { color:var(--cyan); font-weight:500; }
+        .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+        .stat-card {
+            padding:1.5rem; text-align:center;
+            position:relative; overflow:hidden;
         }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: rgba(0, 212, 255, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(0, 212, 255, 0.2);
+        .stat-card::before {
+            content:''; position:absolute; top:0; left:0; right:0;
+            height:2px;
+            background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+            opacity:.4;
         }
-
         .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #00d4ff;
-            display: block;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:2.4rem; font-weight:700;
+            color:var(--cyan); line-height:1;
+            display:block; margin-bottom:.3rem;
         }
-
         .stat-label {
-            color: #ccc;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
+            font-size:.75rem; color:var(--text-d);
+            text-transform:uppercase; letter-spacing:.08em;
         }
 
-        /* Experience Section */
-        .experience {
-            padding: 6rem 0;
-            background: #0a0a0a;
-        }
-
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
+        /* ── EXPERIENCE ── */
+        .experience { background:var(--bg); }
+        .timeline { position:relative; padding-left:2rem; }
         .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #00d4ff, #0099cc);
-            transform: translateX(-50%);
+            content:''; position:absolute;
+            left:0; top:8px; bottom:0; width:1px;
+            background:linear-gradient(to bottom, var(--cyan) 0%, transparent 100%);
+        }
+        .timeline-item { position:relative; padding-bottom:2.75rem; }
+        .timeline-item:last-child { padding-bottom:0; }
+        .timeline-dot {
+            position:absolute; left:-2rem; top:8px;
+            width:10px; height:10px;
+            background:var(--bg); border:2px solid var(--cyan);
+            border-radius:50%; transform:translateX(-4px);
+        }
+        .timeline-dot.live { background:var(--cyan); box-shadow:var(--glow-sm); }
+        .tl-date {
+            font-family:'JetBrains Mono',monospace;
+            font-size:.7rem; color:var(--cyan);
+            letter-spacing:.05em; margin-bottom:.4rem;
+        }
+        .tl-role {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:1.1rem; font-weight:600;
+            color:var(--text); margin-bottom:.2rem;
+        }
+        .tl-company {
+            font-size:.87rem; color:var(--text-m); margin-bottom:.9rem;
+        }
+        .tl-body { padding:1.1rem 1.4rem; }
+        .tl-body ul { list-style:none; display:flex; flex-direction:column; gap:.55rem; }
+        .tl-body li {
+            font-size:.875rem; color:var(--text-m);
+            padding-left:1rem; position:relative;
+        }
+        .tl-body li::before {
+            content:'›'; position:absolute; left:0;
+            color:var(--cyan); font-weight:700;
+        }
+        .tech-tags {
+            display:flex; flex-wrap:wrap; gap:.35rem;
+            margin-top:.9rem; padding-top:.9rem;
+            border-top:1px solid var(--border);
+        }
+        .tech-tag {
+            font-family:'JetBrains Mono',monospace;
+            font-size:.67rem; color:var(--cyan);
+            background:rgba(0,212,255,.05);
+            border:1px solid rgba(0,212,255,.14);
+            padding:.18rem .55rem; border-radius:4px;
         }
 
-        .timeline-item {
-            position: relative;
-            margin-bottom: 4rem;
-            width: 50%;
+        /* ── PROJECTS TEASER ── */
+        .projects-teaser { background:var(--bg); }
+        .proj-grid {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem;
+            margin-bottom:2.5rem;
+        }
+        .proj-preview {
+            display:flex; flex-direction:column; overflow:hidden;
+            text-decoration:none; color:inherit;
+        }
+        .proj-thumb {
+            width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:var(--r) var(--r) 0 0;
+            background:var(--bg-surface); position:relative;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .proj-thumb-icon {
+            font-size:2.4rem; opacity:.18; color:var(--cyan);
+        }
+        .proj-thumb img {
+            width:100%; height:100%; object-fit:cover;
+            transition:transform .5s ease;
+        }
+        .proj-preview:hover .proj-thumb img,
+        .proj-preview:hover .proj-thumb-icon { transform:scale(1.04); opacity:.28; }
+        .proj-info { padding:1.1rem 1.2rem 1.3rem; flex:1; display:flex; flex-direction:column; }
+        .proj-meta {
+            display:flex; align-items:center; justify-content:space-between;
+            margin-bottom:.5rem;
+        }
+        .proj-date {
+            font-family:'JetBrains Mono',monospace; font-size:.62rem;
+            color:var(--text-d); letter-spacing:.06em;
+        }
+        .proj-tags { display:flex; gap:.35rem; flex-wrap:wrap; }
+        .proj-tag {
+            font-family:'JetBrains Mono',monospace; font-size:.58rem;
+            color:var(--cyan); background:rgba(0,212,255,.06);
+            border:1px solid rgba(0,212,255,.14);
+            padding:.1rem .45rem; border-radius:4px; letter-spacing:.04em;
+        }
+        .proj-title {
+            font-family:'Space Grotesk',sans-serif; font-size:1rem;
+            font-weight:600; color:var(--text); margin-bottom:.4rem;
+            line-height:1.35;
+        }
+        .proj-excerpt {
+            font-size:.82rem; color:var(--text-m); line-height:1.65; flex:1;
+        }
+        .proj-cta-row { text-align:center; }
+        .btn-outline {
+            display:inline-flex; align-items:center; gap:.55rem;
+            font-family:'JetBrains Mono',monospace; font-size:.72rem;
+            letter-spacing:.1em; text-transform:uppercase;
+            color:var(--cyan); border:1px solid var(--border-h);
+            padding:.7rem 1.6rem; border-radius:8px;
+            background:rgba(0,212,255,.04);
+            text-decoration:none;
+            transition:background var(--ease), box-shadow var(--ease), border-color var(--ease);
+        }
+        .btn-outline:hover {
+            background:rgba(0,212,255,.12); box-shadow:var(--glow);
+        }
+        @media(max-width:900px) {
+            .proj-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media(max-width:600px) {
+            .proj-grid { grid-template-columns:1fr; }
         }
 
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            padding-right: 3rem;
+        /* ── SKILLS ── */
+        .skills { background:var(--bg-surface); }
+        .skills-bento {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
         }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-            padding-left: 3rem;
+        .skill-card {
+            padding:1.4rem; position:relative; overflow:hidden; cursor:default;
         }
-
-        .timeline-content {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #333;
-            position: relative;
+        .skill-card::after {
+            content:''; position:absolute; inset:0;
+            background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,212,255,.05) 0%, transparent 65%);
+            opacity:0; transition:opacity .3s; pointer-events:none;
         }
-
-        .timeline-content::before {
-            content: '';
-            position: absolute;
-            top: 2rem;
-            width: 0;
-            height: 0;
-            border: 10px solid transparent;
+        .skill-card:hover::after { opacity:1; }
+        .ski {
+            width:34px; height:34px;
+            background:rgba(0,212,255,.07);
+            border:1px solid rgba(0,212,255,.14);
+            border-radius:8px; display:flex;
+            align-items:center; justify-content:center;
+            color:var(--cyan); font-size:.9rem; margin-bottom:.9rem;
         }
-
-        .timeline-item:nth-child(odd) .timeline-content::before {
-            right: -20px;
-            border-left-color: #1a1a1a;
+        .ski.p { background:rgba(129,140,248,.07); border-color:rgba(129,140,248,.15); color:var(--purple); }
+        .ski.g { background:rgba(16,185,129,.07); border-color:rgba(16,185,129,.15); color:var(--green); }
+        .ski.au { background:rgba(245,158,11,.07); border-color:rgba(245,158,11,.15); color:var(--gold); }
+        .skill-card h3 {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:.9rem; font-weight:600;
+            color:var(--text); margin-bottom:.85rem;
         }
-
-        .timeline-item:nth-child(even) .timeline-content::before {
-            left: -20px;
-            border-right-color: #1a1a1a;
-        }
-
-        .timeline-date {
-            color: #00d4ff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-title {
-            color: #fff;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-company {
-            color: #888;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-description {
-            color: #ccc;
-            line-height: 1.6;
-        }
-
-        .timeline-description ul {
-            margin-left: 1rem;
-            margin-top: 1rem;
-        }
-
-        .timeline-description li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Skills Section */
-        .skills {
-            padding: 6rem 0;
-            background: #111;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .skill-category {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #333;
-        }
-
-        .skill-category h3 {
-            color: #00d4ff;
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
+        .skill-tags { display:flex; flex-wrap:wrap; gap:.35rem; }
         .skill-tag {
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            font-size:.76rem; color:var(--text-m);
+            background:rgba(255,255,255,.03);
+            border:1px solid rgba(255,255,255,.06);
+            padding:.22rem .55rem; border-radius:4px;
+            transition:color var(--ease), border-color var(--ease), background var(--ease);
+        }
+        .skill-tag:hover {
+            color:var(--cyan); border-color:rgba(0,212,255,.2);
+            background:rgba(0,212,255,.05);
         }
 
-        /* Awards Section */
-        .awards {
-            padding: 6rem 0;
-            background: #0a0a0a;
-        }
-
-        .awards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
+        /* ── AWARDS ── */
+        .awards { background:var(--bg); }
+        .awards-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; }
         .award-card {
-            background: #1a1a1a;
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #333;
-            text-align: center;
-            transition: transform 0.3s ease;
+            padding:1.75rem; display:flex; gap:1.1rem; align-items:flex-start;
+            position:relative; overflow:hidden;
         }
-
-        .award-card:hover {
-            transform: translateY(-5px);
+        .award-card::before {
+            content:''; position:absolute; top:0; left:0; right:0; height:1px;
+            background:linear-gradient(90deg,transparent,var(--gold),transparent);
+            opacity:.25; transition:opacity var(--ease);
         }
-
-        .award-icon {
-            font-size: 3rem;
-            color: #00d4ff;
-            margin-bottom: 1rem;
+        .award-card:hover::before { opacity:.65; }
+        .award-ico {
+            flex-shrink:0; width:42px; height:42px;
+            background:rgba(245,158,11,.07);
+            border:1px solid rgba(245,158,11,.18);
+            border-radius:9px; display:flex;
+            align-items:center; justify-content:center;
+            color:var(--gold); font-size:1rem;
         }
-
+        .award-body { flex:1; }
         .award-title {
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:.97rem; font-weight:600; color:var(--text); margin-bottom:.2rem;
         }
-
-        .award-org {
-            color: #888;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
+        .award-org { font-size:.83rem; color:var(--text-m); margin-bottom:.4rem; }
         .award-date {
-            color: #00d4ff;
-            font-size: 0.9rem;
+            font-family:'JetBrains Mono',monospace;
+            font-size:.68rem; color:var(--gold); opacity:.75;
         }
 
-        /* Contact Section */
-        .contact {
-            padding: 6rem 0;
-            background: #111;
+        /* ── CONTACT ── */
+        .contact { background:var(--bg-surface); }
+        .contact-grid {
+            display:grid; grid-template-columns:1fr 1.35fr;
+            gap:3.5rem; align-items:start;
         }
-
-        .contact-content {
-            max-width: 800px;
-            margin: 3rem auto 0;
+        .contact-intro { font-size:.93rem; color:var(--text-m); line-height:1.78; }
+        .contact-links { display:flex; flex-direction:column; gap:.65rem; margin-top:1.75rem; }
+        .contact-link {
+            display:flex; align-items:center; gap:.95rem;
+            padding:.9rem 1.1rem; text-decoration:none;
+            color:var(--text); transition:border-color var(--ease), background var(--ease);
         }
-
-        .contact-info {
-            color: #ccc;
-            text-align: center;
+        .contact-link:hover { border-color:var(--border-h); background:var(--bg-card-h); }
+        .cl-ico {
+            flex-shrink:0; width:34px; height:34px;
+            background:rgba(0,212,255,.06);
+            border:1px solid var(--border); border-radius:8px;
+            display:flex; align-items:center; justify-content:center;
+            color:var(--cyan); font-size:.85rem;
         }
+        .cl-lbl { font-size:.73rem; color:var(--text-d); margin-bottom:.1rem; }
+        .cl-val { font-size:.87rem; font-weight:500; color:var(--text); }
 
-        .contact-info h3 {
-            color: #00d4ff;
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
+        /* Forms */
+        .fsec-title {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:.97rem; font-weight:600; color:var(--text);
+            display:flex; align-items:center; gap:.45rem;
+            margin-bottom:1.1rem;
         }
-
-        .contact-info p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 3rem;
-        }
-
-        .contact-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: rgba(0, 212, 255, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-            transition: all 0.3s ease;
-            min-width: 0; /* Allow flex items to shrink */
-        }
-
-        .contact-item:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: rgba(0, 212, 255, 0.3);
-        }
-
-        .contact-item .emoji {
-            font-size: 1.5rem;
-            min-width: 30px;
-            flex-shrink: 0; /* Prevent emoji from shrinking */
-        }
-
-        .contact-item > div {
-            min-width: 0; /* Allow text container to shrink */
-            flex: 1;
-        }
-
-        .contact-item .label {
-            color: #888;
-            font-size: 0.9rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .contact-item .value {
-            color: #fff;
-            font-weight: 500;
-            word-break: break-all; /* Break long text */
-            overflow-wrap: break-word; /* Wrap long words */
-        }
-
-        .contact-item a {
-            color: #00d4ff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            word-break: break-all; /* Break long URLs */
-            overflow-wrap: break-word; /* Wrap long URLs */
-        }
-
-        .contact-item a:hover {
-            color: #fff;
-        }
-
-        /* Contact Form */
-        .contact-form-section {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.15);
-        }
-
-        .contact-form-section > h3 {
-            color: #00d4ff;
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .contact-form-section > p {
-            color: #888;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        @media (max-width: 600px) {
-            .form-row { grid-template-columns: 1fr; }
-        }
-
-        .form-field {
-            display: flex;
-            flex-direction: column;
-            gap: 0.4rem;
-        }
-
-        .form-field label {
-            color: #aaa;
-            font-size: 0.85rem;
-        }
-
+        .fsec-title i { color:var(--cyan); font-size:.85rem; }
+        .fsec-sub { font-size:.8rem; color:var(--text-d); margin-bottom:1.1rem; }
+        .contact-form { display:flex; flex-direction:column; gap:.8rem; }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+        .form-field { display:flex; flex-direction:column; gap:.3rem; }
+        .form-field label { font-size:.75rem; color:var(--text-d); }
         .form-field input,
-        .form-field textarea {
-            background: #0d0d0d;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 8px;
-            color: #ccc;
-            padding: 0.75rem 1rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            transition: border-color 0.3s ease;
-            box-sizing: border-box;
-            width: 100%;
+        .form-field textarea,
+        .enc-ta {
+            background:rgba(255,255,255,.03);
+            border:1px solid var(--border); border-radius:8px;
+            color:var(--text); padding:.62rem .88rem;
+            font-family:'Inter',sans-serif; font-size:.88rem;
+            transition:border-color var(--ease), background var(--ease);
+            width:100%; box-sizing:border-box;
         }
-
         .form-field input:focus,
-        .form-field textarea:focus {
-            outline: none;
-            border-color: rgba(0, 212, 255, 0.5);
+        .form-field textarea:focus,
+        .enc-ta:focus {
+            outline:none;
+            border-color:rgba(0,212,255,.4);
+            background:rgba(0,212,255,.02);
         }
-
-        .form-field textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .form-status {
-            font-size: 0.9rem;
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
-            display: none;
-        }
-
+        .form-field textarea { resize:vertical; min-height:100px; }
+        .form-status { font-size:.83rem; padding:.55rem .88rem; border-radius:8px; display:none; }
         .form-status.success {
-            display: block;
-            background: rgba(0, 212, 100, 0.1);
-            border: 1px solid rgba(0, 212, 100, 0.3);
-            color: #00d464;
+            display:block;
+            background:rgba(16,185,129,.07); border:1px solid rgba(16,185,129,.22); color:#34d399;
         }
-
         .form-status.error {
-            display: block;
-            background: rgba(255, 80, 80, 0.1);
-            border: 1px solid rgba(255, 80, 80, 0.3);
-            color: #ff6060;
+            display:block;
+            background:rgba(239,68,68,.07); border:1px solid rgba(239,68,68,.18); color:#f87171;
         }
+        .divider { border:none; border-top:1px solid var(--border); margin:2.25rem 0; }
 
-        /* GPG / Encrypted Contact */
-        .gpg-section {
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(0, 212, 255, 0.15);
+        /* GPG */
+        .gpg-card {
+            background:rgba(255,255,255,.02);
+            border:1px solid var(--border); border-radius:var(--r);
+            overflow:hidden; margin-bottom:1.1rem;
         }
-
-        .gpg-section > h3 {
-            color: #00d4ff;
-            font-size: 1.4rem;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
+        .gpg-header {
+            display:flex; justify-content:space-between; align-items:center;
+            padding:.6rem 1rem;
+            background:rgba(0,212,255,.04);
+            border-bottom:1px solid var(--border);
+            flex-wrap:wrap; gap:.4rem;
         }
-
-        .gpg-section > p {
-            color: #888;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 2rem;
+        .gpg-id {
+            font-family:'JetBrains Mono',monospace;
+            font-size:.75rem; color:var(--cyan); font-weight:600;
         }
-
-        .gpg-key-card {
-            background: #0d0d0d;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 2rem;
+        .gpg-exp {
+            font-family:'JetBrains Mono',monospace;
+            font-size:.68rem; color:var(--text-d);
         }
-
-        .gpg-key-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 1.25rem;
-            background: rgba(0, 212, 255, 0.08);
-            border-bottom: 1px solid rgba(0, 212, 255, 0.15);
-            flex-wrap: wrap;
-            gap: 0.5rem;
+        .gpg-dl {
+            display:inline-flex; align-items:center; gap:.3rem;
+            background:transparent; border:1px solid rgba(0,212,255,.22);
+            color:var(--cyan); padding:.28rem .7rem; border-radius:6px;
+            cursor:pointer; font-size:.75rem; font-weight:500;
+            text-decoration:none; transition:all var(--ease);
         }
-
-        .gpg-key-meta {
-            display: flex;
-            flex-direction: column;
-            gap: 0.15rem;
+        .gpg-dl:hover { background:rgba(0,212,255,.08); border-color:var(--cyan); }
+        .gpg-body {
+            padding:.7rem 1rem;
+            font-family:'JetBrains Mono',monospace; font-size:.62rem;
+            color:var(--text-d); white-space:pre; overflow-x:auto;
+            max-height:95px; overflow-y:auto; user-select:all;
+            line-height:1.5;
         }
-
-        .gpg-key-id {
-            color: #00d4ff;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            font-weight: 600;
+        .enc-ta { resize:vertical; min-height:95px; }
+        .enc-ta.out {
+            font-family:'JetBrains Mono',monospace;
+            font-size:.68rem; color:var(--text-d); min-height:125px;
         }
+        .enc-lbl { font-size:.75rem; color:var(--text-d); margin-bottom:.3rem; display:block; }
+        .enc-step { margin-bottom:1.1rem; }
+        .enc-row { display:flex; gap:.65rem; flex-wrap:wrap; align-items:center; margin-top:.6rem; }
+        .enc-hint { font-size:.75rem; color:var(--text-d); }
 
-        .gpg-key-expiry {
-            color: #666;
-            font-size: 0.75rem;
+        /* ── FOOTER ── */
+        footer {
+            background:var(--bg); border-top:1px solid var(--border);
+            padding:1.75rem 2rem; text-align:center;
         }
-
-        .gpg-download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: transparent;
-            border: 1px solid rgba(0, 212, 255, 0.4);
-            color: #00d4ff;
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-decoration: none;
-            transition: all 0.3s ease;
+        footer p {
+            font-family:'JetBrains Mono',monospace;
+            font-size:.75rem; color:var(--text-d);
         }
+        footer span { color:var(--cyan); }
 
-        .gpg-download-btn:hover {
-            background: rgba(0, 212, 255, 0.1);
-            border-color: #00d4ff;
-            color: #fff;
+        /* ── RESPONSIVE ── */
+        @media (max-width:1024px) {
+            .skills-bento { grid-template-columns:repeat(2,1fr); }
         }
-
-        .gpg-key-body {
-            padding: 1rem 1.25rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.72rem;
-            color: #555;
-            white-space: pre;
-            overflow-x: auto;
-            line-height: 1.5;
-            max-height: 110px;
-            overflow-y: auto;
-            user-select: all;
+        @media (max-width:768px) {
+            .nav-links { display:none; }
+            .nav-hamburger { display:block; }
+            #orbital-canvas, .hud-frame { width:100%; opacity:.25; }
+            .about-grid { grid-template-columns:1fr; gap:2.5rem; }
+            .awards-grid { grid-template-columns:1fr; }
+            .contact-grid { grid-template-columns:1fr; }
+            .skills-bento { grid-template-columns:1fr 1fr; }
+            .form-row { grid-template-columns:1fr; }
         }
-
-        .encrypt-step {
-            margin-bottom: 1.25rem;
-        }
-
-        .encrypt-form-label {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-bottom: 0.4rem;
-            display: block;
-        }
-
-        .encrypt-textarea {
-            width: 100%;
-            background: #0d0d0d;
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            border-radius: 10px;
-            color: #ccc;
-            padding: 1rem;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
-            resize: vertical;
-            min-height: 110px;
-            transition: border-color 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        .encrypt-textarea:focus {
-            outline: none;
-            border-color: rgba(0, 212, 255, 0.5);
-        }
-
-        .encrypt-textarea.output {
-            font-family: 'Courier New', monospace;
-            font-size: 0.75rem;
-            color: #777;
-            min-height: 140px;
-        }
-
-        .encrypt-row {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-            margin-top: 0.75rem;
-        }
-
-        .encrypt-hint {
-            color: #555;
-            font-size: 0.85rem;
-        }
-
-        .encrypt-hint a {
-            color: #00d4ff;
-            text-decoration: none;
-        }
-
-        .encrypt-hint a:hover {
-            color: #fff;
-        }
-
-        /* Footer */
-        .footer {
-            background: #0a0a0a;
-            padding: 2rem 0;
-            text-align: center;
-            border-top: 1px solid #333;
-        }
-
-        .footer p {
-            color: #888;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-text .subtitle {
-                font-size: 1.2rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                left: 0 !important;
-                padding-left: 3rem !important;
-                padding-right: 0 !important;
-            }
-
-            .timeline-content::before {
-                left: -20px !important;
-                border-right-color: #1a1a1a !important;
-                border-left-color: transparent !important;
-            }
-
-            .contact-items {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #00d4ff;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0099cc;
+        @media (max-width:480px) {
+            .skills-bento { grid-template-columns:1fr; }
+            .hero-actions { flex-direction:column; align-items:flex-start; }
+            .stats-grid { grid-template-columns:1fr 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">Adarsh Agrawal</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#awards">Awards</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <!-- Animated Background -->
-        <div class="stars-container" id="starsContainer"></div>
-        
-        <!-- Rockets -->
-        <div class="rocket" style="top: 20%; animation-delay: 0s;">🚀</div>
-        <div class="rocket" style="top: 60%; animation-delay: 7s;">🚀</div>
-        <div class="rocket" style="top: 40%; animation-delay: 12s;">🚀</div>
-        
-        <!-- Satellites -->
-        <div class="satellite" style="top: 30%; left: 20%; animation-delay: 0s;">🛰️</div>
-        <div class="satellite" style="top: 70%; left: 70%; animation-delay: 10s;">🛰️</div>
-        
-        <!-- Shooting Stars -->
-        <div class="shooting-star" style="top: 10%; left: 10%; animation-delay: 2s;"></div>
-        <div class="shooting-star" style="top: 50%; left: 80%; animation-delay: 8s;"></div>
-        <div class="shooting-star" style="top: 80%; left: 30%; animation-delay: 14s;"></div>
-        
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1>Adarsh <span class="highlight">Agrawal</span></h1>
-                <p class="subtitle">Aerospace Engineer | Educator | Systems Specialist</p>
-                <p class="description">
-                    Passionate aerospace engineer with expertise in lab instruction, aircraft systems design, and satellite engineering. 
-                    Currently advancing aerospace education at Purdue University while developing innovative solutions for complex engineering challenges.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#experience" class="btn btn-primary">
-                        <i class="fas fa-rocket"></i>
-                        Explore My Work
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="#home" class="logo">AA<em>.</em></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobileDrawer">
+    <button class="mobile-drawer-close" id="drawerClose" aria-label="Close menu">
+        <i class="fas fa-times"></i>
+    </button>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#awards">Awards</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+    <canvas id="orbital-canvas" aria-hidden="true"></canvas>
+    <div class="hud-frame" aria-hidden="true">
+        <div class="hud-corner tl"></div>
+        <div class="hud-corner tr"></div>
+        <div class="hud-corner bl"></div>
+        <div class="hud-corner br"></div>
+        <div class="hud-data">
+            <div><span class="lbl">ALT &nbsp;</span><span id="hAlt">408.2 km</span></div>
+            <div><span class="lbl">INC &nbsp;</span><span id="hInc">51.6°</span></div>
+            <div><span class="lbl">VEL &nbsp;</span><span id="hVel">7.66 km/s</span></div>
+            <div><span class="lbl">ORB &nbsp;</span><span id="hOrb">NOMINAL</span></div>
+        </div>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-badge">PURDUE UNIVERSITY &nbsp;·&nbsp; AAE</div>
+        <h1 class="hero-name">Adarsh<br><span class="acc">Agrawal</span></h1>
+        <p class="hero-role"><span id="typedText"></span><span class="typed-cursor">|</span></p>
+        <p class="hero-desc">
+            Aerospace engineer bridging the gap between ideation and execution — designing lab systems, automating systems, and incorporating AI tools to train the next generation of engineers at Purdue's School of Aeronautics &amp; Astronautics.
+        </p>
+        <div class="hero-actions">
+            <a href="#experience" class="btn btn-primary">
+                <i class="fas fa-satellite-dish"></i> Explore My Work
+            </a>
+            <a href="#contact" class="btn btn-ghost">
+                <i class="fas fa-envelope"></i> Get In Touch
+            </a>
+            <a href="https://huggingface.co/spaces/adarshagrl/aerolab" target="_blank" rel="noopener" class="btn btn-danger">
+                <i class="fas fa-robot"></i> AeroLab AI
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label">01 — About</div>
+            <h2 class="section-title">Engineering at the Edge<br>of Earth and Orbit</h2>
+        </div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>With a <span class="about-hl">Master's in Aeronautics &amp; Astronautics from Purdue</span> (GPA 3.7/4.0) and a Bachelor's in Aerospace Engineering from RV College of Engineering (GPA 8.51/10), I operate at the intersection of classical flight mechanics and modern automation.</p>
+                <p>From optimizing fuel system architectures for the <span class="about-hl">Airbus A350-1000 ULR</span> to designing orbital mission profiles and satellite command pipelines, my work translates complex physics into real-world systems.</p>
+                <p>Today at Purdue's School of Aeronautics &amp; Astronautics, I design lab experiments, build <span class="about-hl">LabVIEW and Arduino</span> data acquisition systems, and integrate AI tools into engineering curricula — shaping the engineers who will build tomorrow's spacecraft.</p>
+            </div>
+            <div class="stats-grid reveal">
+                <div class="stat-card card">
+                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-card card">
+                    <span class="stat-number" data-target="3">0</span>
+                    <span class="stat-label">Major Awards</span>
+                </div>
+                <div class="stat-card card">
+                    <span class="stat-number" data-target="4">0</span>
+                    <span class="stat-label">Publications</span>
+                </div>
+                <div class="stat-card card">
+                    <span class="stat-number" data-target="200">0</span>
+                    <span class="stat-label">Students Advised</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="experience">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label">02 — Experience</div>
+            <h2 class="section-title">Mission Log</h2>
+            <p class="section-sub">From satellite systems to classroom innovation — a trajectory through aerospace engineering.</p>
+        </div>
+        <div class="timeline">
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot live"></div>
+                <div class="tl-date">Aug 2023 — Present</div>
+                <div class="tl-role">Instruction Specialist / Lab Coordinator</div>
+                <div class="tl-company">School of Aeronautics &amp; Astronautics · Purdue University</div>
+                <div class="tl-body card">
+                    <ul>
+                        <li>Design and develop aerospace laboratory experiments for undergraduate students</li>
+                        <li>Build and program LabVIEW and Arduino-based data acquisition and control systems</li>
+                        <li>Create and 3D print physical models using state-of-the-art printers for lab experimentation</li>
+                        <li>Train teaching assistants on lab equipment and safety procedures</li>
+                        <li>Integrate AI-powered tools into engineering curricula to modernize instruction</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">LabVIEW</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">3D Printing</span>
+                        <span class="tech-tag">SolidWorks</span>
+                        <span class="tech-tag">AI Integration</span>
+                        <span class="tech-tag">DAQ</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="tl-date">Aug 2022 — May 2023</div>
+                <div class="tl-role">Graduate Course Coordinator</div>
+                <div class="tl-company">Aerospace Design · Purdue University</div>
+                <div class="tl-body card">
+                    <ul>
+                        <li>Designed systems and methodologies for teaching Aerospace Engineering fundamentals to sophomores</li>
+                        <li>Provided instructional support on MATLAB for assignments and team project development</li>
+                        <li>Helped students debug code issues and optimize algorithmic performance</li>
+                        <li>Coordinated with instructors, TAs, and graders for comprehensive course management</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">MATLAB</span>
+                        <span class="tech-tag">Simulink</span>
+                        <span class="tech-tag">Jupyter</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="tl-date">Jan 2020 — May 2020</div>
+                <div class="tl-role">Associate Engineer, Simulation &amp; Physical Systems</div>
+                <div class="tl-company">Airbus Group · Bangalore, India</div>
+                <div class="tl-body card">
+                    <ul>
+                        <li>Executed design optimization for additional fuel tank integration in the A350-1000 ULR</li>
+                        <li>Conducted data-driven tradeoff analysis using ATA 100 referencing system</li>
+                        <li>Led technical meetings ensuring comprehensive tradeoff analyses across multiple teams</li>
+                        <li>Developed system and safety solutions with associated requirements documentation</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Systems Engineering</span>
+                        <span class="tech-tag">Safety Analysis</span>
+                        <span class="tech-tag">ATA 100</span>
+                        <span class="tech-tag">MDO</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="tl-date">Jul 2018 — Sep 2019</div>
+                <div class="tl-role">Chief Technical Officer / Systems Engineer</div>
+                <div class="tl-company">Team Antariksh · Space Technology Team</div>
+                <div class="tl-body card">
+                    <ul>
+                        <li>Monitored overall satellite system design progress and provided technical leadership</li>
+                        <li>Collaborated cross-functionally with subsystem leads to resolve design challenges</li>
+                        <li>Developed satellite command &amp; control procedures and performed mission planning</li>
+                        <li>Conducted comprehensive spacecraft system design analysis</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Orbital Mechanics</span>
+                        <span class="tech-tag">GMAT</span>
+                        <span class="tech-tag">Mission Planning</span>
+                        <span class="tech-tag">C&amp;C Systems</span>
+                        <span class="tech-tag">Satellite Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="tl-date">Jan 2019 — Dec 2019</div>
+                <div class="tl-role">eCommerce Specialist &amp; CEO</div>
+                <div class="tl-company">VMGN Fashions Pvt. Ltd.</div>
+                <div class="tl-body card">
+                    <ul>
+                        <li>Founded and led an eCommerce platform specializing in ethnic fashion products</li>
+                        <li>Developed comprehensive business strategies and managed end-to-end operations</li>
+                        <li>Implemented marketing automation and data analytics for growth</li>
+                        <li>Managed supply chain operations and vendor relationships</li>
+                    </ul>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Business Strategy</span>
+                        <span class="tech-tag">Operations</span>
+                        <span class="tech-tag">Marketing Automation</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS TEASER -->
+<section id="projects-teaser" class="projects-teaser">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label">03 — Projects</div>
+            <h2 class="section-title">Mission Log</h2>
+            <p class="section-sub">Selected engineering projects spanning orbital mechanics, embedded systems, automation, and machine learning.</p>
+        </div>
+
+        <div class="proj-grid">
+
+            <!-- Preview 1 -->
+            <a class="proj-preview card reveal" href="projects.html#proj-1">
+                <div class="proj-thumb">
+                    <i class="fas fa-satellite proj-thumb-icon"></i>
+                </div>
+                <div class="proj-info">
+                    <div class="proj-meta">
+                        <span class="proj-date">May 2025</span>
+                        <div class="proj-tags">
+                            <span class="proj-tag">AI</span>
+                            <span class="proj-tag">Aerospace</span>
+                        </div>
+                    </div>
+                    <div class="proj-title">Orbital Debris Collision Avoidance</div>
+                    <p class="proj-excerpt">ML pipeline predicting conjunction events from TLE data with sub-hour warning horizon.</p>
+                </div>
+            </a>
+
+            <!-- Preview 2 -->
+            <a class="proj-preview card reveal" href="projects.html#proj-2">
+                <div class="proj-thumb">
+                    <i class="fas fa-wave-square proj-thumb-icon"></i>
+                </div>
+                <div class="proj-info">
+                    <div class="proj-meta">
+                        <span class="proj-date">Feb 2025</span>
+                        <div class="proj-tags">
+                            <span class="proj-tag">LabVIEW</span>
+                            <span class="proj-tag">Automation</span>
+                        </div>
+                    </div>
+                    <div class="proj-title">Structural Health Monitoring System</div>
+                    <p class="proj-excerpt">Real-time vibration analysis dashboard built in LabVIEW with automated fault classification.</p>
+                </div>
+            </a>
+
+            <!-- Preview 3 -->
+            <a class="proj-preview card reveal" href="projects.html#proj-3">
+                <div class="proj-thumb">
+                    <i class="fas fa-microchip proj-thumb-icon"></i>
+                </div>
+                <div class="proj-info">
+                    <div class="proj-meta">
+                        <span class="proj-date">Nov 2024</span>
+                        <div class="proj-tags">
+                            <span class="proj-tag">Arduino</span>
+                            <span class="proj-tag">Robotics</span>
+                        </div>
+                    </div>
+                    <div class="proj-title">Autonomous Ground Rover</div>
+                    <p class="proj-excerpt">Obstacle-avoiding rover with ultrasonic SLAM and a custom PID steering controller.</p>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="proj-cta-row reveal">
+            <a href="projects.html" class="btn-outline">
+                View All Projects <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label">04 — Skills</div>
+            <h2 class="section-title">Technical Arsenal</h2>
+            <p class="section-sub">From orbital propagators to neural networks — a full-stack aerospace engineering toolkit.</p>
+        </div>
+        <div class="skills-bento">
+
+            <div class="skill-card card reveal">
+                <div class="ski"><i class="fas fa-satellite"></i></div>
+                <h3>Aerospace Systems</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Orbital Mechanics</span>
+                    <span class="skill-tag">Satellite Systems</span>
+                    <span class="skill-tag">GMAT</span>
+                    <span class="skill-tag">Mission Planning</span>
+                    <span class="skill-tag">Aircraft Design</span>
+                    <span class="skill-tag">Spaceflight Ops</span>
+                    <span class="skill-tag">Space Traffic Mgmt</span>
+                    <span class="skill-tag">System Integration</span>
+                </div>
+            </div>
+
+            <div class="skill-card card reveal">
+                <div class="ski p"><i class="fas fa-microchip"></i></div>
+                <h3>Automation &amp; Hardware</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">LabVIEW</span>
+                    <span class="skill-tag">Arduino</span>
+                    <span class="skill-tag">DAQ Systems</span>
+                    <span class="skill-tag">Sensors &amp; Actuators</span>
+                    <span class="skill-tag">Embedded Control</span>
+                    <span class="skill-tag">Simulink</span>
+                    <span class="skill-tag">Applied Control</span>
+                    <span class="skill-tag">Signal Processing</span>
+                </div>
+            </div>
+
+            <div class="skill-card card reveal">
+                <div class="ski g"><i class="fas fa-robot"></i></div>
+                <h3>AI &amp; Machine Learning</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python / NumPy</span>
+                    <span class="skill-tag">LLM Integration</span>
+                    <span class="skill-tag">HuggingFace</span>
+                    <span class="skill-tag">AI Chatbots</span>
+                    <span class="skill-tag">Data Analysis</span>
+                    <span class="skill-tag">Claude API</span>
+                    <span class="skill-tag">Prompt Engineering</span>
+                </div>
+            </div>
+
+            <div class="skill-card card reveal">
+                <div class="ski"><i class="fas fa-code"></i></div>
+                <h3>Programming &amp; Software</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">MATLAB</span>
+                    <span class="skill-tag">Jupyter</span>
+                    <span class="skill-tag">LaTeX</span>
+                    <span class="skill-tag">GitHub</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Linux</span>
+                </div>
+            </div>
+
+            <div class="skill-card card reveal">
+                <div class="ski au"><i class="fas fa-drafting-compass"></i></div>
+                <h3>Design &amp; Fabrication</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">SolidWorks</span>
+                    <span class="skill-tag">CAD Design</span>
+                    <span class="skill-tag">3D Printing</span>
+                    <span class="skill-tag">Bambu Studio</span>
+                    <span class="skill-tag">Technical Drawing</span>
+                    <span class="skill-tag">Rapid Prototyping</span>
+                </div>
+            </div>
+
+            <div class="skill-card card reveal">
+                <div class="ski p"><i class="fas fa-cogs"></i></div>
+                <h3>Engineering Methods</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Systems Engineering</span>
+                    <span class="skill-tag">MDO</span>
+                    <span class="skill-tag">Safety Analysis</span>
+                    <span class="skill-tag">System Design Thinking</span>
+                    <span class="skill-tag">Project Management</span>
+                    <span class="skill-tag">Technical Writing</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" class="awards">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label">05 — Recognition</div>
+            <h2 class="section-title">Awards &amp; Honors</h2>
+            <p class="section-sub">Recognized for excellence in teaching, service, and technical innovation.</p>
+        </div>
+        <div class="awards-grid">
+
+            <div class="award-card card reveal">
+                <div class="award-ico"><i class="fas fa-trophy"></i></div>
+                <div class="award-body">
+                    <div class="award-title">The Bravo Award for Excellent Service</div>
+                    <div class="award-org">Purdue University</div>
+                    <div class="award-date">April 2025</div>
+                </div>
+            </div>
+
+            <div class="award-card card reveal">
+                <div class="award-ico"><i class="fas fa-medal"></i></div>
+                <div class="award-body">
+                    <div class="award-title">Estus H. and Vashti L. Magoon Award</div>
+                    <div class="award-org">Excellence in Teaching · Purdue University</div>
+                    <div class="award-date">Spring 2023</div>
+                </div>
+            </div>
+
+            <div class="award-card card reveal">
+                <div class="award-ico"><i class="fas fa-certificate"></i></div>
+                <div class="award-body">
+                    <div class="award-title">Project Management Certification</div>
+                    <div class="award-org">Purdue Global</div>
+                    <div class="award-date">Spring 2025</div>
+                </div>
+            </div>
+
+            <div class="award-card card reveal">
+                <div class="award-ico"><i class="fas fa-file-alt"></i></div>
+                <div class="award-body">
+                    <div class="award-title">Published Research — SETI@home Analysis</div>
+                    <div class="award-org">International Astronautical Congress</div>
+                    <div class="award-date">IAC 2019 · Washington, DC</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-head reveal">
+            <div class="section-label">06 — Contact</div>
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="section-sub">Open to aerospace collaborations, research partnerships, and technical discussions.</p>
+        </div>
+        <div class="contact-grid">
+
+            <!-- Left: links -->
+            <div class="reveal">
+                <p class="contact-intro">I'm always interested in discussing aerospace engineering opportunities, research collaborations, and innovative projects. Whether you need technical expertise or educational insights — reach out.</p>
+                <div class="contact-links">
+                    <a href="https://linkedin.com/in/adarshagrl" target="_blank" rel="noopener" class="contact-link card">
+                        <div class="cl-ico"><i class="fab fa-linkedin-in"></i></div>
+                        <div>
+                            <div class="cl-lbl">LinkedIn</div>
+                            <div class="cl-val">linkedin.com/in/adarshagrl</div>
+                        </div>
                     </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-envelope"></i>
-                        Get In Touch
+                    <a href="https://github.com/adarshorbital" target="_blank" rel="noopener" class="contact-link card">
+                        <div class="cl-ico"><i class="fab fa-github"></i></div>
+                        <div>
+                            <div class="cl-lbl">GitHub</div>
+                            <div class="cl-val">github.com/adarshorbital</div>
+                        </div>
                     </a>
-                    <a href="https://huggingface.co/spaces/adarshagrl/aerolab" style="background-color: #ff0000; color: white; border: 2px solid #cc0000;" target="_blank" class="btn btn-secondary">
-                        <i class="fas fa-rocket"></i>
-                        Use my Chatbot
+                    <a href="https://orcid.org/0000-0001-9288-5421" target="_blank" rel="noopener" class="contact-link card">
+                        <div class="cl-ico"><i class="fas fa-id-badge"></i></div>
+                        <div>
+                            <div class="cl-lbl">ORCID</div>
+                            <div class="cl-val">0000-0001-9288-5421</div>
+                        </div>
                     </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me</h2>
-                <p>Dedicated to advancing aerospace technology through education, innovation, and systematic engineering excellence</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Engineering Excellence</h3>
-                    <p>
-                        With a Master's degree in Aeronautics and Astronautics from Purdue University (GPA: 3.7/4.0) and a Bachelor's in Aerospace Engineering from RV College of Engineering (GPA: 8.51/10), I bring both theoretical knowledge and practical experience to complex aerospace challenges.
-                    </p>
-                    <p>
-                        My journey spans from optimizing fuel systems for the Airbus A350-1000 ULR to designing cutting-edge laboratory experiments that enhance student learning outcomes. I'm passionate about bridging the gap between advanced aerospace concepts and practical implementation.
-                    </p>
-                    <p>
-                        Currently serving as an Instruction Specialist at Purdue's School of Aeronautics & Astronautics, I'm committed to shaping the next generation of aerospace engineers while continuing to push the boundaries of what's possible in aerospace technology.
-                    </p>
-                </div>
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">3</span>
-                        <span class="stat-label">Major Awards</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">1</span>
-                        <span class="stat-label">Publication</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100+</span>
-                        <span class="stat-label">Students Mentored</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <div class="section-title">
-                <h2>Professional Experience</h2>
-                <p>A journey through aerospace innovation, education, and technical excellence</p>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Aug 2023 - Present</div>
-                        <h3 class="timeline-title">Instruction Specialist/Lab Coordinator</h3>
-                        <p class="timeline-company">School of Aeronautics & Astronautics, Purdue University</p>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Design and develop innovative aerospace laboratory experiments for undergraduate students</li>
-                                <li>Create and 3D print physical models using state-of-the-art 3D printers for lab experimentation</li>
-                                <li>Train teaching assistants on lab equipment and safety procedures for optimal student learning</li>
-                                <li>Implement comprehensive curriculum improvements that enhance educational outcomes</li>
-                            </ul>
+            <!-- Right: forms -->
+            <div class="reveal">
+                <div class="fsec-title"><i class="fas fa-paper-plane"></i> Send a Message</div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="cf-name">Name</label>
+                            <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="cf-email">Email</label>
+                            <input type="email" id="cf-email" name="email" placeholder="you@example.com" required>
                         </div>
                     </div>
-                </div>
+                    <div class="form-field">
+                        <label for="cf-message">Message</label>
+                        <textarea id="cf-message" name="message" placeholder="What's on your mind?" required></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary" id="cfSubmitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </div>
+                    <div class="form-status" id="formStatus"></div>
+                </form>
 
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Aug 2022 - May 2023</div>
-                        <h3 class="timeline-title">Graduate Course Coordinator</h3>
-                        <p class="timeline-company">Aerospace Design, School of Aeronautics and Astronautics</p>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Designed systems and methodologies for teaching Aerospace Engineering fundamentals to sophomores</li>
-                                <li>Provided instructional support on MATLAB for assignment problems and team project development</li>
-                                <li>Helped students debug code issues and optimize functionality</li>
-                                <li>Coordinated with instructors, teaching assistants, and graders for comprehensive course management</li>
-                            </ul>
+                <hr class="divider">
+
+                <div class="fsec-title"><i class="fas fa-lock"></i> Send an Encrypted Message</div>
+                <p class="fsec-sub">Encrypt with my GPG key — only I can read it. No plaintext leaves your browser.</p>
+
+                <div class="gpg-card">
+                    <div class="gpg-header">
+                        <div>
+                            <div class="gpg-id">Key ID: 0x36A89F7869565013</div>
+                            <div class="gpg-exp">Expires: June 8, 2028 &nbsp;·&nbsp; Ed25519</div>
                         </div>
+                        <a class="gpg-dl" href="guyfawkes_0x36A89F7869565013_public.asc" download>
+                            <i class="fas fa-download"></i> Download .asc
+                        </a>
                     </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Jan 2020 - May 2020</div>
-                        <h3 class="timeline-title">Associate Engineer, Simulation and Physical Systems</h3>
-                        <p class="timeline-company">Airbus Group, Bangalore, India</p>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Executed design optimization for additional fuel tank integration in A350-1000 ULR aircraft</li>
-                                <li>Conducted data-driven tradeoff analysis using ATA 100 referencing system for commercial aircraft</li>
-                                <li>Led technical meetings to ensure comprehensive tradeoff analyses across multiple teams</li>
-                                <li>Demonstrated expertise in technical development of system and safety solutions with associated requirements</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">July 2018 - Sep 2019</div>
-                        <h3 class="timeline-title">Chief Technical Officer/System Engineer</h3>
-                        <p class="timeline-company">Team Antariksh, Space Technology Team</p>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Monitored overall progress of satellite system design and provided technical expertise</li>
-                                <li>Collaborated cross-functionally with subsystem leads to address and resolve challenges</li>
-                                <li>Developed satellite command and control procedures and performed mission planning</li>
-                                <li>Conducted comprehensive spacecraft system design analysis</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">Jan 2019 - Dec 2019</div>
-                        <h3 class="timeline-title">eCommerce Specialist & CEO</h3>
-                        <p class="timeline-company">VMGN Fashions Pvt. Ltd. (formerly GN Designer Handlooms Pvt. Ltd)</p>
-                        <div class="timeline-description">
-                            <ul>
-                                <li>Founded and led an eCommerce platform specializing in ethnic fashion products</li>
-                                <li>Developed comprehensive business strategies and managed end-to-end operations</li>
-                                <li>Built and maintained customer relationships while ensuring high-quality service delivery</li>
-                                <li>Implemented innovative marketing strategies to expand market reach and brand recognition</li>
-                                <li>Managed supply chain operations and vendor relationships for optimal business performance</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <div class="section-title">
-                <h2>Technical Expertise</h2>
-                <p>Comprehensive skill set spanning aerospace systems, software development, and advanced engineering tools.</p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3><i class="fas fa-code"></i> Programming & Software</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">MATLAB</span>
-                        <span class="skill-tag">Jupyter</span>
-                        <span class="skill-tag">LabVIEW</span>
-                        <span class="skill-tag">Simulink</span>
-                        <span class="skill-tag">LaTeX</span>
-                        <span class="skill-tag">GitHub</span>
-                        <span class="skill-tag">VS Code</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-drafting-compass"></i> Design & CAD</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">SolidWorks</span>
-                        <span class="skill-tag">CAD Design</span>
-                        <span class="skill-tag">3D Printing</span>
-                        <span class="skill-tag">Bambu Studio</span>
-                        <span class="skill-tag">Technical Drawing</span>
-                        <span class="skill-tag">Prototyping</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-satellite"></i> Aerospace Systems</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Aircraft Design</span>
-                        <span class="skill-tag">Satellite Systems</span>
-                        <span class="skill-tag">Orbital Mechanics</span>
-                        <span class="skill-tag">GMAT</span>
-                        <span class="skill-tag">Mission Planning</span>
-                        <span class="skill-tag">System Integration</span>
-                        <span class="skill-tag">Safety Analysis</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3><i class="fas fa-cogs"></i> Engineering Specializations</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Systems Engineering</span>
-                        <span class="skill-tag">Multidisciplinary Design Optimization</span>
-                        <span class="skill-tag">Applied Control</span>
-                        <span class="skill-tag">Spaceflight Operations</span>
-                        <span class="skill-tag">Space Traffic Management</span>
-                        <span class="skill-tag">System Design Thinking</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Awards Section -->
-    <section id="awards" class="awards">
-        <div class="container">
-            <div class="section-title">
-                <h2>Awards & Recognition</h2>
-                <p>Recognized for excellence in teaching, service, and technical contributions</p>
-            </div>
-            <div class="awards-grid">
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3 class="award-title">The Bravo Award for Excellent Service</h3>
-                    <p class="award-org">Purdue University</p>
-                    <p class="award-date">April 2025</p>
-                </div>
-
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-medal"></i>
-                    </div>
-                    <h3 class="award-title">Estus H. and Vashti L. Magoon Award</h3>
-                    <p class="award-org">Excellence in Teaching - Purdue University</p>
-                    <p class="award-date">Spring 2023</p>
-                </div>
-
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h3 class="award-title">Project Management Certification</h3>
-                    <p class="award-org">Purdue Global</p>
-                    <p class="award-date">Spring 2025</p>
-                </div>
-
-                <div class="award-card">
-                    <div class="award-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <h3 class="award-title">Published Research</h3>
-                    <p class="award-org">SETI@home: A Detailed Analysis and Study</p>
-                    <p class="award-date">IAC 2019, Washington, DC</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Let's Connect</h2>
-                <p>Ready to collaborate on aerospace innovations or discuss opportunities</p>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>I'm always interested in discussing aerospace engineering opportunities, research collaborations, or innovative projects. Whether you're looking for technical expertise or educational insights, let's connect!</p>
-                    
-                    <div class="contact-items">                             
-                        <div class="contact-item">
-                            <span class="emoji">💼</span>
-                            <div>
-                                <div class="label">LinkedIn:</div>
-                                <div class="value">
-                                    <a href="https://linkedin.com/in/adarshagrl" target="_blank">linkedin.com/in/adarshagrl</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <span class="emoji">🐙</span>
-                            <div>
-                                <div class="label">GitHub:</div>
-                                <div class="value">
-                                    <a href="https://github.com/adarshorbital" target="_blank">github.com/adarshorbital</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <span class="emoji">🆔</span>
-                            <div>
-                                <div class="label">ORCID:</div>
-                                <div class="value">
-                                    <a href="https://orcid.org/0000-0001-9288-5421" target="_blank">0000-0001-9288-5421</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contact Form -->
-                    <div class="contact-form-section">
-                        <h3><i class="fas fa-paper-plane"></i> Send a Message</h3>
-                        <p>No account needed — just fill in the form and hit send.</p>
-                        <form class="contact-form" id="contactForm">
-                            <div class="form-row">
-                                <div class="form-field">
-                                    <label for="cf-name">Name</label>
-                                    <input type="text" id="cf-name" name="name" placeholder="Your name" required>
-                                </div>
-                                <div class="form-field">
-                                    <label for="cf-email">Email (for reply)</label>
-                                    <input type="email" id="cf-email" name="email" placeholder="you@example.com" required>
-                                </div>
-                            </div>
-                            <div class="form-field">
-                                <label for="cf-message">Message</label>
-                                <textarea id="cf-message" name="message" placeholder="What's on your mind?" required></textarea>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-primary" id="cfSubmitBtn">
-                                    <i class="fas fa-paper-plane"></i> Send Message
-                                </button>
-                            </div>
-                            <div class="form-status" id="formStatus"></div>
-                        </form>
-                    </div>
-
-                    <!-- GPG Encrypted Contact -->
-                    <div class="gpg-section">
-                        <h3><i class="fas fa-lock"></i> Send an Encrypted Message</h3>
-                        <p>Prefer privacy? Encrypt your message with my GPG public key — only I can read it. Send the ciphertext via LinkedIn DM.</p>
-
-                        <div class="gpg-key-card">
-                            <div class="gpg-key-card-header">
-                                <div class="gpg-key-meta">
-                                    <span class="gpg-key-id">Key ID: 0x36A89F7869565013</span>
-                                    <span class="gpg-key-expiry">Expires: June 8, 2028 &nbsp;·&nbsp; Ed25519</span>
-                                </div>
-                                <a class="gpg-download-btn" href="guyfawkes_0x36A89F7869565013_public.asc" download>
-                                    <i class="fas fa-download"></i> Download Public Key (.asc)
-                                </a>
-                            </div>
-                            <div class="gpg-key-body" id="gpgKeyBlock">-----BEGIN PGP PUBLIC KEY BLOCK-----
+                    <div class="gpg-body" id="gpgKeyBlock">-----BEGIN PGP PUBLIC KEY BLOCK-----
 
 mDMEaicuYxYJKwYBBAHaRw8BAQdANpFf3o4nHaEE6x6jP50yFG0oRIWMwvVzDvY/
 JyXIETa0I2d1eWZhd2tlcyA8Z3V5LmZhd2tlczBAb3V0bG9vay5jb20+iLUEExYK
@@ -1368,228 +1194,465 @@ ZkJNv8o3BLOiRdMjT8q9B94wgdf5AQCaZsMRlioD7i72ehyUgTFqX/h2my9kSQPR
 z13BhLuAAg==
 =TIbF
 -----END PGP PUBLIC KEY BLOCK-----</div>
-                        </div>
+                </div>
 
-                        <div class="encrypt-step">
-                            <label class="encrypt-form-label" for="plaintextMsg">Your message:</label>
-                            <textarea class="encrypt-textarea" id="plaintextMsg" placeholder="Write your confidential message here…"></textarea>
-                            <div class="encrypt-row">
-                                <button class="btn btn-primary" onclick="encryptMessage()">
-                                    <i class="fas fa-lock"></i> Encrypt
-                                </button>
-                            </div>
-                        </div>
+                <div class="enc-step">
+                    <label class="enc-lbl" for="plaintextMsg">Your message:</label>
+                    <textarea class="enc-ta" id="plaintextMsg" placeholder="Write your confidential message here…"></textarea>
+                    <div class="enc-row">
+                        <button class="btn btn-primary" onclick="encryptMessage()">
+                            <i class="fas fa-lock"></i> Encrypt
+                        </button>
+                    </div>
+                </div>
 
-                        <div class="encrypt-step">
-                            <label class="encrypt-form-label" for="encryptedMsg">Encrypted output — copy and send via the Contact Form or click the button "Send via Contact Form"</label>
-                            <textarea class="encrypt-textarea output" id="encryptedMsg" readonly placeholder="Encrypted PGP block will appear here…"></textarea>
-                            <div class="encrypt-row">
-                                <button class="btn btn-secondary" id="copyEncBtn" onclick="copyEncrypted(this)" disabled>
-                                    <i class="fas fa-copy"></i> Copy Encrypted Message
-                                </button>
-                                <button class="btn btn-primary" id="sendEncBtn" onclick="sendEncrypted()" disabled>
-                                    <i class="fas fa-paper-plane"></i> Send via Contact Form
-                                </button>
-                                <span class="encrypt-hint">No plaintext leaves your browser.</span>
-                            </div>
-                        </div>
+                <div class="enc-step">
+                    <label class="enc-lbl" for="encryptedMsg">Encrypted output — copy or send via form:</label>
+                    <textarea class="enc-ta out" id="encryptedMsg" readonly placeholder="Encrypted PGP block will appear here…"></textarea>
+                    <div class="enc-row">
+                        <button class="btn btn-ghost" id="copyEncBtn" onclick="copyEncrypted(this)" disabled>
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button class="btn btn-primary" id="sendEncBtn" onclick="sendEncrypted()" disabled>
+                            <i class="fas fa-paper-plane"></i> Send via Form
+                        </button>
+                        <span class="enc-hint">No plaintext leaves your browser.</span>
                     </div>
                 </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Adarsh Agrawal. All rights reserved. | Aerospace Engineer | Educator | Innovator</p>
-        </div>
-    </footer>
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p>© 2025 <span>Adarsh Agrawal</span> &nbsp;·&nbsp; Aerospace Engineer &nbsp;·&nbsp; Educator &nbsp;·&nbsp; Innovator</p>
+    </div>
+</footer>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+<script>
+// ── Navbar ──────────────────────────────────────────
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
 
-        // Navbar background on scroll
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-            }
-        });
+// ── Mobile drawer ────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const drawer = document.getElementById('mobileDrawer');
+const drawerClose = document.getElementById('drawerClose');
 
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+hamburger.addEventListener('click', () => drawer.classList.add('open'));
+drawerClose.addEventListener('click', () => drawer.classList.remove('open'));
+drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => drawer.classList.remove('open'));
+});
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.timeline-item, .skill-category, .award-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Generate animated stars
-        function createStars() {
-            const starsContainer = document.getElementById('starsContainer');
-            const numberOfStars = 150;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
-                // Random size
-                const sizes = ['small', 'medium', 'large'];
-                const randomSize = sizes[Math.floor(Math.random() * sizes.length)];
-                star.classList.add(randomSize);
-                
-                // Random position
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                
-                // Random animation delay
-                star.style.animationDelay = Math.random() * 3 + 's';
-                
-                // Random animation duration
-                star.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                
-                starsContainer.appendChild(star);
-            }
+// ── Active nav link ──────────────────────────────────
+const navAs = document.querySelectorAll('.nav-links a');
+const secEls = document.querySelectorAll('section[id]');
+new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            navAs.forEach(a => a.classList.remove('active'));
+            const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+            if (a) a.classList.add('active');
         }
-
-        // Create stars when page loads
-        window.addEventListener('load', createStars);
-
-        // Add mouse interaction for stars
-        document.addEventListener('mousemove', function(e) {
-            const stars = document.querySelectorAll('.star');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-            
-            stars.forEach((star, index) => {
-                const speed = (index % 3 + 1) * 0.5;
-                const x = (mouseX - 0.5) * speed;
-                const y = (mouseY - 0.5) * speed;
-                
-                star.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-
-        // Add click interaction to create temporary shooting stars
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.hero')) {
-                const shootingStar = document.createElement('div');
-                shootingStar.className = 'shooting-star';
-                shootingStar.style.left = e.clientX + 'px';
-                shootingStar.style.top = e.clientY + 'px';
-                shootingStar.style.position = 'fixed';
-                shootingStar.style.zIndex = '10';
-
-                document.body.appendChild(shootingStar);
-
-                setTimeout(() => {
-                    shootingStar.remove();
-                }, 3000);
+    });
+}, { rootMargin: '-40% 0px -55% 0px' }).observe && secEls.forEach(s =>
+    new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                navAs.forEach(a => a.classList.remove('active'));
+                const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+                if (a) a.classList.add('active');
             }
         });
+    }, { rootMargin: '-40% 0px -55% 0px' }).observe(s)
+);
 
-        // Contact form — replace YOUR_FORM_ID with your Formspree form ID
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('cfSubmitBtn');
-            const status = document.getElementById('formStatus');
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
-            status.className = 'form-status';
-            status.style.display = 'none';
+// ── Scroll reveal ────────────────────────────────────
+const revObs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+            setTimeout(() => e.target.classList.add('visible'), i * 70);
+            revObs.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
+// ── Counter animation ────────────────────────────────
+function runCounter(el) {
+    const target = parseInt(el.dataset.target, 10);
+    const dur = 1200, step = target / (dur / 16);
+    let cur = 0;
+    const t = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = target >= 100 ? Math.round(cur) + '+' : Math.round(cur);
+        if (cur >= target) clearInterval(t);
+    }, 16);
+}
+new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.querySelectorAll('.stat-number[data-target]').forEach(runCounter);
+        }
+    });
+}, { threshold: 0.4 }).observe(document.querySelector('.stats-grid'));
+
+// ── Typed text ───────────────────────────────────────
+const roles = [
+    'Aerospace Engineer',
+    'Orbital Mechanics Specialist',
+    'LabVIEW & Arduino Developer',
+    'AI Integration Engineer',
+    'Lab Systems Designer',
+    'Educator & Researcher'
+];
+let ri = 0, ci = 0, del = false;
+const typedEl = document.getElementById('typedText');
+function tick() {
+    const cur = roles[ri];
+    typedEl.textContent = del ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+    if (!del && ci === cur.length) { del = true; setTimeout(tick, 1800); return; }
+    if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+    setTimeout(tick, del ? 38 : 68);
+}
+tick();
+
+// ── HUD: updated live from ISS TLE (see orbital canvas below) ────
+
+// ── Skill card radial glow ───────────────────────────
+document.querySelectorAll('.skill-card').forEach(c => {
+    c.addEventListener('mousemove', e => {
+        const r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        c.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+    });
+});
+
+// ── Smooth anchor scrolling ──────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// ── Orbital Canvas (ISS live TLE) ────────────────────
+(function() {
+    const canvas = document.getElementById('orbital-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let W, H, cx, cy, t = 0;
+
+    // Named orbits. ISS (index 0) is driven by live TLE.
+    const orbs = [
+        { name:'ISS',     live:true,  af:.30, bf:.12, angle:-0.45, speed:.009, color:'#00d4ff', size:4,   pos:0,           trail:28 },
+        { name:'GEO-SYN', live:false, af:.44, bf:.15, angle: 0.35, speed:.0025,color:'#818cf8', size:3,   pos:Math.PI*.7,  trail:18 },
+        { name:'SSO',     live:false, af:.22, bf:.19, angle:-0.15, speed:.013, color:'#f59e0b', size:2.5, pos:Math.PI*1.4, trail:15 },
+        { name:'LEO Ref', live:false, af:.36, bf:.09, angle: 0.85, speed:.007, color:'#10b981', size:2,   pos:Math.PI*.3,  trail:12 },
+    ];
+    let stars = [];
+    let issSatrec = null, issLive = false, issPosSynced = false;
+
+    // ── TLE fetch & SGP4 ───────────────────────────────
+    async function fetchTLE() {
+        const base = 'https://celestrak.org/NORAD/elements/gp.php?CATNR=25544&FORMAT=TLE';
+        const sources = [base, 'https://corsproxy.io/?' + encodeURIComponent(base)];
+        for (const src of sources) {
             try {
-                const res = await fetch('https://formspree.io/f/xlgknvnl', {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: new FormData(this),
-                });
-                if (res.ok) {
-                    status.textContent = 'Message sent! I\'ll get back to you soon.';
-                    status.className = 'form-status success';
-                    this.reset();
-                } else {
-                    throw new Error('Server error');
+                const r = await fetch(src, { cache: 'no-store' });
+                if (!r.ok) continue;
+                const txt = await r.text();
+                const lines = txt.trim().split('\n').map(l => l.trim()).filter(Boolean);
+                if (lines.length >= 3) {
+                    issSatrec = satellite.twoline2satrec(lines[1], lines[2]);
+                    issLive = true;
+                    issPosSynced = false; // re-sync position on new TLE
+                    applyTLEShape();
+                    return;
                 }
-            } catch {
-                status.textContent = 'Something went wrong. Please try LinkedIn instead.';
-                status.className = 'form-status error';
-            }
+            } catch (_) {}
+        }
+    }
 
-            status.style.display = 'block';
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+    // Set ISS orbit ellipse shape from TLE elements
+    function applyTLEShape() {
+        if (!issSatrec) return;
+        const base = Math.min(W || 600, H || 600);
+        const inc  = issSatrec.inclo;   // radians — real ISS inclination
+        const raan = issSatrec.nodeo;   // radians — right ascension of ascending node
+        orbs[0].a     = base * orbs[0].af;
+        orbs[0].b     = orbs[0].a * Math.sin(inc);   // foreshortened by inclination
+        orbs[0].angle = raan - Math.PI / 2;           // RAAN → canvas rotation
+    }
+
+    // Static parameters shown in HUD for non-ISS orbits
+    const hudStatic = [
+        null, // ISS — populated live
+        { alt:'35,786 km', inc:'0.00°', vel:'3.07 km/s', orb:'GEO-SYN' },
+        { alt:'565 km',    inc:'97.40°', vel:'7.61 km/s', orb:'SSO'     },
+        { alt:'422 km',    inc:'28.50°', vel:'7.63 km/s', orb:'LEO REF' },
+    ];
+    let hudCycleIdx = 0;
+
+    function setHUD(alt, inc, vel, orb) {
+        const g = id => document.getElementById(id);
+        const [hA, hI, hV, hO] = ['hAlt','hInc','hVel','hOrb'].map(g);
+        if (hA) { hA.textContent = alt; hI.textContent = inc; hV.textContent = vel; hO.textContent = orb; }
+    }
+
+    // Propagate ISS — seeds canvas position, updates HUD when ISS turn is active
+    function tickISS() {
+        if (!issSatrec) return;
+        try {
+            const now = new Date();
+            const pv = satellite.propagate(issSatrec, now);
+            if (!pv || !pv.position) return;
+            const p = pv.position, v = pv.velocity;
+            const r   = Math.sqrt(p.x**2 + p.y**2 + p.z**2);
+            const spd = Math.sqrt(v.x**2 + v.y**2 + v.z**2);
+            const inc = issSatrec.inclo, raan = issSatrec.nodeo;
+
+            // Argument of latitude → seed canvas dot position on first tick
+            const Px =  p.x * Math.cos(raan) + p.y * Math.sin(raan);
+            const Py = -p.x * Math.sin(raan) * Math.cos(inc)
+                      + p.y * Math.cos(raan) * Math.cos(inc)
+                      + p.z * Math.sin(inc);
+            if (!issPosSynced) { orbs[0].pos = Math.atan2(Py, Px); issPosSynced = true; }
+
+            // Only update HUD display when ISS is the active cycle slot
+            if (hudCycleIdx === 0) {
+                setHUD(
+                    (r - 6371).toFixed(1) + ' km',
+                    (inc * 180 / Math.PI).toFixed(2) + '°',
+                    spd.toFixed(2) + ' km/s',
+                    'ISS LIVE'
+                );
+            }
+        } catch (_) {}
+    }
+
+    // Cycle HUD through all 4 orbits every 5 seconds
+    function cycleHUD() {
+        hudCycleIdx = (hudCycleIdx + 1) % orbs.length;
+        if (hudCycleIdx === 0) {
+            tickISS(); // immediately refresh ISS live data
+        } else {
+            const d = hudStatic[hudCycleIdx];
+            setHUD(d.alt, d.inc, d.vel, d.orb);
+        }
+    }
+
+    // ── Canvas helpers ────────────────────────────────
+    function rrect(x, y, w, h, r) {
+        ctx.beginPath();
+        ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y);
+        ctx.quadraticCurveTo(x+w, y, x+w, y+r);
+        ctx.lineTo(x+w, y+h-r);
+        ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
+        ctx.lineTo(x+r, y+h);
+        ctx.quadraticCurveTo(x, y+h, x, y+h-r);
+        ctx.lineTo(x, y+r);
+        ctx.quadraticCurveTo(x, y, x+r, y);
+        ctx.closePath();
+    }
+
+    function resize() {
+        W = canvas.width  = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+        cx = W * 0.42; cy = H * 0.5;
+        const base = Math.min(W, H);
+        orbs.forEach(o => { o.a = base * o.af; o.b = base * o.bf; });
+        if (issSatrec) applyTLEShape();
+        stars = Array.from({ length: 180 }, () => ({
+            x: Math.random()*W, y: Math.random()*H,
+            r: Math.random()*1.2+0.2,
+            o: Math.random()*.45+.08,
+            ph: Math.random()*Math.PI*2,
+            sp: Math.random()*.012+.004
+        }));
+    }
+
+    function drawOrb(o) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(o.angle);
+
+        // orbit path
+        ctx.beginPath();
+        ctx.ellipse(0, 0, o.a, o.b, 0, 0, Math.PI*2);
+        ctx.strokeStyle = o.color + (o.live && issLive ? '30' : '1a');
+        ctx.lineWidth = o.live && issLive ? 1.5 : 1;
+        ctx.stroke();
+
+        // trail
+        const pts = [];
+        for (let i = o.trail; i >= 0; i--) {
+            const ang = o.pos - i * 0.05;
+            pts.push([o.a*Math.cos(ang), o.b*Math.sin(ang)]);
+        }
+        if (pts.length > 1) {
+            ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]);
+            for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+            ctx.strokeStyle = o.color + '55';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+        }
+
+        // satellite dot — all orbits self-animate; ISS pos is seeded from TLE on load
+        o.pos += o.speed;
+        const sx = o.a * Math.cos(o.pos);
+        const sy = o.b * Math.sin(o.pos);
+        ctx.shadowColor = o.color;
+        ctx.shadowBlur  = o.live && issLive ? 20 : 12;
+        ctx.beginPath(); ctx.arc(sx, sy, o.size, 0, Math.PI*2);
+        ctx.fillStyle = o.color; ctx.fill(); ctx.shadowBlur = 0;
+
+        ctx.restore();
+    }
+
+    function drawLegend() {
+        const lx = 18, ly = 20, rowH = 22, dotR = 4;
+        const bw = 148, bh = rowH * orbs.length + 14;
+        ctx.save();
+        // Fully opaque so orbit paths behind don't bleed through
+        rrect(lx-8, ly-8, bw, bh, 7);
+        ctx.fillStyle   = 'rgb(2,8,23)'; ctx.fill();
+        ctx.strokeStyle = 'rgba(0,212,255,0.18)'; ctx.lineWidth = 1; ctx.stroke();
+
+        orbs.forEach((o, i) => {
+            const ry = ly + i * rowH + dotR + 2;
+            // Static filled dot — no shadow, no animation
+            ctx.beginPath();
+            ctx.arc(lx + dotR, ry, dotR, 0, Math.PI*2);
+            ctx.fillStyle = o.color;
+            ctx.fill();
+            // Label
+            ctx.font = '400 10px "JetBrains Mono", monospace';
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'left';
+            ctx.fillStyle = o.color + 'cc';
+            ctx.fillText(o.name, lx + dotR*2 + 8, ry);
+        });
+        ctx.restore();
+    }
+
+    function frame() {
+        ctx.clearRect(0, 0, W, H); t += 0.01;
+
+        // Stars
+        stars.forEach(s => {
+            const op = Math.max(0, s.o + Math.sin(t * s.sp * 80 + s.ph) * 0.12);
+            ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+            ctx.fillStyle = `rgba(255,255,255,${op})`; ctx.fill();
         });
 
-        // GPG encryption
-        async function encryptMessage() {
-            const plaintext = document.getElementById('plaintextMsg').value.trim();
-            const outputEl = document.getElementById('encryptedMsg');
-            const copyBtn = document.getElementById('copyEncBtn');
+        orbs.forEach(drawOrb);
 
-            if (!plaintext) {
-                outputEl.value = 'Please enter a message first.';
-                return;
-            }
+        // Earth + atmosphere
+        ctx.save(); ctx.translate(cx, cy);
+        const eg = ctx.createRadialGradient(-3,-3,0,0,0,18);
+        eg.addColorStop(0,'#60a5fa'); eg.addColorStop(0.5,'#1d4ed8'); eg.addColorStop(1,'#0ea5e9');
+        ctx.shadowColor = '#3b82f6'; ctx.shadowBlur = 28;
+        ctx.beginPath(); ctx.arc(0,0,18,0,Math.PI*2); ctx.fillStyle = eg; ctx.fill();
+        const ag = ctx.createRadialGradient(0,0,16,0,0,34);
+        ag.addColorStop(0,'rgba(59,130,246,0.14)'); ag.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.shadowBlur = 0;
+        ctx.beginPath(); ctx.arc(0,0,34,0,Math.PI*2); ctx.fillStyle = ag; ctx.fill();
+        ctx.restore();
 
-            try {
-                const armoredKey = document.getElementById('gpgKeyBlock').textContent.trim();
-                const publicKey = await openpgp.readKey({ armoredKey });
-                const encrypted = await openpgp.encrypt({
-                    message: await openpgp.createMessage({ text: plaintext }),
-                    encryptionKeys: publicKey,
-                });
-                outputEl.value = encrypted;
-                copyBtn.disabled = false;
-                document.getElementById('sendEncBtn').disabled = false;
-            } catch (err) {
-                outputEl.value = 'Encryption failed: ' + err.message;
-                copyBtn.disabled = true;
-            }
-        }
+        drawLegend();
+        requestAnimationFrame(frame);
+    }
 
-        function sendEncrypted() {
-            const ciphertext = document.getElementById('encryptedMsg').value;
-            if (!ciphertext) return;
-            document.getElementById('cf-message').value = ciphertext;
-            document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            document.getElementById('cf-name').focus();
-        }
+    resize();
+    window.addEventListener('resize', resize);
+    frame();
 
-        async function copyEncrypted(btn) {
-            const text = document.getElementById('encryptedMsg').value;
-            if (!text) return;
-            await navigator.clipboard.writeText(text);
-            const orig = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            setTimeout(() => { btn.innerHTML = orig; }, 2000);
-        }
-    </script>
+    // Boot: fetch TLE → seed position → start loops
+    fetchTLE().then(() => tickISS());
+    setInterval(tickISS, 1000);              // ISS live data every second
+    setInterval(cycleHUD, 5000);             // cycle HUD through all 4 orbits
+    setInterval(() => fetchTLE().then(() => tickISS()), 30 * 60 * 1000); // refresh TLE
+})();
+
+// ── Contact Form ─────────────────────────────────────
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('cfSubmitBtn');
+    const status = document.getElementById('formStatus');
+    const email = document.getElementById('cf-email').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        status.textContent = 'Please enter a valid email address.';
+        status.className = 'form-status error';
+        return;
+    }
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+    status.className = 'form-status';
+    try {
+        const res = await fetch('https://formspree.io/f/xlgknvnl', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(this),
+        });
+        if (res.ok) {
+            status.textContent = "Message sent! I'll get back to you soon.";
+            status.className = 'form-status success';
+            this.reset();
+            setTimeout(() => { status.className = 'form-status'; }, 5000);
+        } else throw new Error();
+    } catch {
+        status.textContent = 'Something went wrong. Please try LinkedIn instead.';
+        status.className = 'form-status error';
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+});
+
+// ── GPG Encryption ───────────────────────────────────
+async function encryptMessage() {
+    const plain = document.getElementById('plaintextMsg').value.trim();
+    const out = document.getElementById('encryptedMsg');
+    const cpBtn = document.getElementById('copyEncBtn');
+    const sdBtn = document.getElementById('sendEncBtn');
+    if (!plain) { out.value = 'Please enter a message first.'; return; }
+    try {
+        const armoredKey = document.getElementById('gpgKeyBlock').textContent.trim();
+        const publicKey = await openpgp.readKey({ armoredKey });
+        const encrypted = await openpgp.encrypt({
+            message: await openpgp.createMessage({ text: plain }),
+            encryptionKeys: publicKey,
+        });
+        out.value = encrypted;
+        cpBtn.disabled = false;
+        sdBtn.disabled = false;
+    } catch (err) {
+        out.value = 'Encryption failed: ' + err.message;
+        cpBtn.disabled = true;
+        sdBtn.disabled = true;
+    }
+}
+function sendEncrypted() {
+    const ct = document.getElementById('encryptedMsg').value;
+    if (!ct) return;
+    document.getElementById('cf-message').value = ct;
+    document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('cf-name').focus();
+}
+async function copyEncrypted(btn) {
+    const text = document.getElementById('encryptedMsg').value;
+    if (!text) return;
+    await navigator.clipboard.writeText(text);
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+}
+</script>
 </body>
 </html>

@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QTL8JBBLX4"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-QTL8JBBLX4');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Adarsh Agrawal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* ── Design Tokens (mirrored from index.html) ── */
+        :root {
+            --bg:           #020817;
+            --bg-surface:   #060f20;
+            --bg-card:      #0a1628;
+            --bg-card-h:    #0d1f3c;
+            --border:       rgba(0,212,255,0.10);
+            --border-h:     rgba(0,212,255,0.35);
+            --cyan:         #00d4ff;
+            --purple:       #818cf8;
+            --gold:         #f59e0b;
+            --green:        #10b981;
+            --text:         #e2e8f0;
+            --text-m:       #94a3b8;
+            --text-d:       #475569;
+            --glow:         0 0 24px rgba(0,212,255,0.25);
+            --glow-sm:      0 0 10px rgba(0,212,255,0.2);
+            --r:            12px;
+            --ease:         0.25s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+
+        body {
+            font-family:'Inter',sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            line-height:1.6;
+            overflow-x:hidden;
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+            *, *::before, *::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+        }
+
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--cyan); border-radius:3px; }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            position:fixed; top:0; left:0; right:0; z-index:1000;
+            padding:1rem 2rem;
+            transition:background var(--ease), border-color var(--ease);
+        }
+        .navbar.scrolled {
+            background:rgba(2,8,23,.92);
+            border-bottom:1px solid var(--border);
+            backdrop-filter:blur(14px);
+        }
+        .nav-inner {
+            max-width:1200px; margin:0 auto;
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .logo {
+            font-family:'Space Grotesk',sans-serif; font-weight:700;
+            font-size:1.25rem; color:var(--text); text-decoration:none;
+            letter-spacing:-.03em;
+        }
+        .logo em { color:var(--cyan); font-style:normal; }
+        .nav-links { display:flex; list-style:none; gap:.2rem; }
+        .nav-links a {
+            font-family:'JetBrains Mono',monospace; font-size:.72rem;
+            letter-spacing:.06em; text-transform:uppercase;
+            color:var(--text-m); text-decoration:none;
+            padding:.45rem .85rem; border-radius:6px;
+            transition:color var(--ease), background var(--ease);
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color:var(--cyan); background:rgba(0,212,255,.07);
+        }
+        .nav-back {
+            font-family:'JetBrains Mono',monospace; font-size:.7rem;
+            letter-spacing:.06em; text-transform:uppercase;
+            color:var(--text-m); text-decoration:none;
+            display:inline-flex; align-items:center; gap:.4rem;
+            padding:.45rem .85rem; border-radius:6px;
+            border:1px solid var(--border);
+            transition:color var(--ease), border-color var(--ease);
+        }
+        .nav-back:hover { color:var(--cyan); border-color:var(--border-h); }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            padding:7rem 0 3rem;
+            background:var(--bg-surface);
+            border-bottom:1px solid var(--border);
+        }
+        .page-header .container {
+            max-width:1200px; margin:0 auto; padding:0 2rem;
+        }
+        .page-label {
+            display:inline-flex; align-items:center; gap:.5rem;
+            font-family:'JetBrains Mono',monospace;
+            font-size:.68rem; letter-spacing:.14em;
+            text-transform:uppercase; color:var(--cyan);
+            margin-bottom:.65rem;
+        }
+        .page-label::before {
+            content:''; display:inline-block;
+            width:18px; height:1px; background:var(--cyan);
+        }
+        .page-title {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(2rem,5vw,3.2rem);
+            font-weight:700; letter-spacing:-.03em;
+            color:var(--text); margin-bottom:.7rem;
+        }
+        .page-sub {
+            font-size:.95rem; color:var(--text-m);
+            max-width:540px; line-height:1.75;
+        }
+
+        /* ── FILTER BAR ── */
+        .filter-bar {
+            position:sticky; top:0; z-index:100;
+            background:rgba(2,8,23,.95);
+            border-bottom:1px solid var(--border);
+            backdrop-filter:blur(12px);
+            padding:.75rem 0;
+        }
+        .filter-inner {
+            max-width:1200px; margin:0 auto; padding:0 2rem;
+            display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+        }
+        .filter-label {
+            font-family:'JetBrains Mono',monospace; font-size:.65rem;
+            letter-spacing:.1em; text-transform:uppercase; color:var(--text-d);
+        }
+        .filter-btn {
+            font-family:'JetBrains Mono',monospace; font-size:.67rem;
+            letter-spacing:.07em; text-transform:uppercase;
+            color:var(--text-m); background:transparent;
+            border:1px solid var(--border); border-radius:6px;
+            padding:.35rem .85rem; cursor:pointer;
+            transition:color var(--ease), border-color var(--ease), background var(--ease);
+        }
+        .filter-btn:hover { color:var(--cyan); border-color:var(--border-h); }
+        .filter-btn.active {
+            color:var(--cyan); border-color:var(--cyan);
+            background:rgba(0,212,255,.08);
+        }
+        .filter-count {
+            margin-left:auto;
+            font-family:'JetBrains Mono',monospace; font-size:.65rem;
+            color:var(--text-d); letter-spacing:.06em;
+        }
+
+        /* ── PROJECTS LIST ── */
+        .projects-page { padding:3rem 0 6rem; }
+        .projects-page .container {
+            max-width:1200px; margin:0 auto; padding:0 2rem;
+        }
+        .projects-list {
+            display:flex; flex-direction:column; gap:4rem;
+        }
+
+        /* ── PROJECT CARD ── */
+        .project-card {
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            border-radius:16px;
+            overflow:hidden;
+            transition:border-color var(--ease);
+        }
+        .project-card:hover { border-color:var(--border-h); }
+
+        .project-card-header {
+            padding:2rem 2.5rem 1.5rem;
+            border-bottom:1px solid var(--border);
+            display:flex; align-items:flex-start; justify-content:space-between;
+            gap:1.5rem; flex-wrap:wrap;
+        }
+        .project-card-meta { display:flex; flex-direction:column; gap:.5rem; flex:1; }
+        .project-card-date {
+            font-family:'JetBrains Mono',monospace; font-size:.65rem;
+            color:var(--text-d); letter-spacing:.08em; text-transform:uppercase;
+        }
+        .project-card-title {
+            font-family:'Space Grotesk',sans-serif;
+            font-size:clamp(1.2rem,2.5vw,1.65rem);
+            font-weight:700; letter-spacing:-.02em; color:var(--text);
+        }
+        .project-card-tags { display:flex; gap:.4rem; flex-wrap:wrap; margin-top:.3rem; }
+        .proj-tag {
+            font-family:'JetBrains Mono',monospace; font-size:.6rem;
+            color:var(--cyan); background:rgba(0,212,255,.06);
+            border:1px solid rgba(0,212,255,.16);
+            padding:.15rem .5rem; border-radius:4px; letter-spacing:.04em;
+        }
+        .proj-tag.purple { color:var(--purple); background:rgba(129,140,248,.06); border-color:rgba(129,140,248,.16); }
+        .proj-tag.gold   { color:var(--gold);   background:rgba(245,158,11,.06);  border-color:rgba(245,158,11,.16);  }
+        .proj-tag.green  { color:var(--green);  background:rgba(16,185,129,.06);  border-color:rgba(16,185,129,.16);  }
+        .project-card-id {
+            font-family:'JetBrains Mono',monospace; font-size:.7rem;
+            color:var(--text-d); letter-spacing:.04em; white-space:nowrap;
+            align-self:flex-start; padding-top:.25rem;
+        }
+
+        /* Images row */
+        .project-images {
+            display:grid; grid-template-columns:1fr 1fr; gap:0;
+            border-bottom:1px solid var(--border);
+        }
+        .project-img-slot {
+            aspect-ratio:16/9; overflow:hidden; position:relative;
+            background:var(--bg-surface);
+            display:flex; align-items:center; justify-content:center;
+        }
+        .project-img-slot:first-child { border-right:1px solid var(--border); }
+        .project-img-slot img {
+            width:100%; height:100%; object-fit:cover;
+            transition:transform .5s ease;
+        }
+        .project-card:hover .project-img-slot img { transform:scale(1.03); }
+        .img-placeholder {
+            display:flex; flex-direction:column; align-items:center;
+            justify-content:center; gap:.6rem; pointer-events:none;
+        }
+        .img-placeholder i { font-size:2rem; color:var(--cyan); opacity:.15; }
+        .img-placeholder span {
+            font-family:'JetBrains Mono',monospace; font-size:.6rem;
+            color:var(--text-d); letter-spacing:.08em;
+        }
+        .img-caption {
+            position:absolute; bottom:0; left:0; right:0;
+            padding:.35rem .65rem;
+            background:linear-gradient(transparent, rgba(2,8,23,.85));
+            font-family:'JetBrains Mono',monospace; font-size:.6rem;
+            color:var(--text-m); letter-spacing:.06em;
+        }
+
+        /* Sections */
+        .project-sections { padding:2rem 2.5rem 2.5rem; display:flex; flex-direction:column; gap:2rem; }
+        .proj-section-title {
+            display:flex; align-items:center; gap:.65rem;
+            font-family:'Space Grotesk',sans-serif;
+            font-size:.82rem; font-weight:600; letter-spacing:.04em;
+            text-transform:uppercase; color:var(--cyan);
+            margin-bottom:.75rem;
+        }
+        .proj-section-title i { font-size:.8rem; opacity:.8; }
+        .proj-section-body {
+            font-size:.9rem; color:var(--text-m);
+            line-height:1.8; max-width:820px;
+        }
+        .proj-section-body p + p { margin-top:.75rem; }
+        .impact-stats {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:1rem;
+            margin-top:1rem;
+        }
+        .impact-stat {
+            background:var(--bg-surface); border:1px solid var(--border);
+            border-radius:10px; padding:.9rem 1rem;
+            text-align:center;
+        }
+        .impact-stat-val {
+            font-family:'Space Grotesk',sans-serif; font-size:1.4rem;
+            font-weight:700; color:var(--cyan); display:block; line-height:1.2;
+        }
+        .impact-stat-lab {
+            font-family:'JetBrains Mono',monospace; font-size:.62rem;
+            color:var(--text-d); letter-spacing:.06em; text-transform:uppercase;
+            margin-top:.25rem; display:block;
+        }
+
+        @media(max-width:700px) {
+            .project-images { grid-template-columns:1fr; }
+            .project-img-slot:first-child { border-right:none; border-bottom:1px solid var(--border); }
+            .project-card-header { padding:1.5rem; }
+            .project-sections { padding:1.5rem; }
+            .impact-stats { grid-template-columns:1fr 1fr; }
+        }
+
+        /* Reveal */
+        .reveal { opacity:0; transform:translateY(22px); transition:opacity .6s ease, transform .6s ease; }
+        .reveal.visible { opacity:1; transform:translateY(0); }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="index.html" class="logo">AA<em>.</em></a>
+        <a href="index.html" class="nav-back">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="container">
+        <div class="page-label">Mission Log</div>
+        <h1 class="page-title">Projects</h1>
+        <p class="page-sub">Engineering builds from concept to deployment — orbital systems, embedded hardware, automation pipelines, and machine learning.</p>
+    </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+    <div class="filter-inner">
+        <span class="filter-label">Sort</span>
+        <button class="filter-btn active" data-sort="newest">Newest First</button>
+        <button class="filter-btn" data-sort="oldest">Oldest First</button>
+        <span class="filter-count" id="proj-count">5 projects</span>
+    </div>
+</div>
+
+<!-- PROJECTS -->
+<section class="projects-page">
+    <div class="container">
+        <div class="projects-list" id="projects-list">
+
+            <!-- ── PROJECT 1 ── -->
+            <article class="project-card reveal" id="proj-1" data-date="2025-05">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">May 2025</div>
+                        <h2 class="project-card-title">Orbital Debris Collision Avoidance</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">AI / ML</span>
+                            <span class="proj-tag">Aerospace</span>
+                            <span class="proj-tag purple">Python</span>
+                            <span class="proj-tag green">TLE / SGP4</span>
+                        </div>
+                    </div>
+                    <span class="project-card-id">PROJ-001</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <!-- Replace src with actual image path -->
+                        <div class="img-placeholder">
+                            <i class="fas fa-satellite"></i>
+                            <span>Image 1 — System Architecture</span>
+                        </div>
+                        <div class="img-caption">System architecture diagram</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-chart-scatter"></i>
+                            <span>Image 2 — Conjunction Plot</span>
+                        </div>
+                        <div class="img-caption">Predicted conjunction events (90-day window)</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Low Earth orbit is increasingly congested with defunct satellites and fragmentation debris. Current conjunction screening tools rely on manual operator review of CDMs (Conjunction Data Messages) and struggle to scale as catalog sizes grow beyond 27,000 tracked objects. False-positive rates exceed 95%, creating alert fatigue among operators.</p>
+                            <p>The goal was to build an automated screening pipeline that reduces operator workload while maintaining zero missed high-probability events.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Developed a Python pipeline ingesting live TLE data from Celestrak via the satellite.js SGP4 propagator, computing pairwise close-approach distances for all catalogued objects within a 90-day horizon. A gradient-boosted classifier (XGBoost) trained on historical CDMs filters the event stream, ranking events by predicted miss distance uncertainty.</p>
+                            <p>Key components: automated TLE refresh every 6 hours, Cartesian conjunction geometry computation, feature engineering from orbital element deltas, and a Slack-integrated alert dispatcher. Deployed as a scheduled Python service on AWS Lambda.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-body">
+                            <p>Achieved a 78% reduction in false-positive conjunction alerts compared to the unfiltered CDM feed, with no missed events above 1-in-1000 collision probability threshold during a 60-day validation window.</p>
+                        </div>
+                        <div class="impact-stats">
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">78%</span>
+                                <span class="impact-stat-lab">False positives reduced</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">0</span>
+                                <span class="impact-stat-lab">Missed high-risk events</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">27k+</span>
+                                <span class="impact-stat-lab">Objects tracked</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 2 ── -->
+            <article class="project-card reveal" id="proj-2" data-date="2025-02">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">February 2025</div>
+                        <h2 class="project-card-title">Structural Health Monitoring System</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">LabVIEW</span>
+                            <span class="proj-tag">Automation</span>
+                            <span class="proj-tag gold">Signal Processing</span>
+                            <span class="proj-tag purple">DAQ</span>
+                        </div>
+                    </div>
+                    <span class="project-card-id">PROJ-002</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-wave-square"></i>
+                            <span>Image 1 — LabVIEW Front Panel</span>
+                        </div>
+                        <div class="img-caption">Real-time LabVIEW front panel</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-chart-area"></i>
+                            <span>Image 2 — FFT Fault Signature</span>
+                        </div>
+                        <div class="img-caption">FFT fault signature — bearing defect at 3× running speed</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Rotating machinery in aerospace ground support equipment degrades gradually through bearing wear, imbalance, and resonance buildup. Unscheduled maintenance from unexpected failures costs test campaigns weeks of delay and can corrupt test data through excessive vibration during sensitive measurements.</p>
+                            <p>The facility needed a continuous, automated monitoring solution that could flag anomalies before failure and produce reports without human intervention.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built a LabVIEW application interfacing with an NI-9234 DAQ module sampling triaxial accelerometers at 51.2 kSa/s. The block diagram performs real-time FFT, RMS trending, and crest-factor calculation. A state machine monitors four health thresholds (ISO 10816 zones A–D) and triggers automated email alerts with attached spectrum PNG on zone C or D entry.</p>
+                            <p>A report generation VI runs nightly, archiving trend data to a shared network drive in TDMS format and producing a PDF health summary. Configuration (sensor sensitivities, alarm thresholds, channel mapping) is stored in an XML file read at startup.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-body">
+                            <p>Deployed on three test rigs. Identified a developing bearing fault 11 days before failure in one rig, enabling a planned replacement during a scheduled maintenance window with zero test campaign disruption.</p>
+                        </div>
+                        <div class="impact-stats">
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">11 days</span>
+                                <span class="impact-stat-lab">Early fault detection</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">3</span>
+                                <span class="impact-stat-lab">Rigs monitored</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">51.2k</span>
+                                <span class="impact-stat-lab">Samples/sec per channel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 3 ── -->
+            <article class="project-card reveal" id="proj-3" data-date="2024-11">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">November 2024</div>
+                        <h2 class="project-card-title">Autonomous Ground Rover</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">Arduino</span>
+                            <span class="proj-tag">Robotics</span>
+                            <span class="proj-tag green">C++</span>
+                            <span class="proj-tag gold">PID Control</span>
+                        </div>
+                    </div>
+                    <span class="project-card-id">PROJ-003</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-robot"></i>
+                            <span>Image 1 — Rover Hardware</span>
+                        </div>
+                        <div class="img-caption">Assembled rover with sensor array</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-route"></i>
+                            <span>Image 2 — Mapped Path</span>
+                        </div>
+                        <div class="img-caption">Serial-logged obstacle map — 4×4 m test arena</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Planetary surface exploration requires rovers capable of navigating unstructured terrain without constant ground-station commands. Latency makes teleoperation impractical beyond cislunar distances. This project investigated low-cost autonomous navigation algorithms that could later inform a larger-scale mission design study.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built around an Arduino Mega 2560 with three HC-SR04 ultrasonic sensors (front, left, right), dual-channel L298N motor driver, and an MPU-6050 IMU for heading estimation. Navigation logic runs a reactive obstacle avoidance loop: if the front sensor reads below 25 cm, the rover compares left/right clearance and turns toward the larger gap. A PID controller on the IMU yaw channel maintains heading during straight segments, reducing drift to under 3° per meter.</p>
+                            <p>Obstacle positions are logged via Serial at 115200 baud and visualized in a companion Python script that plots a 2D occupancy grid in real time.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-body">
+                            <p>Completed 12 laps of a 4×4 m obstacle course autonomously with a 100% course completion rate. Heading drift reduced to 3° per meter vs. 18° without PID. Total component cost kept under $40.</p>
+                        </div>
+                        <div class="impact-stats">
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">100%</span>
+                                <span class="impact-stat-lab">Course completion</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">&lt;3°/m</span>
+                                <span class="impact-stat-lab">Heading drift</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">$40</span>
+                                <span class="impact-stat-lab">Total BOM cost</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 4 ── -->
+            <article class="project-card reveal" id="proj-4" data-date="2024-08">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">August 2024</div>
+                        <h2 class="project-card-title">Flight Anomaly Detection — Neural Network Classifier</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">AI / ML</span>
+                            <span class="proj-tag purple">PyTorch</span>
+                            <span class="proj-tag">Aerospace</span>
+                            <span class="proj-tag gold">Time-Series</span>
+                        </div>
+                    </div>
+                    <span class="project-card-id">PROJ-004</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-brain"></i>
+                            <span>Image 1 — Model Architecture</span>
+                        </div>
+                        <div class="img-caption">1D-CNN + LSTM encoder architecture</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Image 2 — Confusion Matrix</span>
+                        </div>
+                        <div class="img-caption">Validation confusion matrix — 8 anomaly classes</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Flight data recorders generate hundreds of parameters at 64 Hz across thousands of flight hours. Manual review for anomaly investigation is prohibitively slow. Airlines and manufacturers need automated tools that can flag safety-relevant events — stall precursors, hydraulic pressure drops, engine surge signatures — without generating an overwhelming number of false alerts.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Trained a hybrid 1D-CNN + LSTM model in PyTorch on synthetic FOQA (Flight Operational Quality Assurance) data covering 8 anomaly classes. Input windows of 512 time steps across 12 flight parameters are passed through three convolutional blocks (kernel size 7, 128 filters) then a bidirectional LSTM with 256 hidden units, followed by a softmax classification head.</p>
+                            <p>Data augmentation (Gaussian noise injection, time warping) was applied to balance underrepresented classes. The model was evaluated with stratified 5-fold cross-validation. Inference runs at 2× real-time speed on a laptop CPU, enabling post-flight screening of full recordings.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-body">
+                            <p>Achieved 94.3% weighted F1-score across all 8 classes on held-out test data. The stall precursor class reached 97.1% recall — the highest-priority safety class. Processing a 10-hour flight record takes under 5 minutes end-to-end.</p>
+                        </div>
+                        <div class="impact-stats">
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">94.3%</span>
+                                <span class="impact-stat-lab">Weighted F1 score</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">97.1%</span>
+                                <span class="impact-stat-lab">Stall precursor recall</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">8</span>
+                                <span class="impact-stat-lab">Anomaly classes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 5 ── -->
+            <article class="project-card reveal" id="proj-5" data-date="2024-04">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">April 2024</div>
+                        <h2 class="project-card-title">Automated Propulsion Test Bench</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">LabVIEW</span>
+                            <span class="proj-tag">Automation</span>
+                            <span class="proj-tag green">Python</span>
+                            <span class="proj-tag purple">DAQ</span>
+                        </div>
+                    </div>
+                    <span class="project-card-id">PROJ-005</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-fire-flame-curved"></i>
+                            <span>Image 1 — Test Bench Setup</span>
+                        </div>
+                        <div class="img-caption">Thrust measurement bench with load cell array</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-gauge-high"></i>
+                            <span>Image 2 — Thrust Curve</span>
+                        </div>
+                        <div class="img-caption">Measured thrust curve vs. predicted — static fire #7</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Characterizing small solid and hybrid rocket motors requires precise simultaneous measurement of thrust, chamber pressure, temperature, and oxidizer mass flow. Manual data logging with separate instruments introduces synchronization errors and operator variability between test runs, making back-to-back comparative testing unreliable.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Designed a LabVIEW test sequencer controlling an NI CompactDAQ chassis with modules for strain-gauge load cells (thrust), Type-K thermocouples (chamber + nozzle), pressure transducers, and a servo-driven pintle valve. All channels are sampled synchronously at 1 kSa/s with hardware-timed acquisition.</p>
+                            <p>A Python post-processing script reads the TDMS output, applies load cell calibration curves, integrates thrust for total impulse, and generates standardized PDF reports and CSV exports. An interlock state machine in LabVIEW enforces a hardware abort if any sensor exceeds a safety threshold, venting oxidizer through a normally-open solenoid.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-body">
+                            <p>Used across 14 static fire tests with zero data synchronization errors. Measurement repeatability (1σ) improved from ±3.2% to ±0.4% compared to the prior manual logging approach. Setup time between test runs reduced from 45 minutes to under 10 minutes.</p>
+                        </div>
+                        <div class="impact-stats">
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">14</span>
+                                <span class="impact-stat-lab">Static fires conducted</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">±0.4%</span>
+                                <span class="impact-stat-lab">Measurement repeatability</span>
+                            </div>
+                            <div class="impact-stat">
+                                <span class="impact-stat-val">78%</span>
+                                <span class="impact-stat-lab">Setup time reduction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive:true });
+
+    // Reveal on scroll
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+    }, { threshold:0.07 });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // Sort / filter
+    const list    = document.getElementById('projects-list');
+    const btns    = document.querySelectorAll('.filter-btn');
+    const counter = document.getElementById('proj-count');
+
+    function getCards() {
+        return Array.from(list.querySelectorAll('.project-card'));
+    }
+
+    function sortCards(order) {
+        const cards = getCards();
+        cards.sort((a, b) => {
+            const da = a.dataset.date, db = b.dataset.date;
+            return order === 'oldest' ? da.localeCompare(db) : db.localeCompare(da);
+        });
+        cards.forEach(c => list.appendChild(c));
+        counter.textContent = cards.length + ' project' + (cards.length !== 1 ? 's' : '');
+    }
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            sortCards(btn.dataset.sort);
+        });
+    });
+
+    // Handle deep-link anchor scroll after page load
+    if (location.hash) {
+        setTimeout(() => {
+            const el = document.querySelector(location.hash);
+            if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+        }, 300);
+    }
+</script>
+</body>
+</html>
