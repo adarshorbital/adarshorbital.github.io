@@ -283,6 +283,12 @@
             margin-top:.25rem; display:block;
         }
 
+        /* Short description under tags in card header */
+        .project-card-desc {
+            font-size:.85rem; color:var(--text-m);
+            line-height:1.6; max-width:620px; margin-top:.4rem;
+        }
+
         @media(max-width:700px) {
             .project-images { grid-template-columns:1fr; }
             .project-img-slot:first-child { border-right:none; border-bottom:1px solid var(--border); }
@@ -323,7 +329,7 @@
         <span class="filter-label">Sort</span>
         <button class="filter-btn active" data-sort="newest">Newest First</button>
         <button class="filter-btn" data-sort="oldest">Oldest First</button>
-        <span class="filter-count" id="proj-count">5 projects</span>
+        <span class="filter-count" id="proj-count">19 projects</span>
     </div>
 </div>
 
@@ -333,36 +339,36 @@
         <div class="projects-list" id="projects-list">
 
             <!-- ── PROJECT 1 ── -->
-            <article class="project-card reveal" id="proj-1" data-date="2025-05">
+            <article class="project-card reveal" id="proj-1" data-date="2026-06">
                 <div class="project-card-header">
                     <div class="project-card-meta">
-                        <div class="project-card-date">May 2025</div>
-                        <h2 class="project-card-title">Orbital Debris Collision Avoidance</h2>
+                        <div class="project-card-date">2026 — Ongoing</div>
+                        <h2 class="project-card-title">Custom Test Apparatus Design & 3D Fabrication</h2>
                         <div class="project-card-tags">
-                            <span class="proj-tag">AI / ML</span>
-                            <span class="proj-tag">Aerospace</span>
-                            <span class="proj-tag purple">Python</span>
-                            <span class="proj-tag green">TLE / SGP4</span>
+                            <span class="proj-tag">3D Printing</span>
+                            <span class="proj-tag">CAD</span>
+                            <span class="proj-tag gold">Hardware</span>
+                            <span class="proj-tag green">Lab Equipment</span>
                         </div>
+                        <p class="project-card-desc">Designing and fabricating custom mechanical fixtures, sensor mounts, and structural lab hardware using CAD and FDM 3D printing — enabling rapid iteration from concept to installed hardware within the same week.</p>
                     </div>
                     <span class="project-card-id">PROJ-001</span>
                 </div>
 
                 <div class="project-images">
                     <div class="project-img-slot">
-                        <!-- Replace src with actual image path -->
                         <div class="img-placeholder">
-                            <i class="fas fa-satellite"></i>
-                            <span>Image 1 — System Architecture</span>
+                            <i class="fas fa-drafting-compass"></i>
+                            <span>Image 1 — CAD Model</span>
                         </div>
-                        <div class="img-caption">System architecture diagram</div>
+                        <div class="img-caption">CAD renders of custom test fixtures</div>
                     </div>
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-chart-scatter"></i>
-                            <span>Image 2 — Conjunction Plot</span>
+                            <i class="fas fa-print"></i>
+                            <span>Image 2 — Fabricated Parts</span>
                         </div>
-                        <div class="img-caption">Predicted conjunction events (90-day window)</div>
+                        <div class="img-caption">FDM-printed apparatus installed on test rig</div>
                     </div>
                 </div>
 
@@ -370,52 +376,39 @@
                     <div>
                         <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
                         <div class="proj-section-body">
-                            <p>Low Earth orbit is increasingly congested with defunct satellites and fragmentation debris. Current conjunction screening tools rely on manual operator review of CDMs (Conjunction Data Messages) and struggle to scale as catalog sizes grow beyond 27,000 tracked objects. False-positive rates exceed 95%, creating alert fatigue among operators.</p>
-                            <p>The goal was to build an automated screening pipeline that reduces operator workload while maintaining zero missed high-probability events.</p>
+                            <p>Research laboratories frequently require custom mechanical fixtures, mounting brackets, sensor holders, and miscellaneous structural components that are either unavailable off-the-shelf or prohibitively expensive to machine conventionally. Iterating on test apparatus design through traditional fabrication methods introduces weeks-long lead times that block experimental progress.</p>
+                            <p>The goal was to establish an in-house rapid-prototyping pipeline capable of producing functional lab hardware from concept to installation within days.</p>
                         </div>
                     </div>
                     <div>
                         <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
                         <div class="proj-section-body">
-                            <p>Developed a Python pipeline ingesting live TLE data from Celestrak via the satellite.js SGP4 propagator, computing pairwise close-approach distances for all catalogued objects within a 90-day horizon. A gradient-boosted classifier (XGBoost) trained on historical CDMs filters the event stream, ranking events by predicted miss distance uncertainty.</p>
-                            <p>Key components: automated TLE refresh every 6 hours, Cartesian conjunction geometry computation, feature engineering from orbital element deltas, and a Slack-integrated alert dispatcher. Deployed as a scheduled Python service on AWS Lambda.</p>
+                            <p>Designed and 3D printed a range of custom test apparatus components including sensor mounting brackets, alignment jigs, cable management fixtures, and structural test frames. Parts were modeled in CAD with full tolerance analysis, then printed in PLA, PETG, and high-temperature materials depending on the thermal and mechanical requirements of each application.</p>
+                            <p>Each design went through at least one rapid iteration cycle — measure, identify fit or strength issues, update the model, reprint — enabling functional hardware to be validated and deployed in the same week it was conceived.</p>
                         </div>
                     </div>
                     <div>
-                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
                         <div class="proj-section-body">
-                            <p>Achieved a 78% reduction in false-positive conjunction alerts compared to the unfiltered CDM feed, with no missed events above 1-in-1000 collision probability threshold during a 60-day validation window.</p>
-                        </div>
-                        <div class="impact-stats">
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">78%</span>
-                                <span class="impact-stat-lab">False positives reduced</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">0</span>
-                                <span class="impact-stat-lab">Missed high-risk events</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">27k+</span>
-                                <span class="impact-stat-lab">Objects tracked</span>
-                            </div>
+                            <p>Details and build documentation coming soon. Check back for photos, CAD files, and lessons learned from the fabrication process.</p>
                         </div>
                     </div>
                 </div>
             </article>
 
             <!-- ── PROJECT 2 ── -->
-            <article class="project-card reveal" id="proj-2" data-date="2025-02">
+            <article class="project-card reveal" id="proj-2" data-date="2025-12">
                 <div class="project-card-header">
                     <div class="project-card-meta">
-                        <div class="project-card-date">February 2025</div>
-                        <h2 class="project-card-title">Structural Health Monitoring System</h2>
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">Wind Tunnel Run Notifier — Raspberry Pi Automation</h2>
                         <div class="project-card-tags">
-                            <span class="proj-tag">LabVIEW</span>
-                            <span class="proj-tag">Automation</span>
-                            <span class="proj-tag gold">Signal Processing</span>
-                            <span class="proj-tag purple">DAQ</span>
+                            <span class="proj-tag">Raspberry Pi</span>
+                            <span class="proj-tag purple">Python</span>
+                            <span class="proj-tag">IoT</span>
+                            <span class="proj-tag green">Automation</span>
                         </div>
+                        <p class="project-card-desc">Raspberry Pi system that monitors wind tunnel operating conditions and automatically alerts researchers when a run begins or ends — eliminating unnecessary standby time without missing a test.</p>
                     </div>
                     <span class="project-card-id">PROJ-002</span>
                 </div>
@@ -423,17 +416,17 @@
                 <div class="project-images">
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-wave-square"></i>
-                            <span>Image 1 — LabVIEW Front Panel</span>
+                            <i class="fas fa-wind"></i>
+                            <span>Image 1 — Hardware Setup</span>
                         </div>
-                        <div class="img-caption">Real-time LabVIEW front panel</div>
+                        <div class="img-caption">Raspberry Pi sensor interface mounted near tunnel control panel</div>
                     </div>
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-chart-area"></i>
-                            <span>Image 2 — FFT Fault Signature</span>
+                            <i class="fas fa-bell"></i>
+                            <span>Image 2 — Notification Flow</span>
                         </div>
-                        <div class="img-caption">FFT fault signature — bearing defect at 3× running speed</div>
+                        <div class="img-caption">Automated alert pipeline architecture</div>
                     </div>
                 </div>
 
@@ -441,52 +434,39 @@
                     <div>
                         <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
                         <div class="proj-section-body">
-                            <p>Rotating machinery in aerospace ground support equipment degrades gradually through bearing wear, imbalance, and resonance buildup. Unscheduled maintenance from unexpected failures costs test campaigns weeks of delay and can corrupt test data through excessive vibration during sensitive measurements.</p>
-                            <p>The facility needed a continuous, automated monitoring solution that could flag anomalies before failure and produce reports without human intervention.</p>
+                            <p>Wind tunnel test runs require researchers to remain on standby for extended periods, often with no reliable indication of when a run is about to begin, is actively running, or has completed. This forces unnecessary lab presence and makes efficient time management across concurrent tasks difficult for the team.</p>
+                            <p>An automated, low-cost notification system was needed to alert personnel of tunnel status changes without requiring manual operator intervention.</p>
                         </div>
                     </div>
                     <div>
                         <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
                         <div class="proj-section-body">
-                            <p>Built a LabVIEW application interfacing with an NI-9234 DAQ module sampling triaxial accelerometers at 51.2 kSa/s. The block diagram performs real-time FFT, RMS trending, and crest-factor calculation. A state machine monitors four health thresholds (ISO 10816 zones A–D) and triggers automated email alerts with attached spectrum PNG on zone C or D entry.</p>
-                            <p>A report generation VI runs nightly, archiving trend data to a shared network drive in TDMS format and producing a PDF health summary. Configuration (sensor sensitivities, alarm thresholds, channel mapping) is stored in an XML file read at startup.</p>
+                            <p>A Raspberry Pi monitors wind tunnel operating conditions — such as motor speed signals or pressure differential thresholds — and automatically dispatches status notifications when predefined state transitions occur. Python scripts handle sensor polling, state machine logic, and the notification dispatch layer.</p>
+                            <p>Alerts are delivered in real time so researchers anywhere on campus know exactly when to return to the lab, eliminating unnecessary standby time without missing a run.</p>
                         </div>
                     </div>
                     <div>
-                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
                         <div class="proj-section-body">
-                            <p>Deployed on three test rigs. Identified a developing bearing fault 11 days before failure in one rig, enabling a planned replacement during a scheduled maintenance window with zero test campaign disruption.</p>
-                        </div>
-                        <div class="impact-stats">
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">11 days</span>
-                                <span class="impact-stat-lab">Early fault detection</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">3</span>
-                                <span class="impact-stat-lab">Rigs monitored</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">51.2k</span>
-                                <span class="impact-stat-lab">Samples/sec per channel</span>
-                            </div>
+                            <p>Full build details, wiring diagrams, and notification configuration coming soon.</p>
                         </div>
                     </div>
                 </div>
             </article>
 
             <!-- ── PROJECT 3 ── -->
-            <article class="project-card reveal" id="proj-3" data-date="2024-11">
+            <article class="project-card reveal" id="proj-3" data-date="2025-09">
                 <div class="project-card-header">
                     <div class="project-card-meta">
-                        <div class="project-card-date">November 2024</div>
-                        <h2 class="project-card-title">Autonomous Ground Rover</h2>
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">ADCS Educator Rig — Attitude Control Teaching Platform</h2>
                         <div class="project-card-tags">
-                            <span class="proj-tag">Arduino</span>
-                            <span class="proj-tag">Robotics</span>
-                            <span class="proj-tag green">C++</span>
-                            <span class="proj-tag gold">PID Control</span>
+                            <span class="proj-tag">Spacecraft</span>
+                            <span class="proj-tag">Embedded</span>
+                            <span class="proj-tag purple">Control Systems</span>
+                            <span class="proj-tag gold">STEM Education</span>
                         </div>
+                        <p class="project-card-desc">Hands-on satellite attitude control teaching platform with real IMU sensors, reaction wheel actuators, and a live quaternion attitude display — bridging classroom ADCS theory and physical hardware.</p>
                     </div>
                     <span class="project-card-id">PROJ-003</span>
                 </div>
@@ -494,17 +474,17 @@
                 <div class="project-images">
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-robot"></i>
-                            <span>Image 1 — Rover Hardware</span>
+                            <i class="fas fa-satellite"></i>
+                            <span>Image 1 — Rig Hardware</span>
                         </div>
-                        <div class="img-caption">Assembled rover with sensor array</div>
+                        <div class="img-caption">Assembled ADCS educator rig with reaction wheels and IMU</div>
                     </div>
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-route"></i>
-                            <span>Image 2 — Mapped Path</span>
+                            <i class="fas fa-compass"></i>
+                            <span>Image 2 — Attitude Visualization</span>
                         </div>
-                        <div class="img-caption">Serial-logged obstacle map — 4×4 m test arena</div>
+                        <div class="img-caption">Live quaternion attitude display</div>
                     </div>
                 </div>
 
@@ -512,51 +492,39 @@
                     <div>
                         <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
                         <div class="proj-section-body">
-                            <p>Planetary surface exploration requires rovers capable of navigating unstructured terrain without constant ground-station commands. Latency makes teleoperation impractical beyond cislunar distances. This project investigated low-cost autonomous navigation algorithms that could later inform a larger-scale mission design study.</p>
+                            <p>Attitude Determination and Control Systems (ADCS) are among the most conceptually challenging subsystems in spacecraft engineering. Without hands-on hardware, students struggle to internalize the relationship between sensor fusion, reference frames, control moment gyroscopes, and stability — concepts that are abstract when studied only through simulation or lecture.</p>
+                            <p>A low-cost, physically interactive rig was needed to bring ADCS principles to life in an educational setting.</p>
                         </div>
                     </div>
                     <div>
                         <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
                         <div class="proj-section-body">
-                            <p>Built around an Arduino Mega 2560 with three HC-SR04 ultrasonic sensors (front, left, right), dual-channel L298N motor driver, and an MPU-6050 IMU for heading estimation. Navigation logic runs a reactive obstacle avoidance loop: if the front sensor reads below 25 cm, the rover compares left/right clearance and turns toward the larger gap. A PID controller on the IMU yaw channel maintains heading during straight segments, reducing drift to under 3° per meter.</p>
-                            <p>Obstacle positions are logged via Serial at 115200 baud and visualized in a companion Python script that plots a 2D occupancy grid in real time.</p>
+                            <p>Designed and built a tabletop educator rig replicating the core ADCS loop: IMU-based attitude determination (accelerometer + gyroscope fusion), attitude error computation in quaternion space, and closed-loop control output to reaction wheel motors. Students can physically disturb the rig and observe the control system respond, tune PID gains in real time, and visualize attitude on a live display.</p>
+                            <p>The rig serves as a bridge between classroom theory and satellite hardware, reinforcing concepts taught in spacecraft systems courses.</p>
                         </div>
                     </div>
                     <div>
-                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
                         <div class="proj-section-body">
-                            <p>Completed 12 laps of a 4×4 m obstacle course autonomously with a 100% course completion rate. Heading drift reduced to 3° per meter vs. 18° without PID. Total component cost kept under $40.</p>
-                        </div>
-                        <div class="impact-stats">
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">100%</span>
-                                <span class="impact-stat-lab">Course completion</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">&lt;3°/m</span>
-                                <span class="impact-stat-lab">Heading drift</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">$40</span>
-                                <span class="impact-stat-lab">Total BOM cost</span>
-                            </div>
+                            <p>Hardware schematics, firmware, and lesson plan integration details coming soon.</p>
                         </div>
                     </div>
                 </div>
             </article>
 
             <!-- ── PROJECT 4 ── -->
-            <article class="project-card reveal" id="proj-4" data-date="2024-08">
+            <article class="project-card reveal" id="proj-4" data-date="2025-06">
                 <div class="project-card-header">
                     <div class="project-card-meta">
-                        <div class="project-card-date">August 2024</div>
-                        <h2 class="project-card-title">Flight Anomaly Detection — Neural Network Classifier</h2>
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">Automated Score Adjustment Engine — MATLAB</h2>
                         <div class="project-card-tags">
-                            <span class="proj-tag">AI / ML</span>
-                            <span class="proj-tag purple">PyTorch</span>
-                            <span class="proj-tag">Aerospace</span>
-                            <span class="proj-tag gold">Time-Series</span>
+                            <span class="proj-tag gold">MATLAB</span>
+                            <span class="proj-tag">Automation</span>
+                            <span class="proj-tag purple">Data Analysis</span>
+                            <span class="proj-tag green">Tooling</span>
                         </div>
+                        <p class="project-card-desc">MATLAB tool for programmatically applying curve adjustments, weighted normalization, and audit-trail generation to scoring datasets — replacing error-prone manual spreadsheet workflows with fully reproducible output.</p>
                     </div>
                     <span class="project-card-id">PROJ-004</span>
                 </div>
@@ -564,17 +532,17 @@
                 <div class="project-images">
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-brain"></i>
-                            <span>Image 1 — Model Architecture</span>
+                            <i class="fas fa-sliders"></i>
+                            <span>Image 1 — Score Dashboard</span>
                         </div>
-                        <div class="img-caption">1D-CNN + LSTM encoder architecture</div>
+                        <div class="img-caption">MATLAB GUI for score adjustment and review</div>
                     </div>
                     <div class="project-img-slot">
                         <div class="img-placeholder">
                             <i class="fas fa-chart-bar"></i>
-                            <span>Image 2 — Confusion Matrix</span>
+                            <span>Image 2 — Distribution Plot</span>
                         </div>
-                        <div class="img-caption">Validation confusion matrix — 8 anomaly classes</div>
+                        <div class="img-caption">Score distribution before and after adjustment</div>
                     </div>
                 </div>
 
@@ -582,51 +550,39 @@
                     <div>
                         <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
                         <div class="proj-section-body">
-                            <p>Flight data recorders generate hundreds of parameters at 64 Hz across thousands of flight hours. Manual review for anomaly investigation is prohibitively slow. Airlines and manufacturers need automated tools that can flag safety-relevant events — stall precursors, hydraulic pressure drops, engine surge signatures — without generating an overwhelming number of false alerts.</p>
+                            <p>Scoring and grading workflows involving multiple evaluators or rubric criteria often produce distributions that require normalization, curve adjustments, or weighted re-scoring. Performing these adjustments manually in spreadsheets is time-consuming, error-prone, and difficult to audit consistently across multiple scoring sessions.</p>
+                            <p>An automated, reproducible tool was needed to apply scoring logic programmatically and generate transparent output for review.</p>
                         </div>
                     </div>
                     <div>
                         <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
                         <div class="proj-section-body">
-                            <p>Trained a hybrid 1D-CNN + LSTM model in PyTorch on synthetic FOQA (Flight Operational Quality Assurance) data covering 8 anomaly classes. Input windows of 512 time steps across 12 flight parameters are passed through three convolutional blocks (kernel size 7, 128 filters) then a bidirectional LSTM with 256 hidden units, followed by a softmax classification head.</p>
-                            <p>Data augmentation (Gaussian noise injection, time warping) was applied to balance underrepresented classes. The model was evaluated with stratified 5-fold cross-validation. Inference runs at 2× real-time speed on a laptop CPU, enabling post-flight screening of full recordings.</p>
+                            <p>Built a MATLAB application that ingests raw score data, applies configurable adjustment algorithms (curve functions, weighted averages, normalization to a target distribution), and outputs adjusted scores alongside a full audit trail. The tool supports multiple adjustment strategies selectable at runtime and visualizes the before/after score distributions for reviewer sign-off.</p>
+                            <p>Designed for repeatability — the same input data with the same configuration produces identical output every time, making results fully reproducible and auditable.</p>
                         </div>
                     </div>
                     <div>
-                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
                         <div class="proj-section-body">
-                            <p>Achieved 94.3% weighted F1-score across all 8 classes on held-out test data. The stall precursor class reached 97.1% recall — the highest-priority safety class. Processing a 10-hour flight record takes under 5 minutes end-to-end.</p>
-                        </div>
-                        <div class="impact-stats">
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">94.3%</span>
-                                <span class="impact-stat-lab">Weighted F1 score</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">97.1%</span>
-                                <span class="impact-stat-lab">Stall precursor recall</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">8</span>
-                                <span class="impact-stat-lab">Anomaly classes</span>
-                            </div>
+                            <p>Full documentation, algorithm details, and example outputs coming soon.</p>
                         </div>
                     </div>
                 </div>
             </article>
 
             <!-- ── PROJECT 5 ── -->
-            <article class="project-card reveal" id="proj-5" data-date="2024-04">
+            <article class="project-card reveal" id="proj-5" data-date="2025-03">
                 <div class="project-card-header">
                     <div class="project-card-meta">
-                        <div class="project-card-date">April 2024</div>
-                        <h2 class="project-card-title">Automated Propulsion Test Bench</h2>
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">Wireless DAQ & Control for Satellite Test Rig</h2>
                         <div class="project-card-tags">
-                            <span class="proj-tag">LabVIEW</span>
-                            <span class="proj-tag">Automation</span>
-                            <span class="proj-tag green">Python</span>
+                            <span class="proj-tag">Arduino</span>
+                            <span class="proj-tag gold">Simulink</span>
+                            <span class="proj-tag">Wireless</span>
                             <span class="proj-tag purple">DAQ</span>
                         </div>
+                        <p class="project-card-desc">Tether-free data acquisition and closed-loop control for a freely rotating satellite test rig — Arduino wireless nodes stream sensor data to a Simulink real-time model that commands actuators back without any physical cable constraints.</p>
                     </div>
                     <span class="project-card-id">PROJ-005</span>
                 </div>
@@ -634,17 +590,17 @@
                 <div class="project-images">
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-fire-flame-curved"></i>
-                            <span>Image 1 — Test Bench Setup</span>
+                            <i class="fas fa-satellite-dish"></i>
+                            <span>Image 1 — Wireless Node Hardware</span>
                         </div>
-                        <div class="img-caption">Thrust measurement bench with load cell array</div>
+                        <div class="img-caption">Arduino wireless node mounted on satellite test rig</div>
                     </div>
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-gauge-high"></i>
-                            <span>Image 2 — Thrust Curve</span>
+                            <i class="fas fa-diagram-project"></i>
+                            <span>Image 2 — Simulink Block Diagram</span>
                         </div>
-                        <div class="img-caption">Measured thrust curve vs. predicted — static fire #7</div>
+                        <div class="img-caption">Real-time control model in Simulink</div>
                     </div>
                 </div>
 
@@ -652,34 +608,817 @@
                     <div>
                         <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
                         <div class="proj-section-body">
-                            <p>Characterizing small solid and hybrid rocket motors requires precise simultaneous measurement of thrust, chamber pressure, temperature, and oxidizer mass flow. Manual data logging with separate instruments introduces synchronization errors and operator variability between test runs, making back-to-back comparative testing unreliable.</p>
+                            <p>Satellite test rigs that physically articulate or rotate cannot use tethered DAQ cables without introducing unacceptable torque loads or cable wrap constraints on the rig's motion. Traditional wired data acquisition becomes a hardware bottleneck that limits the fidelity of testing for attitude control and dynamics experiments.</p>
+                            <p>A wireless data link was needed to decouple the rig's mechanical freedom from its measurement and control infrastructure.</p>
                         </div>
                     </div>
                     <div>
                         <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
                         <div class="proj-section-body">
-                            <p>Designed a LabVIEW test sequencer controlling an NI CompactDAQ chassis with modules for strain-gauge load cells (thrust), Type-K thermocouples (chamber + nozzle), pressure transducers, and a servo-driven pintle valve. All channels are sampled synchronously at 1 kSa/s with hardware-timed acquisition.</p>
-                            <p>A Python post-processing script reads the TDMS output, applies load cell calibration curves, integrates thrust for total impulse, and generates standardized PDF reports and CSV exports. An interlock state machine in LabVIEW enforces a hardware abort if any sensor exceeds a safety threshold, venting oxidizer through a normally-open solenoid.</p>
+                            <p>Designed an Arduino-based wireless data acquisition system that streams sensor measurements — IMU, current, encoder — from the freely moving satellite rig to a ground-side host over a low-latency wireless link. The received data feeds directly into a Simulink real-time model that closes the control loop, commanding actuators back through the same wireless channel.</p>
+                            <p>The architecture eliminates all tethers from the rig while preserving the real-time control loop timing required for ADCS experiments.</p>
                         </div>
                     </div>
                     <div>
-                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Impact</div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
                         <div class="proj-section-body">
-                            <p>Used across 14 static fire tests with zero data synchronization errors. Measurement repeatability (1σ) improved from ±3.2% to ±0.4% compared to the prior manual logging approach. Setup time between test runs reduced from 45 minutes to under 10 minutes.</p>
+                            <p>Hardware design, latency characterization, and Simulink model details coming soon.</p>
                         </div>
-                        <div class="impact-stats">
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">14</span>
-                                <span class="impact-stat-lab">Static fires conducted</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">±0.4%</span>
-                                <span class="impact-stat-lab">Measurement repeatability</span>
-                            </div>
-                            <div class="impact-stat">
-                                <span class="impact-stat-val">78%</span>
-                                <span class="impact-stat-lab">Setup time reduction</span>
-                            </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 6 ── -->
+            <article class="project-card reveal" id="proj-6" data-date="2024-12">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2024</div>
+                        <h2 class="project-card-title">Hermes — On-Device AI Assistant with Discord Integration</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">AI / LLM</span>
+                            <span class="proj-tag">Raspberry Pi</span>
+                            <span class="proj-tag purple">Python</span>
+                            <span class="proj-tag green">Discord</span>
+                        </div>
+                        <p class="project-card-desc">Locally-hosted LLM chatbot running entirely on a Raspberry Pi — no cloud APIs — delivering cron-scheduled daily briefings, task reminders, and on-demand conversational queries directly through Discord.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-006</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-robot"></i>
+                            <span>Image 1 — Raspberry Pi Setup</span>
+                        </div>
+                        <div class="img-caption">Hermes running locally on Raspberry Pi</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Image 2 — Discord Interface</span>
+                        </div>
+                        <div class="img-caption">Daily briefing and cron job output in Discord</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Cloud-hosted AI assistants introduce latency, recurring API costs, data privacy concerns, and dependency on external services for tasks that could be handled locally. For recurring automation workflows — daily briefings, status summaries, scheduled reminders — a self-hosted solution running on modest hardware is both more private and more cost-effective.</p>
+                            <p>The goal was to build a fully local, always-on AI assistant capable of handling scheduled tasks and conversational queries, surfaced through a familiar communication interface.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Hermes is a locally-hosted large language model assistant running entirely on a Raspberry Pi — no cloud API calls required. A Python backend manages the LLM inference process, a cron scheduler triggers automated daily briefings and status updates, and a Discord bot interface delivers outputs and accepts conversational commands from any device on the network.</p>
+                            <p>Named after the messenger of the gods, Hermes handles morning summaries, task reminders, and on-demand queries — all processed and responded to locally, with results delivered directly to a designated Discord channel.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Model selection, inference setup, cron job configuration, and Discord bot integration details coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 7 ── -->
+            <article class="project-card reveal" id="proj-7" data-date="2024-08">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2024</div>
+                        <h2 class="project-card-title">Merchandise Cataloging & Inventory Management System</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">Automation</span>
+                            <span class="proj-tag purple">Database</span>
+                            <span class="proj-tag gold">Inventory</span>
+                            <span class="proj-tag green">Tooling</span>
+                        </div>
+                        <p class="project-card-desc">Structured database system for logging, searching, and reporting merchandise inventory — replacing fragile spreadsheet workflows with a queryable catalog that supports barcode-based entry and on-demand stock summaries.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-007</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-boxes-stacked"></i>
+                            <span>Image 1 — Catalog Interface</span>
+                        </div>
+                        <div class="img-caption">Item catalog search and browse interface</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-barcode"></i>
+                            <span>Image 2 — Scanning Workflow</span>
+                        </div>
+                        <div class="img-caption">Barcode scanning and database entry workflow</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Managing a merchandise inventory through manual spreadsheets is fragile and time-consuming — items are miscounted, records fall out of sync, and searching or generating reports requires significant manual effort. As catalog size grows, the lack of a structured system leads to duplicate entries, lost stock, and difficulty onboarding new team members to inventory workflows.</p>
+                            <p>A dedicated cataloging system was needed to bring structure, searchability, and reliability to the merchandise management process.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built a structured cataloging system for logging, searching, and managing merchandise inventory. The system supports item entry with categorization, quantity tracking, and identifier-based lookup — replacing the spreadsheet workflow with a queryable database. Reporting utilities generate summaries of stock levels and catalog composition on demand.</p>
+                            <p>Designed for ease of use by non-technical team members, with a straightforward interface for adding and updating entries and exporting inventory snapshots.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>System architecture, technology stack, and feature walkthrough coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 8 ── -->
+            <article class="project-card reveal" id="proj-8" data-date="2025-11">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">Rotational Positioning Machine for Microbiological Research — MDRS</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">Hardware</span>
+                            <span class="proj-tag">Wireless</span>
+                            <span class="proj-tag purple">DAQ</span>
+                            <span class="proj-tag gold">Mars Analog</span>
+                        </div>
+                        <p class="project-card-desc">Motorized rotational positioning machine for orienting microbiological samples at the Mars Desert Research Station, paired with a wireless data acquisition system for logging environmental and experimental parameters during analog Mars missions.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-008</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-rotate"></i>
+                            <span>Image 1 — Positioning Machine</span>
+                        </div>
+                        <div class="img-caption">Assembled rotational positioning apparatus at MDRS</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-wifi"></i>
+                            <span>Image 2 — Wireless DAQ Setup</span>
+                        </div>
+                        <div class="img-caption">Wireless sensor node and data logging interface</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Microbiological studies at the Mars Desert Research Station require controlled sample orientation and environmental logging under analog Mars conditions. Manual repositioning introduces inconsistency between experimental runs, and tethered data acquisition constrains placement options inside the habitat.</p>
+                            <p>A compact, motorized positioning machine with wireless data acquisition was needed to support rigorous, repeatable experimental protocols in a resource-constrained field environment.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Designed and built a motorized rotational positioning machine capable of placing microbiological samples at precise angular orientations, paired with a wireless DAQ system that logs environmental sensors without cable constraints. The system was deployed at MDRS to support ongoing research into microbial behavior under simulated Mars surface conditions.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Hardware design, wireless architecture, and field deployment results coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 9 ── -->
+            <article class="project-card reveal" id="proj-9" data-date="2025-10">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">AI Lab Assistant Chatbot — AAE Fluid Mechanics & Aerodynamics</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">AI / LLM</span>
+                            <span class="proj-tag purple">Python</span>
+                            <span class="proj-tag green">Education</span>
+                            <span class="proj-tag">Chatbot</span>
+                        </div>
+                        <p class="project-card-desc">AI-powered chatbot providing 24/7 guided support for students enrolled in the AAE Fluid Mechanics and Aerodynamics laboratory course — answering procedure questions, interpreting results, and scaffolding understanding without replacing the learning process.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-009</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-comments"></i>
+                            <span>Image 1 — Chat Interface</span>
+                        </div>
+                        <div class="img-caption">Student-facing chatbot interface for lab guidance</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-wind"></i>
+                            <span>Image 2 — Lab Context</span>
+                        </div>
+                        <div class="img-caption">Aerodynamics lab experimental setup</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Students in the AAE Fluid Mechanics and Aerodynamics lab frequently encounter questions during off-hours when TAs and instructors are unavailable. Without timely guidance, students either stall on their lab reports or develop misconceptions about experimental procedures and data interpretation.</p>
+                            <p>A context-aware AI assistant was needed to extend lab support beyond scheduled office hours while maintaining pedagogical integrity.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built an LLM-based chatbot grounded in the specific lab manual, procedures, and course material for the AAE Fluid Mechanics and Aerodynamics lab. The system guides students through procedure steps, helps interpret sensor readings and plots, and flags common data analysis pitfalls — while being deliberately scoped to the course content rather than acting as a general-purpose homework solver.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>System architecture, prompt engineering approach, and student feedback coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 10 ── -->
+            <article class="project-card reveal" id="proj-10" data-date="2025-08">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">Interactive Digital Lab Manual — Jupyter Notebook on nanoHUB</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag green">Jupyter</span>
+                            <span class="proj-tag">nanoHUB</span>
+                            <span class="proj-tag purple">Python</span>
+                            <span class="proj-tag gold">Education</span>
+                        </div>
+                        <p class="project-card-desc">Living digital lab manual built in Jupyter Notebook and hosted on nanoHUB — replacing static PDFs with executable, annotatable course content that students run directly in the browser without any local software installation.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-010</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-book-open"></i>
+                            <span>Image 1 — Notebook Interface</span>
+                        </div>
+                        <div class="img-caption">Interactive lab manual rendered in Jupyter on nanoHUB</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Image 2 — Live Plot Output</span>
+                        </div>
+                        <div class="img-caption">Student-generated plot from in-notebook analysis cell</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Traditional PDF lab manuals are passive — students read instructions but cannot interact with the content, run example calculations, or visualize data within the document itself. This separation between instruction and execution slows down the learning loop and increases setup friction for students unfamiliar with data analysis tools.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Authored a digital lab manual as a Jupyter Notebook hosted on Purdue's nanoHUB platform, where students access and execute it directly in the browser. The notebook interleaves procedure text, theory explanations, worked examples, and live Python cells — students enter their measured data and the notebook produces plots and analysis inline, eliminating the gap between manual and computation.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Notebook structure, nanoHUB deployment process, and course integration details coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 11 ── -->
+            <article class="project-card reveal" id="proj-11" data-date="2025-07">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">AI-Powered Proposal Review System — Circuit / Charlie at Purdue</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">AI / LLM</span>
+                            <span class="proj-tag purple">Purdue</span>
+                            <span class="proj-tag green">Automation</span>
+                            <span class="proj-tag gold">Research Tools</span>
+                        </div>
+                        <p class="project-card-desc">LLM-powered proposal screening and review assistant built on Purdue's Circuit / Charlie AI platform, helping faculty and reviewers surface key criteria, flag gaps, and accelerate evaluation cycles for research and project proposals.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-011</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-file-circle-check"></i>
+                            <span>Image 1 — Review Interface</span>
+                        </div>
+                        <div class="img-caption">AI proposal review dashboard</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-magnifying-glass-chart"></i>
+                            <span>Image 2 — Analysis Output</span>
+                        </div>
+                        <div class="img-caption">Structured critique and scoring output from the AI reviewer</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Reviewing research proposals and project submissions at scale requires significant faculty and reviewer time. Inconsistent application of evaluation rubrics across multiple reviewers introduces bias, and first-pass screening of large submission volumes creates bottlenecks that delay feedback to applicants.</p>
+                            <p>An AI-assisted review layer was needed to standardize first-pass evaluation, surface rubric-relevant content, and reduce reviewer burden — while keeping humans in the final decision loop.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built on Purdue's Circuit / Charlie institutional AI platform, the system ingests proposal documents and applies an LLM-driven review pipeline that scores proposals against defined criteria, extracts key claims and supporting evidence, and generates structured feedback summaries. Reviewers receive a pre-populated analysis they can accept, modify, or override — making the process faster without removing human judgment.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Pipeline architecture, rubric design, and evaluation results coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 12 ── -->
+            <article class="project-card reveal" id="proj-12" data-date="2026-03">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2026</div>
+                        <h2 class="project-card-title">BiSlide Precision Model Positioning System for Wind Tunnel</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">LabVIEW</span>
+                            <span class="proj-tag gold">Motion Control</span>
+                            <span class="proj-tag purple">Hardware</span>
+                            <span class="proj-tag green">Automation</span>
+                        </div>
+                        <p class="project-card-desc">Automated two-axis BiSlide positioning system for precisely placing test models at repeatable locations within a wind tunnel test section — replacing manual placement with programmatic control for higher throughput and spatial accuracy.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-012</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-arrows-up-down-left-right"></i>
+                            <span>Image 1 — BiSlide Mechanism</span>
+                        </div>
+                        <div class="img-caption">BiSlide actuator assembly inside wind tunnel</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-crosshairs"></i>
+                            <span>Image 2 — Position Control UI</span>
+                        </div>
+                        <div class="img-caption">LabVIEW position control and sweep programming interface</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Positioning test models at precise spatial coordinates within a wind tunnel by hand is slow, inconsistent across operators, and prevents automated multi-point sweeps that would otherwise require continuous human intervention between measurement locations.</p>
+                            <p>An automated positioning system was needed to enable repeatable, programmable model placement for traverse-style measurement campaigns.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Integrated a BiSlide linear actuator system with a LabVIEW control interface, enabling operators to program multi-point position sweeps and execute them autonomously during a test run. The system homes to a reference point on startup, executes commanded moves with closed-loop position feedback, and synchronizes with the DAQ trigger to acquire data at each programmed location.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Mechanical integration, LabVIEW control architecture, and positioning accuracy characterization coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 13 ── -->
+            <article class="project-card reveal" id="proj-13" data-date="2024-11">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2024</div>
+                        <h2 class="project-card-title">Configurable Pulse Generator for Water Tunnel Dye Injection</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">Arduino</span>
+                            <span class="proj-tag purple">Embedded C</span>
+                            <span class="proj-tag gold">Flow Visualization</span>
+                            <span class="proj-tag green">Hardware</span>
+                        </div>
+                        <p class="project-card-desc">Arduino Nano Every-based pulse generator for triggering dye injection valves in a water tunnel flow visualization rig — producing repeatable, timing-precise injection pulses synchronized to flow conditions and experiment events.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-013</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-wave-square"></i>
+                            <span>Image 1 — Pulse Generator Hardware</span>
+                        </div>
+                        <div class="img-caption">Arduino Nano Every pulse generator circuit</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-droplet"></i>
+                            <span>Image 2 — Dye Injection in Flow</span>
+                        </div>
+                        <div class="img-caption">Water tunnel flow visualization with timed dye injection</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Water tunnel flow visualization relies on injecting dye at precise moments and durations relative to flow events or camera triggers. Manual valve actuation is too slow and inconsistent for high-fidelity visualization, and off-the-shelf function generators lack the programmable multi-channel logic needed for coordinated injection sequences.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built a configurable pulse generator on an Arduino Nano Every, producing software-defined injection pulses with adjustable frequency, duty cycle, and phase offset. The firmware supports external trigger inputs for synchronization with cameras or DAQ systems, and parameters are configurable via serial command without reflashing — enabling rapid tuning during experiments.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Circuit schematic, firmware, timing characterization, and flow visualization results coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 14 ── -->
+            <article class="project-card reveal" id="proj-14" data-date="2025-02">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">Raspberry Pi Magic Mirror — Live Information Display</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">Raspberry Pi</span>
+                            <span class="proj-tag purple">JavaScript</span>
+                            <span class="proj-tag green">IoT</span>
+                            <span class="proj-tag gold">Hardware</span>
+                        </div>
+                        <p class="project-card-desc">Smart two-way mirror display powered by a Raspberry Pi, showing real-time weather, calendar events, news, and custom lab status widgets on a half-silvered mirror surface — a functional ambient information display for the workspace.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-014</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-display"></i>
+                            <span>Image 1 — Magic Mirror Display</span>
+                        </div>
+                        <div class="img-caption">Magic mirror with live widgets and clock</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-screwdriver-wrench"></i>
+                            <span>Image 2 — Build Assembly</span>
+                        </div>
+                        <div class="img-caption">Mirror frame assembly with Raspberry Pi and monitor</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Ambient information displays — weather, schedule, time, reminders — typically require checking a phone or computer, breaking focus. A always-on, glanceable display integrated into a workspace mirror surface provides the same information passively without requiring any interaction.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built a smart mirror using a Raspberry Pi driving a monitor mounted behind a two-way mirror. MagicMirror² software renders customized widget modules — weather forecast, calendar, clock, news headlines, and custom status feeds — on a dark background so only the illuminated content shows through the reflective surface. Custom modules were added for lab-specific status updates.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Build materials, module configuration, and custom widget development details coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 15 ── -->
+            <article class="project-card reveal" id="proj-15" data-date="2025-05">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2025</div>
+                        <h2 class="project-card-title">AI-Driven Web Scraper for Site Issue Analysis</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">AI / LLM</span>
+                            <span class="proj-tag purple">Python</span>
+                            <span class="proj-tag green">Web Scraping</span>
+                            <span class="proj-tag gold">Automation</span>
+                        </div>
+                        <p class="project-card-desc">Automated web scraper that feeds page content into an AI analysis pipeline to identify usability issues, broken patterns, and content gaps — then surfaces categorized findings and proposed fixes without requiring manual site auditing.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-015</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-spider"></i>
+                            <span>Image 1 — Scraper Pipeline</span>
+                        </div>
+                        <div class="img-caption">Web scraping and AI analysis pipeline architecture</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-list-check"></i>
+                            <span>Image 2 — Issue Report Output</span>
+                        </div>
+                        <div class="img-caption">AI-generated issue categorization and fix suggestions</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Manually auditing a website for usability problems, broken content, or structural issues is labor-intensive and produces inconsistent results across reviewers. As sites grow, comprehensive manual review becomes impractical, and issues go undetected until users encounter them.</p>
+                            <p>An automated system was needed to continuously crawl, analyze, and report site problems with actionable fix recommendations.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built a Python-based web scraper that crawls target sites, extracts structured page content, and feeds it through an LLM analysis pipeline. The AI identifies categories of issues — broken navigation patterns, missing accessibility attributes, inconsistent copy, thin content — and generates prioritized fix suggestions for each finding. Results are compiled into a structured report for review.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Scraping architecture, LLM prompt design, and example audit outputs coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 16 ── -->
+            <article class="project-card reveal" id="proj-16" data-date="2024-09">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2024</div>
+                        <h2 class="project-card-title">Automated Plant Watering System — ESP32</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">ESP32</span>
+                            <span class="proj-tag purple">Embedded C</span>
+                            <span class="proj-tag green">IoT</span>
+                            <span class="proj-tag gold">Hardware</span>
+                        </div>
+                        <p class="project-card-desc">ESP32-based automated watering system with capacitive soil moisture sensing and Wi-Fi-enabled scheduling — keeping plants watered on a smart schedule and accessible for remote monitoring and control.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-016</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-seedling"></i>
+                            <span>Image 1 — System Hardware</span>
+                        </div>
+                        <div class="img-caption">ESP32 watering node with soil sensor and pump relay</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-mobile-screen"></i>
+                            <span>Image 2 — Remote Dashboard</span>
+                        </div>
+                        <div class="img-caption">Wi-Fi monitoring and schedule control interface</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Consistent plant watering on a fixed schedule is easy to forget during busy periods, and over- or under-watering based on time-only schedules ignores actual soil moisture conditions. A smarter system was needed that responds to real soil state rather than a calendar.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Built an ESP32-based system with a capacitive soil moisture sensor feeding a pump relay. The firmware reads moisture levels on a configurable interval and activates the water pump only when moisture drops below a threshold, preventing both overwatering and drought. Wi-Fi connectivity enables remote monitoring of soil state and manual override from any device on the network.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Circuit design, firmware, and remote interface details coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 17 ── -->
+            <article class="project-card reveal" id="proj-17" data-date="2026-05">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2026 — Ongoing</div>
+                        <h2 class="project-card-title">Supersonic Wind Tunnel DAQ & Control — LabVIEW</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">LabVIEW</span>
+                            <span class="proj-tag purple">DAQ</span>
+                            <span class="proj-tag gold">Aerospace</span>
+                            <span class="proj-tag green">Automation</span>
+                        </div>
+                        <p class="project-card-desc">Full data acquisition and real-time control suite for a supersonic wind tunnel — synchronously logging pressure, temperature, and flow parameters while managing tunnel actuation sequences through a LabVIEW state machine with hardware safety interlocks.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-017</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-gauge-high"></i>
+                            <span>Image 1 — LabVIEW Front Panel</span>
+                        </div>
+                        <div class="img-caption">Supersonic tunnel DAQ front panel — live pressure traces</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-wind"></i>
+                            <span>Image 2 — Tunnel Test Section</span>
+                        </div>
+                        <div class="img-caption">Supersonic test section during a run</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Supersonic wind tunnel experiments demand precise, synchronized measurement of multiple high-speed pressure and temperature channels during very short run windows. Missing data, unsynchronized channels, or delayed actuator commands during a run can invalidate an entire test, wasting facility time and experimental resources.</p>
+                            <p>A robust, hardware-timed acquisition and control system was needed to guarantee data integrity and safe automated operation of the tunnel through its full run sequence.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Developed a LabVIEW application on an NI CompactDAQ platform performing hardware-timed synchronous acquisition across pressure transducer, thermocouple, and flow meter channels. A state machine manages the full tunnel run sequence — pressurize, hold, fire, vent — with sensor-triggered transitions and hardware abort interlocks that protect the facility if any parameter exceeds safe limits.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Full system architecture, DAQ configuration, interlock design, and test results coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 18 ── -->
+            <article class="project-card reveal" id="proj-18" data-date="2026-04">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2026</div>
+                        <h2 class="project-card-title">Angle of Attack Actuator System — LabVIEW & Tic/Pololu Controller</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">LabVIEW</span>
+                            <span class="proj-tag purple">Stepper Control</span>
+                            <span class="proj-tag gold">Pololu / Tic</span>
+                            <span class="proj-tag green">Wind Tunnel</span>
+                        </div>
+                        <p class="project-card-desc">Automated angle of attack positioning system for wind tunnel test apparatus — LabVIEW interfaces with a Pololu Tic stepper motor controller to drive the model to commanded AoA values with sub-degree repeatability and synchronized DAQ triggering.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-018</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-angle-up"></i>
+                            <span>Image 1 — AoA Mechanism</span>
+                        </div>
+                        <div class="img-caption">Angle of attack actuator assembly on test apparatus</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-sliders"></i>
+                            <span>Image 2 — LabVIEW Control Panel</span>
+                        </div>
+                        <div class="img-caption">AoA sweep programming and position monitoring interface</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Manually adjusting angle of attack between wind tunnel data points is slow, introduces operator-to-operator variation, and makes automated polar sweeps — where the model steps through a range of AoA values while data is acquired at each — impractical without dedicated actuation hardware.</p>
+                            <p>A motorized, software-controlled AoA positioning system was needed to enable repeatable automated polars during a test run.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Integrated a stepper motor actuator with a Pololu Tic controller interfaced to LabVIEW over USB. The LabVIEW VI sends position commands to the Tic driver, waits for motion-complete confirmation, then triggers the DAQ acquisition — ensuring data is always captured at the settled target angle. A user-programmable sweep table allows full polar sequences to run unattended.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Mechanical design, LabVIEW–Tic integration, position accuracy characterization, and polar sweep results coming soon.</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ── PROJECT 19 ── -->
+            <article class="project-card reveal" id="proj-19" data-date="2024-06">
+                <div class="project-card-header">
+                    <div class="project-card-meta">
+                        <div class="project-card-date">2024 — Ongoing</div>
+                        <h2 class="project-card-title">Website Design, Development & WhatsApp-Integrated Contact System</h2>
+                        <div class="project-card-tags">
+                            <span class="proj-tag">Web Dev</span>
+                            <span class="proj-tag purple">HTML / CSS / JS</span>
+                            <span class="proj-tag green">WhatsApp API</span>
+                            <span class="proj-tag gold">Forms</span>
+                        </div>
+                        <p class="project-card-desc">End-to-end design and development of personal and organizational websites with form submission workflows and WhatsApp-integrated contact and notification pipelines — enabling visitors to reach out directly through the platform they already use.</p>
+                    </div>
+                    <span class="project-card-id">PROJ-019</span>
+                </div>
+
+                <div class="project-images">
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fas fa-globe"></i>
+                            <span>Image 1 — Website Design</span>
+                        </div>
+                        <div class="img-caption">Responsive website layout and design system</div>
+                    </div>
+                    <div class="project-img-slot">
+                        <div class="img-placeholder">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Image 2 — WhatsApp Notification Flow</span>
+                        </div>
+                        <div class="img-caption">Form submission triggering WhatsApp message delivery</div>
+                    </div>
+                </div>
+
+                <div class="project-sections">
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
+                        <div class="proj-section-body">
+                            <p>Standard website contact forms deliver inquiries to email inboxes that may go unmonitored for days. For individuals and small organizations where WhatsApp is the primary communication channel, routing form submissions through email creates a friction point that delays responses and frustrates potential contacts.</p>
+                            <p>A website and contact system was needed that meets people where they communicate — delivering form submissions and notifications directly through WhatsApp.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
+                        <div class="proj-section-body">
+                            <p>Designed and built responsive websites with clean, accessible layouts and structured contact forms. Form submissions are processed through a backend integration with the WhatsApp Business API — delivering formatted message notifications instantly to the owner's WhatsApp, with reply capability built in. Updates to site content and form logic are handled through an ongoing maintenance workflow.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-body">
+                            <p>Design system, WhatsApp API integration architecture, and live site examples coming soon.</p>
                         </div>
                     </div>
                 </div>
