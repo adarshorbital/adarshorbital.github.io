@@ -458,33 +458,33 @@
             <article class="project-card reveal" id="proj-3" data-date="2025-09">
                 <div class="project-card-header">
                     <div class="project-card-meta">
-                        <div class="project-card-date">2025</div>
+                        <div class="project-card-date">2025 · Published at SERC / Purdue AAE</div>
                         <h2 class="project-card-title">ADCS Educator Rig — Attitude Control Teaching Platform</h2>
                         <div class="project-card-tags">
                             <span class="proj-tag">Spacecraft</span>
-                            <span class="proj-tag">Embedded</span>
-                            <span class="proj-tag purple">Control Systems</span>
+                            <span class="proj-tag">Arduino Mega</span>
+                            <span class="proj-tag purple">MATLAB / Simulink</span>
                             <span class="proj-tag gold">STEM Education</span>
+                            <span class="proj-tag green">Open Source</span>
                         </div>
-                        <p class="project-card-desc">Hands-on satellite attitude control teaching platform with real IMU sensors, reaction wheel actuators, and a live quaternion attitude display — bridging classroom ADCS theory and physical hardware.</p>
+                        <p class="project-card-desc">Students write their own attitude determination and control algorithms in MATLAB and Simulink, then test them on real Arduino-based hardware — because what works in simulation doesn't always survive contact with a physical rig. Used in AAE courses at Purdue, co-authored with Dr. Carolin Frueh, and published as a peer-reviewed teaching activity.</p>
                     </div>
                     <span class="project-card-id">PROJ-003</span>
                 </div>
 
                 <div class="project-images">
                     <div class="project-img-slot">
-                        <div class="img-placeholder">
-                            <i class="fas fa-satellite"></i>
-                            <span>Image 1 — Rig Hardware</span>
-                        </div>
-                        <div class="img-caption">Assembled ADCS educator rig with reaction wheels and IMU</div>
+                        <img src="https://cdn.serc.carleton.edu/images/teaching_computation/workshop_2025/activities/media.jpeg_456.webp"
+                             alt="ADCS educator rig — Arduino Mega, MPU-6050 IMU, stepper motor, and 3D-printed structural parts assembled for attitude control testing"
+                             loading="lazy">
+                        <div class="img-caption">Arduino Mega, MPU-6050 IMU, stepper motor, and 3D-printed structure — assembled and ready for a student to close the loop</div>
                     </div>
                     <div class="project-img-slot">
                         <div class="img-placeholder">
-                            <i class="fas fa-compass"></i>
-                            <span>Image 2 — Attitude Visualization</span>
+                            <i class="fas fa-diagram-project"></i>
+                            <span>Image 2 — Simulink Block Diagram</span>
                         </div>
-                        <div class="img-caption">Live quaternion attitude display</div>
+                        <div class="img-caption">Student-authored Simulink model running attitude determination and PID control on hardware</div>
                     </div>
                 </div>
 
@@ -492,21 +492,33 @@
                     <div>
                         <div class="proj-section-title"><i class="fas fa-exclamation-triangle"></i> Problem Statement</div>
                         <div class="proj-section-body">
-                            <p>Attitude Determination and Control Systems (ADCS) are among the most conceptually challenging subsystems in spacecraft engineering. Without hands-on hardware, students struggle to internalize the relationship between sensor fusion, reference frames, control moment gyroscopes, and stability — concepts that are abstract when studied only through simulation or lecture.</p>
-                            <p>A low-cost, physically interactive rig was needed to bring ADCS principles to life in an educational setting.</p>
+                            <p>Attitude Determination and Control Systems sit at the intersection of sensor fusion, quaternion math, and real-time control — and they stay stubbornly abstract until a student sees them operating on actual hardware. Simulations are clean, forgiving, and miss the point: delays, sensor noise, actuator limits, and mechanical play are not edge cases. They are the problem.</p>
+                            <p>Senior undergraduates and graduate students in spacecraft systems courses needed a low-cost, physically interactive rig where they could test their own ADCS algorithms on real hardware and confront the gap between what a model predicts and what a stepper motor actually does.</p>
                         </div>
                     </div>
                     <div>
                         <div class="proj-section-title"><i class="fas fa-code-branch"></i> Solution & Implementation</div>
                         <div class="proj-section-body">
-                            <p>Designed and built a tabletop educator rig replicating the core ADCS loop: IMU-based attitude determination (accelerometer + gyroscope fusion), attitude error computation in quaternion space, and closed-loop control output to reaction wheel motors. Students can physically disturb the rig and observe the control system respond, tune PID gains in real time, and visualize attitude on a live display.</p>
-                            <p>The rig serves as a bridge between classroom theory and satellite hardware, reinforcing concepts taught in spacecraft systems courses.</p>
+                            <p>Designed and built a tabletop ADCS rig using an Arduino Mega, MPU-6050 IMU, 28BYJ-48 stepper motor with ULN2003 driver, and 3D-printed structural components. Students write the full control loop in MATLAB and Simulink — attitude determination from the IMU (accelerometer and gyroscope fusion, complementary or Kalman filtering), error computation, and PID control output to the stepper — and deploy it directly to the Arduino via Simulink's hardware support package.</p>
+                            <p>The activity was designed in two tracks: instructors can provide pre-printed hardware so students jump straight to the controls problem, or hand students the CAD files and have them 3D print the structure themselves, adding a rapid prototyping dimension to the project. Either way, the moment a student disturbs the rig and watches their controller push back is the moment the theory becomes real. Used in AAE courses taught by Dr. Carolin Frueh, Harold DeGroff Associate Professor of Aeronautics and Astronautics at Purdue University.</p>
                         </div>
                     </div>
                     <div>
-                        <div class="proj-section-title"><i class="fas fa-chart-line"></i> Overview</div>
+                        <div class="proj-section-title"><i class="fas fa-link"></i> Resources</div>
                         <div class="proj-section-body">
-                            <p>Hardware schematics, firmware, and lesson plan integration details coming soon.</p>
+                            <p>
+                                <a href="https://github.com/adarshorbital/satcontrol" target="_blank" rel="noopener noreferrer"
+                                   style="color:var(--cyan);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-right:1.5rem;">
+                                    <i class="fab fa-github"></i> GitHub — adarshorbital/satcontrol
+                                </a>
+                                <a href="https://serc.carleton.edu/teaching_computation/workshop_2025/activities/309353.html" target="_blank" rel="noopener noreferrer"
+                                   style="color:var(--purple);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;">
+                                    <i class="fas fa-graduation-cap"></i> Published Activity — SERC / Teaching Computation with MATLAB
+                                </a>
+                            </p>
+                            <p style="margin-top:.75rem;font-size:.8rem;color:var(--text-d);">
+                                Agrawal, A., &amp; Frueh, C. (2025, October 7). <em>Learning attitude determination and control for satellites using hardware prototype.</em> Teaching Computation in the Sciences Using MATLAB. Reviewed April 21, 2026.
+                            </p>
                         </div>
                     </div>
                 </div>
