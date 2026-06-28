@@ -886,63 +886,7 @@
             <p class="section-sub">Selected engineering projects spanning orbital mechanics, embedded systems, automation, and machine learning.</p>
         </div>
 
-        <div class="proj-grid">
-
-            <!-- Preview 1 -->
-            <a class="proj-preview card reveal" href="projects.html#proj-1">
-                <div class="proj-thumb">
-                    <i class="fas fa-satellite proj-thumb-icon"></i>
-                </div>
-                <div class="proj-info">
-                    <div class="proj-meta">
-                        <span class="proj-date">May 2025</span>
-                        <div class="proj-tags">
-                            <span class="proj-tag">AI</span>
-                            <span class="proj-tag">Aerospace</span>
-                        </div>
-                    </div>
-                    <div class="proj-title">Orbital Debris Collision Avoidance</div>
-                    <p class="proj-excerpt">ML pipeline predicting conjunction events from TLE data with sub-hour warning horizon.</p>
-                </div>
-            </a>
-
-            <!-- Preview 2 -->
-            <a class="proj-preview card reveal" href="projects.html#proj-2">
-                <div class="proj-thumb">
-                    <i class="fas fa-wave-square proj-thumb-icon"></i>
-                </div>
-                <div class="proj-info">
-                    <div class="proj-meta">
-                        <span class="proj-date">Feb 2025</span>
-                        <div class="proj-tags">
-                            <span class="proj-tag">LabVIEW</span>
-                            <span class="proj-tag">Automation</span>
-                        </div>
-                    </div>
-                    <div class="proj-title">Structural Health Monitoring System</div>
-                    <p class="proj-excerpt">Real-time vibration analysis dashboard built in LabVIEW with automated fault classification.</p>
-                </div>
-            </a>
-
-            <!-- Preview 3 -->
-            <a class="proj-preview card reveal" href="projects.html#proj-3">
-                <div class="proj-thumb">
-                    <i class="fas fa-microchip proj-thumb-icon"></i>
-                </div>
-                <div class="proj-info">
-                    <div class="proj-meta">
-                        <span class="proj-date">Nov 2024</span>
-                        <div class="proj-tags">
-                            <span class="proj-tag">Arduino</span>
-                            <span class="proj-tag">Robotics</span>
-                        </div>
-                    </div>
-                    <div class="proj-title">Autonomous Ground Rover</div>
-                    <p class="proj-excerpt">Obstacle-avoiding rover with ultrasonic SLAM and a custom PID steering controller.</p>
-                </div>
-            </a>
-
-        </div>
+        <div class="proj-grid" id="featured-proj-grid"></div>
 
         <div class="proj-cta-row reveal">
             <a href="projects.html" class="btn-outline">
@@ -1653,6 +1597,53 @@ async function copyEncrypted(btn) {
     btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
     setTimeout(() => { btn.innerHTML = orig; }, 2000);
 }
+
+// ── Featured Projects (random 3 from full list) ──────
+const ALL_PROJECTS = [
+    { id:'proj-1',  displayDate:'Jun 2026', icon:'fa-drafting-compass',          title:'Custom Test Apparatus Design & 3D Fabrication',          excerpt:'Designing and fabricating custom mechanical fixtures and lab hardware using CAD and FDM 3D printing.',                                        tags:['3D Printing','CAD'] },
+    { id:'proj-2',  displayDate:'Dec 2025', icon:'fa-wind',                      title:'Wind Tunnel Run Notifier — Raspberry Pi Automation',      excerpt:'Raspberry Pi system that monitors wind tunnel conditions and automatically alerts researchers when a run begins or ends.',                    tags:['Raspberry Pi','Automation'] },
+    { id:'proj-3',  displayDate:'Sep 2025', icon:'fa-diagram-project',            title:'ADCS Educator Rig — Attitude Control Teaching Platform',  excerpt:'Students write attitude control algorithms in MATLAB/Simulink and test them on real Arduino-based hardware at Purdue AAE.',                  tags:['Arduino','Spacecraft'] },
+    { id:'proj-4',  displayDate:'Jun 2025', icon:'fa-sliders',                   title:'Automated Score Adjustment Engine — MATLAB',              excerpt:'MATLAB tool applying curve adjustments and weighted normalization to scoring datasets with fully reproducible audit trails.',                  tags:['MATLAB','Automation'] },
+    { id:'proj-5',  displayDate:'Mar 2025', icon:'fa-satellite-dish',            title:'Wireless DAQ & Control for Satellite Test Rig',           excerpt:'Tether-free data acquisition and closed-loop control for a freely rotating satellite test rig via Arduino wireless nodes.',                 tags:['Arduino','DAQ'] },
+    { id:'proj-6',  displayDate:'Dec 2024', icon:'fa-robot',                     title:'Hermes — On-Device AI Assistant with Discord Integration', excerpt:'Locally-hosted LLM chatbot running entirely on a Raspberry Pi — delivering scheduled daily briefings through Discord.',                     tags:['AI/LLM','Raspberry Pi'] },
+    { id:'proj-7',  displayDate:'Aug 2024', icon:'fa-boxes-stacked',             title:'Merchandise Cataloging & Inventory Management System',    excerpt:'Structured database for logging, searching, and reporting merchandise inventory with barcode-based entry and on-demand summaries.',         tags:['Database','Automation'] },
+    { id:'proj-8',  displayDate:'Nov 2025', icon:'fa-rotate',                    title:'Rotational Positioning Machine for Microbiological Research', excerpt:'Motorized rotational positioning machine for orienting microbiological samples at the Mars Desert Research Station.',                    tags:['Hardware','Mars Analog'] },
+    { id:'proj-9',  displayDate:'Oct 2025', icon:'fa-comments',                  title:'AI Lab Assistant Chatbot — AAE Fluid Mechanics',          excerpt:'AI chatbot providing 24/7 guided support for students in the AAE Fluid Mechanics and Aerodynamics laboratory course.',                      tags:['AI/LLM','Education'] },
+    { id:'proj-10', displayDate:'Aug 2025', icon:'fa-book-open',                 title:'Interactive Digital Lab Manual — Jupyter on nanoHUB',     excerpt:'Living digital lab manual in Jupyter Notebook hosted on nanoHUB — executable course content students run directly in the browser.',        tags:['Jupyter','Education'] },
+    { id:'proj-11', displayDate:'Jul 2025', icon:'fa-file-circle-check',         title:'AI-Powered Proposal Review System — Circuit/Charlie',      excerpt:'LLM-powered proposal screening built on Purdue\'s Circuit/Charlie AI platform to accelerate faculty evaluation cycles.',                  tags:['AI/LLM','Research Tools'] },
+    { id:'proj-12', displayDate:'Mar 2026', icon:'fa-arrows-up-down-left-right', title:'BiSlide Precision Model Positioning System',              excerpt:'Automated two-axis BiSlide positioning system for precisely placing test models at repeatable locations in a wind tunnel.',                 tags:['LabVIEW','Motion Control'] },
+    { id:'proj-13', displayDate:'Nov 2024', icon:'fa-wave-square',               title:'Configurable Pulse Generator for Water Tunnel',           excerpt:'Arduino Nano Every-based pulse generator for triggering dye injection valves with timing-precise pulses synchronized to flow events.',      tags:['Arduino','Embedded C'] },
+    { id:'proj-14', displayDate:'Feb 2025', icon:'fa-display',                   title:'Raspberry Pi Magic Mirror — Live Information Display',     excerpt:'Smart two-way mirror display showing real-time weather, calendar events, and custom lab status widgets on a half-silvered surface.',       tags:['Raspberry Pi','IoT'] },
+    { id:'proj-15', displayDate:'May 2025', icon:'fa-spider',                    title:'AI-Driven Web Scraper for Site Issue Analysis',           excerpt:'Automated web scraper feeding page content into an AI analysis pipeline to surface usability issues and proposed fixes.',                  tags:['AI/LLM','Python'] },
+    { id:'proj-16', displayDate:'Sep 2024', icon:'fa-seedling',                  title:'Automated Plant Watering System — ESP32',                 excerpt:'ESP32-based watering system with capacitive soil moisture sensing and Wi-Fi-enabled scheduling for smart, threshold-driven irrigation.',     tags:['ESP32','IoT'] },
+    { id:'proj-17', displayDate:'May 2026', icon:'fa-gauge-high',                title:'Supersonic Wind Tunnel DAQ & Control — LabVIEW',          excerpt:'Full data acquisition and real-time control suite for a supersonic wind tunnel with hardware safety interlocks.',                          tags:['LabVIEW','Aerospace'] },
+    { id:'proj-18', displayDate:'Apr 2026', icon:'fa-angle-up',                  title:'Angle of Attack Actuator System — LabVIEW & Pololu Tic',  excerpt:'Automated AoA positioning system enabling repeatable polar sweeps with synchronized DAQ triggering and sub-degree repeatability.',           tags:['LabVIEW','Wind Tunnel'] },
+    { id:'proj-19', displayDate:'Jun 2024', icon:'fa-globe',                     title:'Website Design & WhatsApp-Integrated Contact System',     excerpt:'End-to-end website development with WhatsApp Business API form-submission workflows for instant notifications.',                            tags:['Web Dev','WhatsApp API'] },
+];
+
+function renderFeaturedProjects() {
+    const grid = document.getElementById('featured-proj-grid');
+    if (!grid) return;
+    const picks = ALL_PROJECTS.slice().sort(() => Math.random() - 0.5).slice(0, 3);
+    grid.innerHTML = picks.map(p => `
+        <a class="proj-preview card reveal" href="projects.html#${p.id}">
+            <div class="proj-thumb">
+                <i class="fas ${p.icon} proj-thumb-icon"></i>
+            </div>
+            <div class="proj-info">
+                <div class="proj-meta">
+                    <span class="proj-date">${p.displayDate}</span>
+                    <div class="proj-tags">
+                        ${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="proj-title">${p.title}</div>
+                <p class="proj-excerpt">${p.excerpt}</p>
+            </div>
+        </a>`).join('');
+    grid.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+}
+renderFeaturedProjects();
 </script>
 </body>
 </html>
